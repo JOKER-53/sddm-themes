@@ -286,14 +286,25 @@ themes.forEach((t) => {
   const b = document.createElement("button");
   b.dataset.id = t.id;
   b.innerHTML = `${t.name} <span class="pid">${t.id}</span>`;
-  b.onclick = () => { current = t; render(); };
+    b.onclick = () => { 
+    currentIndex = themes.findIndex(th => th.id === t.id);
+    current = t; 
+    render(); 
+    pauseAutoplay();
+  };
   picker.appendChild(b);
 
   const c = document.createElement("div");
   c.className = "card";
   c.dataset.name = t.name;
   c.style.backgroundImage = `url("${t.wp}")`;
-  c.onclick = () => { current = t; render(); window.scrollTo({ top: 0, behavior: "smooth" }); };
+    c.onclick = () => { 
+    currentIndex = themes.findIndex(th => th.id === t.id);
+    current = t; 
+    render(); 
+    window.scrollTo({ top: 0, behavior: "smooth" }); 
+    pauseAutoplay();
+  };
   grid.appendChild(c);
 });
 
@@ -308,3 +319,28 @@ cmd.onclick = async () => {
 
 render();
 setInterval(render, 1000);
+
+let currentIndex = 0;
+let autoplayInterval = null;
+let autoplayTimeout = null;
+
+function startAutoplay() {
+  if (autoplayInterval) clearInterval(autoplayInterval);
+  autoplayInterval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % themes.length;
+    current = themes[currentIndex];
+    render();
+  }, 4000); // Change theme every 4 seconds
+}
+
+function pauseAutoplay() {
+  if (autoplayInterval) clearInterval(autoplayInterval);
+  if (autoplayTimeout) clearTimeout(autoplayTimeout);
+  
+  autoplayTimeout = setTimeout(() => {
+    startAutoplay();
+  }, 60000); // Pause for 1 minute
+}
+
+// Start autoplay initially
+startAutoplay();

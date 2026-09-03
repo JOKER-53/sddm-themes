@@ -131,7 +131,7 @@ h1 { font-size: clamp(60px, 12vw, 160px); margin: 8px 0 0; line-height: .9; lett
 .gm-bmw-clock { margin-left:auto; font-family:monospace; font-size:22px; color:rgba(255,255,255,.8); }
 
 /* picker / grid / footer */
-.picker { display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); padding: 8px; }
+.picker { display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); padding: 8px; max-height: 70vh; overflow-y: auto; }
 .picker button { text-align: left; background: transparent; color: var(--fg); border: none; padding: 10px 12px; font: inherit; cursor: pointer; border-left: 2px solid transparent; }
 .picker button:hover { background: #111; }
 .picker button.active { background: #101010; border-left-color: var(--accent); color: var(--accent); }
@@ -148,3 +148,9 @@ h1 { font-size: clamp(60px, 12vw, 160px); margin: 8px 0 0; line-height: .9; lett
 .muted { color: var(--mute); font-size: 13px; }
 
 footer { max-width: 1200px; margin: 64px auto 32px; padding: 16px 6vw; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--mute); font-size: 12px; border-top: 1px solid var(--line); }
+
+/* Custom Scrollbar for picker */
+.picker::-webkit-scrollbar { width: 6px; }
+.picker::-webkit-scrollbar-track { background: transparent; }
+.picker::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+.picker::-webkit-scrollbar-thumb:hover { background: #555; }
