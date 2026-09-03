@@ -17,7 +17,35 @@ Rectangle {
             id: p; width: 280; height: 60; placeholderText: "KEY"; echoMode: TextInput.Password
             color: "#fff"; font.pixelSize: 24; horizontalAlignment: TextInput.AlignHCenter
             background: Rectangle { color: "#000"; border.color: "#d4202c"; border.width: 3 }
-            onAccepted: sddm.login(u.currentText, p.text, sessionModel.lastIndex)
+            onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
         }
     }
+
+    Row {
+        anchors.top: parent.top; anchors.left: parent.left
+        anchors.margins: 20; spacing: 15
+        z: 100
+        ComboBox {
+            id: sessionCombo
+            width: 140; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex
+            background: Rectangle { color: "#aa000000"; border.color: "#55ffffff"; radius: 4 }
+            contentItem: Text { text: sessionCombo.currentText; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 10 }
+            delegate: ItemDelegate {
+                width: sessionCombo.width; height: 30
+                background: Rectangle { color: parent.hovered ? "#55ffffff" : "#000" }
+                contentItem: Text { text: model.name; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter }
+            }
+        }
+        Rectangle {
+            width: 80; height: 30; color: "#aa000000"; border.color: "#55ffffff"; radius: 4
+            Text { anchors.centerIn: parent; text: "REBOOT"; color: "#fff"; font.pixelSize: 11; font.bold: true }
+            MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: sddm.reboot() }
+        }
+        Rectangle {
+            width: 80; height: 30; color: "#aa000000"; border.color: "#ff2e63"; radius: 4
+            Text { anchors.centerIn: parent; text: "SHUTDOWN"; color: "#ff2e63"; font.pixelSize: 11; font.bold: true }
+            MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: sddm.powerOff() }
+        }
+    }
+
 }

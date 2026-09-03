@@ -224,44 +224,44 @@ const layouts = {
       <div style="width:350px; height:50px; background:rgba(0,255,68,0.1); border:1px solid #00ff44; color:#00ff44; line-height:50px; padding-left:15px; font-size:18px; margin-bottom:30px;">${USER} ▾</div>
       <div style="width:350px; height:50px; background:rgba(255,255,255,0.05); border:1px solid #00ff44; color:#fff; line-height:50px; padding-left:15px; font-size:18px; margin-bottom:30px;">••••••••</div>
       <div style="width:350px; height:50px; background:#00ff44; color:#000; text-align:center; line-height:50px; font-weight:bold; font-size:18px;">UNLEASH</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "bmw-m3": (n) => `
     <div style="font-family:'Audiowide', sans-serif; position:absolute; bottom:0; width:100%; height:150px; background:rgba(10,10,10,0.9); border-top:1px solid #1c69d4; display:flex; justify-content:center; align-items:center; gap:40px; z-index:3;">
       <div style="width:250px; height:50px; border:2px solid #1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-size:18px;">${USER} ▾</div>
       <div style="width:300px; height:50px; border:2px solid #1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-size:18px; letter-spacing:4px;">••••</div>
       <div style="width:150px; height:50px; background:#1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-weight:bold;">START ENGINE</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "nissan": (n) => `
     <div style="font-family:'Russo One', sans-serif; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%) rotate(-3deg); width:600px; height:100px; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="width:200px; height:40px; background:#ffb020; color:#000; text-align:center; line-height:40px; font-weight:bold; font-size:18px;">${USER} ▾</div>
       <div style="width:250px; height:40px; background:#000; border:2px solid #ffb020; color:#fff; text-align:center; line-height:40px; font-size:18px; letter-spacing:4px;">••••••••</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "oni-anime-girl": (n) => `
     <div style="font-family:'Rajdhani', sans-serif; position:absolute; right:100px; top:50%; transform:translateY(-50%); width:350px; height:450px; background:rgba(0,0,0,0.6); border:1px solid #ff00ff; border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:25px; z-index:3;">
       <div style="color:#ff00ff; font-size:24px; font-weight:bold; letter-spacing:4px;">ONI // SYSTEM</div>
       <div style="width:280px; height:45px; border:1px solid #ff00ff; color:#ff00ff; line-height:45px; padding-left:10px; font-size:16px;">${USER} ▾</div>
       <div style="width:280px; height:45px; border:1px solid #ff00ff; color:#fff; line-height:45px; padding-left:10px; font-size:16px; letter-spacing:4px;">••••••••</div>
       <div style="width:280px; height:45px; background:#ff00ff; color:#000; text-align:center; line-height:45px; font-weight:bold;">CONNECT</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "mazda-mx5": (n) => `
     <div style="font-family:'Righteous', cursive; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.2); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="color:#05d9e8; font-size:50px; font-weight:bold; font-style:italic;">NIGHT DRIVE</div>
       <div style="width:300px; height:40px; background:rgba(0,0,0,0.6); border:2px solid #ff2a6d; color:#fff; font-style:italic; text-align:center; line-height:40px; font-size:18px;">${USER} ▾</div>
       <div style="width:300px; height:40px; background:rgba(0,0,0,0.6); border:2px solid #05d9e8; color:#fff; font-style:italic; text-align:center; line-height:40px; font-size:18px; letter-spacing:4px;">••••••••</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "oni-robot": (n) => `
     <div style="position:absolute; top:0; left:0; width:100%; height:100%; border:10px solid rgba(255,85,0,0.8); box-sizing:border-box; pointer-events:none; z-index:2;"></div>
     <div style="position:absolute; top:80px; left:80px; width:400px; height:300px; background:rgba(0,0,0,0.8); border:2px solid #ff5500; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="color:#ff5500; font-family:'VT323', monospace; font-size:22px;">[ PILOT LOGIN ]</div>
       <div style="width:300px; height:40px; background:#000; border:1px solid #ff5500; color:#ff5500; font-family:'VT323', monospace; font-size:18px; line-height:40px; padding-left:10px;">> ${USER} ▾</div>
       <div style="width:300px; height:40px; background:#000; border:1px solid #ff5500; color:#ff5500; font-family:'VT323', monospace; font-size:18px; line-height:40px; padding-left:10px; letter-spacing:4px;">••••••••</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "dodge": (n) => `
     <div style="font-family:'Bebas Neue', sans-serif; position:absolute; bottom:0; left:0; width:100%; height:300px; background:linear-gradient(to top, rgba(0,0,0,1), transparent); z-index:2;"></div>
     <div style="position:absolute; bottom:60px; right:80px; display:flex; gap:10px; z-index:3;">
       <div style="width:220px; height:60px; background:#d4202c; color:#fff; font-size:24px; font-weight:bold; text-align:center; line-height:60px;">${USER} ▾</div>
       <div style="width:280px; height:60px; background:#000; border:3px solid #d4202c; color:#fff; font-size:24px; text-align:center; line-height:54px; letter-spacing:4px; box-sizing:border-box;">••••••</div>
-    </div>`,
+    </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
 };
 
 function render() {
