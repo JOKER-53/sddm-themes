@@ -10,7 +10,6 @@ const themes = [
   { id: "deadpool",    name: "DEADPOOL",      wp: "./deadpool/assets/wallpaper.jpg",    tag: "snarky chat-bubble panel",   accent: "#d4202c" },
   { id: "bmw",         name: "BMW MUSEUM",    wp: "./bmw/assets/wallpaper.jpg",         tag: "M-stripe ignition HUD",      accent: "#1c69d4" },
   { id: "neon-gif",    name: "NEON (GIF)",    wp: "./neon-gif/assets/wallpaper.gif",    tag: "animated cyberpunk loop",    accent: "#00ffcc" },
-  { id: "lofi-gif",    name: "LOFI (GIF)",    wp: "./lofi-gif/assets/wallpaper.gif",    tag: "animated chill vibes",       accent: "#ffb3d1" },
 ];
 
 const $ = (s) => document.querySelector(s);
@@ -211,15 +210,6 @@ const layouts = {
       </div>
     </div>
     <div style="position:absolute; top:30px; right:30px; color:#05d9e8; font-family:monospace; font-size:12px; letter-spacing:2px; z-index:3;">SYS.SHUTDOWN &nbsp;&nbsp; SYS.REBOOT</div>`,
-
-  "lofi-gif": (n) => `
-    <div style="position:absolute; left:4%; bottom:6%; width:320px; height:220px; background:rgba(255,255,255,0.8); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3; color:#222; font-family:sans-serif;">
-      <div style="font-size:36px; font-weight:bold; margin-bottom:16px;">${fmtHM(n)}</div>
-      <div style="width:240px; border:1px solid #ccc; background:#fff; padding:6px 12px; border-radius:8px; margin-bottom:24px; font-size:14px; color:#999;">password...</div>
-      <div style="display:flex; gap:24px; font-size:12px; font-weight:bold; color:#666;">
-        <span>⏸ sleep</span><span>⏹ power</span>
-      </div>
-    </div>`,
 };
 
 function render() {
