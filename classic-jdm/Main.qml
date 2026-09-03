@@ -10,7 +10,7 @@ Rectangle {
     color: "#000"
 
     property color amber: "#f5a623"
-    property color panel: "#0c0c0ccc"
+    property color panel: "#cc0c0c0c"
     property color text:  "#ececec"
     property color dim:   "#7a7a7a"
 

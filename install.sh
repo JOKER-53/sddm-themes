@@ -72,36 +72,88 @@ QT_VER=$(detect_qt_version)
 info "Detected SDDM Qt version: Qt${QT_VER}"
 
 # ── check dependencies ────────────────────────────────────────
+install_missing() {
+  local pm=$1
+  shift
+  local pkgs=("$@")
+  info "Installing missing dependencies: ${pkgs[*]}"
+  case "$pm" in
+    pacman) pacman -S --noconfirm "${pkgs[@]}" ;;
+    apt)    apt update && apt install -y "${pkgs[@]}" ;;
+    dnf)    dnf install -y "${pkgs[@]}" ;;
+    zypper) zypper install -y "${pkgs[@]}" ;;
+  esac
+}
+
 check_deps_qt6() {
+  local pm=""
   local missing=()
-  for pkg in qt6-declarative qt6-5compat qt6-svg; do
-    if ! pacman -Qq "$pkg" &>/dev/null 2>&1 && \
-       ! dpkg -l "$pkg" &>/dev/null 2>&1 && \
-       ! rpm -q "$pkg" &>/dev/null 2>&1; then
-      missing+=("$pkg")
-    fi
-  done
+  if command -v pacman &>/dev/null; then
+    pm="pacman"
+    for pkg in qt6-declarative qt6-5compat qt6-svg; do
+      pacman -Qq "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v apt &>/dev/null; then
+    pm="apt"
+    for pkg in qml6-module-qtquick qml6-module-qt5compat-graphicaleffects libqt6svg6; do
+      dpkg -l "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v dnf &>/dev/null; then
+    pm="dnf"
+    for pkg in qt6-qtdeclarative qt6-qt5compat qt6-qtsvg; do
+      rpm -q "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v zypper &>/dev/null; then
+    pm="zypper"
+    for pkg in qt6-declarative qt6-5compat qt6-svg; do
+      rpm -q "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  fi
+
   if [[ ${#missing[@]} -gt 0 ]]; then
-    warn "Possibly missing Qt6 packages: ${missing[*]}"
-    warn "On Arch:  pacman -S qt6-declarative qt6-5compat qt6-svg qt6-multimedia"
-    warn "On Fedora: dnf install qt6-qtdeclarative qt6-qt5compat qt6-qtsvg"
-    warn "Continuing anyway — install them if the theme fails to load."
+    if [[ -n "$pm" ]]; then
+      install_missing "$pm" "${missing[@]}"
+    else
+      warn "Missing Qt6 packages: ${missing[*]} (Install manually)"
+    fi
+  else
+    ok "All Qt6 dependencies satisfied."
   fi
 }
 
 check_deps_qt5() {
+  local pm=""
   local missing=()
-  for pkg in qt5-declarative qt5-graphicaleffects qt5-quickcontrols2; do
-    if ! pacman -Qq "$pkg" &>/dev/null 2>&1 && \
-       ! dpkg -l "qml-module-${pkg#qt5-}" &>/dev/null 2>&1; then
-      missing+=("$pkg")
-    fi
-  done
+  if command -v pacman &>/dev/null; then
+    pm="pacman"
+    for pkg in qt5-declarative qt5-graphicaleffects qt5-quickcontrols2; do
+      pacman -Qq "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v apt &>/dev/null; then
+    pm="apt"
+    for pkg in qml-module-qtquick2 qml-module-qtgraphicaleffects qml-module-qtquick-controls2; do
+      dpkg -l "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v dnf &>/dev/null; then
+    pm="dnf"
+    for pkg in qt5-qtdeclarative qt5-qtgraphicaleffects qt5-qtquickcontrols2; do
+      rpm -q "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  elif command -v zypper &>/dev/null; then
+    pm="zypper"
+    for pkg in libqt5-qtdeclarative qt5-graphicaleffects; do
+      rpm -q "$pkg" &>/dev/null || missing+=("$pkg")
+    done
+  fi
+
   if [[ ${#missing[@]} -gt 0 ]]; then
-    warn "Possibly missing Qt5 packages: ${missing[*]}"
-    warn "On Arch:   pacman -S qt5-declarative qt5-graphicaleffects qt5-quickcontrols2"
-    warn "On Debian/Ubuntu: apt install qml-module-qtquick2 qml-module-qtgraphicaleffects qml-module-qtquick-controls2"
-    warn "Continuing anyway — install them if the theme fails to load."
+    if [[ -n "$pm" ]]; then
+      install_missing "$pm" "${missing[@]}"
+    else
+      warn "Missing Qt5 packages: ${missing[*]} (Install manually)"
+    fi
+  else
+    ok "All Qt5 dependencies satisfied."
   fi
 }
 
@@ -133,12 +185,18 @@ transpile_for_qt5() {
   ok "Qt5 import patching done"
 }
 
-# ── backup existing theme ─────────────────────────────────────
+# ── backup existing theme & config ────────────────────────────
 if [[ -d "$DEST" ]]; then
   BACKUP="${DEST}.backup.$(date +%Y%m%d_%H%M%S)"
   info "Backing up existing theme to $BACKUP"
-  cp -r "$DEST" "$BACKUP"
+  cp -r "$DEST" "$BACKUP" || true
   ok "Backup saved: $BACKUP"
+fi
+
+if [[ -f "$SDDM_CONF" ]]; then
+  CONF_BACKUP="${SDDM_CONF}.backup.$(date +%Y%m%d_%H%M%S)"
+  info "Backing up sddm.conf to $CONF_BACKUP"
+  cp "$SDDM_CONF" "$CONF_BACKUP" || true
 fi
 
 # ── copy theme ────────────────────────────────────────────────

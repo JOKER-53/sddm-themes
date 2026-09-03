@@ -22,7 +22,7 @@ Rectangle {
         anchors.top: parent.top; anchors.right: parent.right
         anchors.margins: 40
         width: 280; height: 110
-        color: "#1a0e07ee"; border.color: root.sepia; border.width: 2
+        color: "#ee1a0e07"; border.color: root.sepia; border.width: 2
         Rectangle { anchors.fill: parent; anchors.margins: 5
             color: "transparent"; border.color: root.sepia; border.width: 1 }
         Column { anchors.centerIn: parent; spacing: 2

@@ -12,7 +12,7 @@ Rectangle {
     property color pink:   "#ffb3d1"
     property color purple: "#c8a2ff"
     property color soft:   "#fff0f6"
-    property color cardBg: "#1a0f1fcc"
+    property color cardBg: "#cc1a0f1f"
 
     Image {
         anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter

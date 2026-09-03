@@ -9,6 +9,8 @@ const themes = [
   { id: "rdr2",        name: "RDR2",          wp: "./rdr2/assets/wallpaper.jpg",        tag: "wanted-poster western",      accent: "#c79a4a" },
   { id: "deadpool",    name: "DEADPOOL",      wp: "./deadpool/assets/wallpaper.jpg",    tag: "snarky chat-bubble panel",   accent: "#d4202c" },
   { id: "bmw",         name: "BMW MUSEUM",    wp: "./bmw/assets/wallpaper.jpg",         tag: "M-stripe ignition HUD",      accent: "#1c69d4" },
+  { id: "neon-gif",    name: "NEON (GIF)",    wp: "./neon-gif/assets/wallpaper.gif",    tag: "animated cyberpunk loop",    accent: "#00ffcc" },
+  { id: "lofi-gif",    name: "LOFI (GIF)",    wp: "./lofi-gif/assets/wallpaper.gif",    tag: "animated chill vibes",       accent: "#ffb3d1" },
 ];
 
 const $ = (s) => document.querySelector(s);
@@ -192,6 +194,32 @@ const layouts = {
       </div>
     </div>
     <div class="gm-power" style="left:5%;bottom:5%">⏻ shutdown · ↻ restart · ☾ suspend</div>`,
+
+  "neon-gif": (n) => `
+    <div class="gm-overlay" style="background:linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 50%, rgba(0,0,0,0.8) 100%)"></div>
+    <div style="position:absolute; bottom:80px; left:50%; transform:translateX(-50%); width:700px; height:280px; background:rgba(0,0,0,0.5); border:2px solid #ff2a6d; border-radius:8px; display:flex; align-items:center; padding:30px; box-sizing:border-box; z-index:3;">
+      <div style="width:250px; display:flex; flex-direction:column; gap:10px;">
+        <div style="color:#05d9e8; font-family:monospace; font-size:14px; letter-spacing:4px;">SYSTEM LOGIN</div>
+        <div style="color:#fff; font-family:Impact; font-size:80px; letter-spacing:4px; -webkit-text-stroke:2px #ff2a6d; line-height:1;">${fmtHM(n)}</div>
+        <div style="color:#05d9e8; font-family:monospace; font-size:16px; letter-spacing:2px;">${fmtDate(n)}</div>
+      </div>
+      <div style="width:2px; height:100%; background:#ff2a6d; opacity:0.5; margin:0 40px;"></div>
+      <div style="width:300px; display:flex; flex-direction:column; gap:20px;">
+        <div style="width:100%; height:44px; border:1px solid #05d9e8; background:rgba(0,0,0,0.2); color:#05d9e8; font-family:monospace; font-size:16px; font-weight:bold; line-height:44px; padding-left:12px; box-sizing:border-box;">${USER} ▾</div>
+        <div style="width:100%; height:44px; border:1px solid #ff2a6d; background:rgba(0,0,0,0.2); color:#fff; font-family:monospace; font-size:16px; letter-spacing:4px; line-height:44px; padding-left:12px; box-sizing:border-box;">••••••••</div>
+        <div style="width:100%; height:44px; background:#ff2a6d; color:#000; font-family:Impact; font-size:20px; letter-spacing:2px; text-align:center; line-height:44px; font-weight:bold;">INITIALIZE //</div>
+      </div>
+    </div>
+    <div style="position:absolute; top:30px; right:30px; color:#05d9e8; font-family:monospace; font-size:12px; letter-spacing:2px; z-index:3;">SYS.SHUTDOWN &nbsp;&nbsp; SYS.REBOOT</div>`,
+
+  "lofi-gif": (n) => `
+    <div style="position:absolute; left:4%; bottom:6%; width:320px; height:220px; background:rgba(255,255,255,0.8); border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:3; color:#222; font-family:sans-serif;">
+      <div style="font-size:36px; font-weight:bold; margin-bottom:16px;">${fmtHM(n)}</div>
+      <div style="width:240px; border:1px solid #ccc; background:#fff; padding:6px 12px; border-radius:8px; margin-bottom:24px; font-size:14px; color:#999;">password...</div>
+      <div style="display:flex; gap:24px; font-size:12px; font-weight:bold; color:#666;">
+        <span>⏸ sleep</span><span>⏹ power</span>
+      </div>
+    </div>`,
 };
 
 function render() {

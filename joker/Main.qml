@@ -18,8 +18,8 @@ Rectangle {
     Rectangle { anchors.fill: parent
         gradient: Gradient { orientation: Gradient.Horizontal
             GradientStop { position: 0.0; color: "#00000000" }
-            GradientStop { position: 0.55; color: "#000000aa" }
-            GradientStop { position: 1.0; color: "#000000ff" } } }
+            GradientStop { position: 0.55; color: "#aa000000" }
+            GradientStop { position: 1.0; color: "#ff000000" } } }
 
     Column {
         anchors.right: parent.right; anchors.rightMargin: 110
