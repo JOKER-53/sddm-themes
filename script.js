@@ -17,6 +17,18 @@ const themes = [
   { id: "mazda-mx5", name: "MAZDA MX5", wp: "./mazda-mx5/assets/wallpaper.gif", tag: "synthwave night drive", accent: "#ff2a6d" },
   { id: "oni-robot", name: "MECHA ONI", wp: "./oni-robot/assets/wallpaper.gif", tag: "glitchy mecha HUD", accent: "#ff5500" },
   { id: "dodge", name: "DODGE HELLCAT", wp: "./dodge/assets/wallpaper.gif", tag: "american muscle red", accent: "#d4202c" },
+  { id: "spiderverse", name: "SPIDER-VERSE", wp: "./spiderverse/assets/wallpaper.gif", tag: "comic book halftone", accent: "#00ffff" },
+  { id: "spiderman", name: "SPIDERMAN", wp: "./spiderman/assets/wallpaper.gif", tag: "classic red blue hero", accent: "#e23636" },
+  { id: "sakura-lake", name: "SAKURA LAKE", wp: "./sakura-lake/assets/wallpaper.gif", tag: "calm pink petals", accent: "#ffb7c5" },
+  { id: "mountain-sunset", name: "MOUNTAIN SUNSET", wp: "./mountain-sunset/assets/wallpaper.gif", tag: "retro 80s outrun", accent: "#ff007f" },
+  { id: "mount-fuji", name: "MOUNT FUJI", wp: "./mount-fuji/assets/wallpaper.gif", tag: "minimal zen white", accent: "#d4f1f9" },
+  { id: "the-dark-river", name: "THE DARK RIVER", wp: "./the-dark-river/assets/wallpaper.gif", tag: "moody gold gothic", accent: "#c5a059" },
+  { id: "purrple-cat", name: "PURRPLE CAT", wp: "./purrple-cat/assets/wallpaper.gif", tag: "lo-fi hip hop chill", accent: "#a854f7" },
+  { id: "hitagi-senjougahara", name: "SENJOUGAHARA", wp: "./hitagi-senjougahara/assets/wallpaper.gif", tag: "monogatari geometric red", accent: "#ff0000" },
+  { id: "hilda-and-tepig", name: "HILDA & TEPIG", wp: "./hilda-and-tepig/assets/wallpaper.gif", tag: "playful rounded orange", accent: "#ff8c00" },
+  { id: "hoodie", name: "HOODIE HACKER", wp: "./hoodie/assets/wallpaper.gif", tag: "urban glitch green", accent: "#39ff14" },
+  { id: "neko-anime", name: "NEKO KAWAII", wp: "./neko-anime/assets/wallpaper.gif", tag: "pastel pink cyan box", accent: "#00ffff" },
+  { id: "zoro-blue", name: "ZORO BLUE", wp: "./zoro-blue/assets/wallpaper.gif", tag: "intense sword aura", accent: "#00aaff" },
 ];
 
 const $ = (s) => document.querySelector(s);
@@ -262,6 +274,84 @@ const layouts = {
       <div style="width:220px; height:60px; background:#d4202c; color:#fff; font-size:24px; font-weight:bold; text-align:center; line-height:60px;">${USER} ▾</div>
       <div style="width:280px; height:60px; background:#000; border:3px solid #d4202c; color:#fff; font-size:24px; text-align:center; line-height:54px; letter-spacing:4px; box-sizing:border-box;">••••••</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+
+  "spiderverse": (n) => `
+    <div style="font-family:'Bangers', cursive; position:absolute; left:0; bottom:0; margin:60px; width:400px; height:300px; background:#e23636; border:5px solid #000; transform:rotate(-2deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:10px; z-index:3;">
+      <div style="font-size:48px; color:#000;">INTO THE SYSTEM</div>
+      <div style="width:300px; height:50px; background:#00ffff; border:3px solid #000; font-size:24px; color:#000; text-align:center; line-height:44px;">${USER} ▾</div>
+      <div style="width:300px; height:50px; background:#000; border:3px solid transparent; font-size:24px; color:#fff; text-align:center; line-height:44px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "spiderman": (n) => `
+    <div style="font-family:'Anton', sans-serif; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:350px; height:350px; background:rgba(0,0,0,0.7); border:8px solid #e23636; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:36px; color:#e23636;">WEB SHOOTER</div>
+      <div style="width:280px; height:50px; background:transparent; border:4px solid #0055ff; font-size:20px; color:#0055ff; text-align:center; line-height:42px;">${USER} ▾</div>
+      <div style="width:280px; height:50px; background:#000; border:4px solid #e23636; font-size:20px; color:#fff; text-align:center; line-height:42px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "sakura-lake": (n) => `
+    <div style="font-family:'Yusei Magic', sans-serif; position:absolute; bottom:80px; left:50%; transform:translateX(-50%); width:500px; height:80px; background:rgba(255,255,255,0.8); border-radius:40px; display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="width:200px; height:40px; font-size:24px; color:#ffb7c5; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:1px; height:30px; background:#ffb7c5;"></div>
+      <div style="width:200px; height:40px; font-size:24px; color:#555; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "mountain-sunset": (n) => `
+    <div style="font-family:'Lobster', cursive; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; height:250px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:52px; color:#ff007f; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">SUNSET DRIVE</div>
+      <div style="width:300px; height:45px; background:#ff007f; border-radius:22px; font-size:24px; color:#fff; text-align:center; line-height:45px;">${USER} ▾</div>
+      <div style="width:300px; height:45px; background:#fff; border-radius:22px; font-size:24px; color:#ff007f; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "mount-fuji": (n) => `
+    <div style="font-family:'Kosugi', sans-serif; position:absolute; right:0; top:0; width:400px; height:100%; background:rgba(255,255,255,0.9); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:3;">
+      <div style="font-size:72px; color:#333;">ZEN</div>
+      <div style="width:250px; height:40px; border:1px solid #333; font-size:22px; color:#333; line-height:38px; padding-left:15px;">${USER} ▾</div>
+      <div style="width:250px; height:40px; border:1px solid #333; font-size:22px; color:#333; line-height:38px; padding-left:15px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "the-dark-river": (n) => `
+    <div style="font-family:'MedievalSharp', cursive; position:absolute; top:0; left:50%; transform:translateX(-50%); width:600px; height:250px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:42px; color:#c5a059;">THE DARK RIVER</div>
+      <div style="display:flex; gap:20px;">
+        <div style="width:200px; height:45px; background:rgba(0,0,0,0.6); border:1px solid #c5a059; font-size:18px; color:#c5a059; text-align:center; line-height:45px;">${USER} ▾</div>
+        <div style="width:250px; height:45px; background:rgba(0,0,0,0.6); border:1px solid #c5a059; font-size:18px; color:#fff; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "purrple-cat": (n) => `
+    <div style="font-family:'Patrick Hand', cursive; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:320px; height:200px; background:rgba(255,255,255,0.6); border-radius:20px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:32px; color:#a854f7;">chill out...</div>
+      <div style="width:250px; height:40px; background:#fff; border-radius:10px; font-size:20px; color:#a854f7; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:250px; height:40px; background:#fff; border-radius:10px; font-size:20px; color:#555; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "hitagi-senjougahara": (n) => `
+    <div style="font-family:'Fjalla One', sans-serif; position:absolute; right:50px; bottom:50px; width:350px; height:200px; background:rgba(0,0,0,0.8); border:4px solid #ff0000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:3;">
+      <div style="font-size:64px; color:#ff0000;">CRAB</div>
+      <div style="display:flex; gap:10px;">
+        <div style="width:140px; height:40px; background:#ff0000; font-size:18px; color:#fff; text-align:center; line-height:40px;">${USER} ▾</div>
+        <div style="width:140px; height:40px; background:#000; border:2px solid #ff0000; font-size:18px; color:#ff0000; text-align:center; line-height:36px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "hilda-and-tepig": (n) => `
+    <div style="font-family:'Chewy', cursive; position:absolute; left:80px; top:50%; transform:translateY(-50%); width:350px; height:250px; background:#ff8c00; border-radius:30px; border:6px solid #fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:42px; color:#fff;">BATTLE!</div>
+      <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px;">${USER} ▾</div>
+      <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "hoodie": (n) => `
+    <div style="font-family:'Rubik Glitch', system-ui; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:450px; height:350px; background:rgba(0,0,0,0.6); border:2px solid #39ff14; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:64px; color:#39ff14;">0xACCESS</div>
+      <div style="width:350px; height:50px; background:transparent; border:1px solid #39ff14; font-size:28px; color:#39ff14; text-align:center; line-height:48px;">${USER} ▾</div>
+      <div style="width:350px; height:50px; background:transparent; border:1px solid #39ff14; font-size:28px; color:#fff; text-align:center; line-height:48px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "neko-anime": (n) => `
+    <div style="font-family:'Mali', cursive; position:absolute; right:80px; top:80px; width:320px; height:280px; background:#ffb6c1; border-radius:15px; border:4px solid #00ffff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:36px; color:#00ffff; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Mya-nee~</div>
+      <div style="width:250px; height:45px; background:#fff; border-radius:10px; border:2px solid #00ffff; font-size:22px; color:#ffb6c1; text-align:center; line-height:41px;">${USER} ▾</div>
+      <div style="width:250px; height:45px; background:#fff; border-radius:10px; border:2px solid #00ffff; font-size:22px; color:#000; text-align:center; line-height:41px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "zoro-blue": (n) => `
+    <div style="font-family:'Black Ops One', system-ui; position:absolute; left:0; bottom:0; width:500px; height:350px; background:rgba(0,0,0,0.7); border-top:5px solid #00aaff; border-right:5px solid #00aaff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:64px; color:#00aaff;">ASHURA</div>
+      <div style="width:350px; height:50px; background:#00aaff; font-size:24px; color:#000; text-align:center; line-height:50px;">${USER} ▾</div>
+      <div style="width:350px; height:50px; background:#000; border:2px solid #00aaff; font-size:24px; color:#fff; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
+    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+
 };
 
 function render() {
