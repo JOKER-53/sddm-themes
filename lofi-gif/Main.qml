@@ -10,7 +10,7 @@ Rectangle {
         id: bg
         anchors.fill: parent
         source: "assets/wallpaper.gif"
-        fillMode: Image.PreserveAspectCrop
+        fillMode: Image.PreserveAspectFit
         playing: true
     }
 
