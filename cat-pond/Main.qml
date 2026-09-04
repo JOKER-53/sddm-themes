@@ -24,22 +24,21 @@ Rectangle {
     }
 
         Row {
-            anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 20; spacing: 15
-            ComboBox {
-                id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
-                background: Rectangle { color: "#99000000"; radius: 4; border.color: "#4dffffff" }
-                contentItem: Text { text: sessionCombo.currentText; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 10 }
-            }
-            Rectangle {
-                width: 80; height: 30; color: "#99000000"; radius: 4; border.color: "#4dffffff"
-                Text { anchors.centerIn: parent; text: "REBOOT"; color: "#fff"; font.pixelSize: 11; font.bold: true }
-                MouseArea { anchors.fill: parent; onClicked: sddm.reboot() }
-            }
-            Rectangle {
-                width: 90; height: 30; color: "#99000000"; radius: 4; border.color: "#ff2e63"
-                Text { anchors.centerIn: parent; text: "SHUTDOWN"; color: "#ff2e63"; font.pixelSize: 11; font.bold: true }
-                MouseArea { anchors.fill: parent; onClicked: sddm.powerOff() }
-            }
+         anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 20; spacing: 15; z: 100
+        ComboBox {
+            id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
+            background: Rectangle { color: "#aa4caf50"; radius: 4; border.color: "#81c784" }
+            contentItem: Text { text: sessionCombo.currentText; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 10 }
         }
-
+        Rectangle {
+            width: 80; height: 30; color: "#aa4caf50"; radius: 4; border.color: "#81c784"
+            Text { anchors.centerIn: parent; text: "REBOOT"; color: "#fff"; font.pixelSize: 11; font.bold: true }
+            MouseArea { anchors.fill: parent; onClicked: sddm.reboot() }
+        }
+        Rectangle {
+            width: 90; height: 30; color: "#aa4caf50"; radius: 4; border.color: "#ff2e63"
+            Text { anchors.centerIn: parent; text: "SHUTDOWN"; color: "#ff2e63"; font.pixelSize: 11; font.bold: true }
+            MouseArea { anchors.fill: parent; onClicked: sddm.powerOff() }
+        }
+    }
 }
