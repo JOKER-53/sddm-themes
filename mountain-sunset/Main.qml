@@ -1,27 +1,136 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-Rectangle { width: 1920; height: 1080; color: "#000"; AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
- FontLoader { id: customFont; source: "assets/font.ttf" }
- Rectangle { anchors.right: parent.right; anchors.top: parent.top; anchors.margins: 80; width: 400; height: 250; color: "transparent"; Column { anchors.centerIn: parent; spacing: 15; Text { text: "SUNSET DRIVE"; font.family: customFont.name; font.pixelSize: 52; color: "#ff007f"; style: Text.Outline; styleColor: "#fff" }
- ComboBox { id: u; width: 300; height: 45; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex; background: Rectangle { color: "#ff007f"; radius: 22.5 }
- contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 24; color: "#fff"; anchors.centerIn: parent } }
- TextField { id: p; width: 300; height: 45; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#ff007f"; background: Rectangle { color: "#fff"; radius: 22.5 }
- onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex) } } } 
-    Row {
-        anchors.top: parent.top; anchors.left: parent.left
-        anchors.margins: 20; spacing: 15
-        z: 100
-        ComboBox {
-            id: sessionCombo
-            width: 140; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex
-            background: Rectangle { color: "#aa000000"; border.color: "#55ffffff"; radius: 4 }
-            contentItem: Text { text: sessionCombo.currentText; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 10 }
-            delegate: ItemDelegate { width: sessionCombo.width; height: 30; background: Rectangle { color: parent.hovered ? "#55ffffff" : "#000" }
- contentItem: Text { text: model.name; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter } }
-        }
-        Rectangle { width: 80; height: 30; color: "#aa000000"; border.color: "#55ffffff"; radius: 4; Text { anchors.centerIn: parent; text: "REBOOT"; color: "#fff"; font.pixelSize: 11; font.bold: true }
- MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: sddm.reboot() } }
-        Rectangle { width: 80; height: 30; color: "#aa000000"; border.color: "#ff2e63"; radius: 4; Text { anchors.centerIn: parent; text: "SHUTDOWN"; color: "#ff2e63"; font.pixelSize: 11; font.bold: true }
- MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: sddm.powerOff() } }
+import QtQuick.Layouts 1.15
+
+Rectangle {
+    id: root
+    width: 1920; height: 1080; color: "#000"
+    
+    // Background
+    AnimatedImage { 
+        anchors.fill: parent; source: "assets/wallpaper.gif"; 
+        fillMode: Image.PreserveAspectCrop; playing: true 
     }
- }
+    FontLoader { id: customFont; source: "assets/font.ttf" }
+
+    // Title floating above the command bar
+    Text { 
+        anchors.bottom: commandBar.top; anchors.bottomMargin: 30
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "SUNSET DRIVE"
+        font.family: customFont.name; font.pixelSize: 64; 
+        color: "#ff9d76" // Warm sunset peach
+        style: Text.Outline; styleColor: "#55000000"
+        
+        // Subtle floating animation
+        SequentialAnimation on anchors.bottomMargin {
+            loops: Animation.Infinite
+            NumberAnimation { from: 30; to: 35; duration: 2000; easing.type: Easing.InOutQuad }
+            NumberAnimation { from: 35; to: 30; duration: 2000; easing.type: Easing.InOutQuad }
+        }
+    }
+
+    // UNIQUE HORIZONTAL COMMAND BAR (Floating Pill UI)
+    Rectangle {
+        id: commandBar
+        anchors.bottom: parent.bottom; anchors.bottomMargin: 80
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: 820; height: 60
+        color: "#66110a08" // Deep warm dark translucent
+        radius: 30
+        border.color: "#44ff9d76"; border.width: 1
+        
+        // Background glow
+        Rectangle {
+            anchors.fill: parent; radius: 30; color: "transparent"
+            border.color: "#22ff9d76"; border.width: 4; z: -1
+        }
+
+        Row {
+            anchors.fill: parent; anchors.leftMargin: 20; anchors.rightMargin: 10
+            spacing: 15
+
+            // 1. User Selection
+            ComboBox {
+                id: u; width: 140; height: 40; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
+                anchors.verticalCenter: parent.verticalCenter
+                background: Rectangle { color: "transparent" }
+                contentItem: Text { 
+                    text: u.currentText; font.family: "sans-serif"; font.pixelSize: 16; font.bold: true; color: "#ff9d76"
+                    verticalAlignment: Text.AlignVCenter; horizontalAlignment: Text.AlignHCenter 
+                }
+                delegate: ItemDelegate {
+                    width: u.width; height: 36; background: Rectangle { color: parent.hovered ? "#44ff9d76" : "#22110a08" }
+                    contentItem: Text { text: model.name; color: "#ff9d76"; font.family: "sans-serif"; font.pixelSize: 14; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+                }
+            }
+
+            // Separator
+            Rectangle { width: 1; height: 30; color: "#44ff9d76"; anchors.verticalCenter: parent.verticalCenter }
+
+            // 2. Password Input
+            TextField {
+                id: p; width: 220; height: 40
+                anchors.verticalCenter: parent.verticalCenter
+                placeholderText: "Enter password..."
+                placeholderTextColor: "#88ff9d76"
+                echoMode: TextInput.Password; font.family: "sans-serif"; font.pixelSize: 16; color: "#ffffff"; font.letterSpacing: 2
+                background: Rectangle { color: "transparent" }
+                verticalAlignment: TextInput.AlignVCenter
+                onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
+            }
+
+            // Login Button (Arrow)
+            Rectangle {
+                width: 40; height: 40; radius: 20; color: "#ff9d76"
+                anchors.verticalCenter: parent.verticalCenter
+                Text { anchors.centerIn: parent; text: "→"; color: "#111"; font.pixelSize: 20; font.bold: true }
+                MouseArea { 
+                    anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
+                    onEntered: parent.color = "#ffffff"
+                    onExited: parent.color = "#ff9d76"
+                    onClicked: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
+                }
+                Behavior on color { ColorAnimation { duration: 150 } }
+            }
+
+            // Separator
+            Rectangle { width: 1; height: 30; color: "#44ff9d76"; anchors.verticalCenter: parent.verticalCenter }
+
+            // 3. Session Selection
+            ComboBox {
+                id: sessionCombo; width: 100; height: 40; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex
+                anchors.verticalCenter: parent.verticalCenter
+                background: Rectangle { color: "transparent" }
+                contentItem: Text { 
+                    text: sessionCombo.currentText; font.family: "sans-serif"; font.pixelSize: 13; color: "#ff9d76"
+                    verticalAlignment: Text.AlignVCenter; horizontalAlignment: Text.AlignHCenter 
+                }
+                delegate: ItemDelegate {
+                    width: sessionCombo.width; height: 36; background: Rectangle { color: parent.hovered ? "#44ff9d76" : "#22110a08" }
+                    contentItem: Text { text: model.name; color: "#ff9d76"; font.family: "sans-serif"; font.pixelSize: 12; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+                }
+            }
+
+            // Separator
+            Rectangle { width: 1; height: 30; color: "#44ff9d76"; anchors.verticalCenter: parent.verticalCenter }
+
+            // 4. Power Controls
+            Row {
+                spacing: 15; height: 40; anchors.verticalCenter: parent.verticalCenter
+                
+                Text { 
+                    text: "⟳"; font.pixelSize: 22; color: "#ff9d76"; font.bold: true; anchors.verticalCenter: parent.verticalCenter
+                    MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onEntered: parent.color = "#ffffff"; onExited: parent.color = "#ff9d76"; onClicked: sddm.reboot() }
+                    Behavior on color { ColorAnimation { duration: 150 } }
+                }
+                
+                Text { 
+                    text: "⏻"; font.pixelSize: 22; color: "#ff5050"; font.bold: true; anchors.verticalCenter: parent.verticalCenter
+                    MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onEntered: parent.color = "#ffffff"; onExited: parent.color = "#ff5050"; onClicked: sddm.powerOff() }
+                    Behavior on color { ColorAnimation { duration: 150 } }
+                }
+            }
+        }
+    }
+}
