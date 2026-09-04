@@ -11,7 +11,7 @@ Rectangle {
 
     property color red:   "#e63946"
     property color white: "#ffffff"
-    property color dim:   "rgba(255,255,255,0.55)"
+    property color dim:   "#8cffffff"
 
     Image {
         anchors.fill: parent
@@ -20,9 +20,9 @@ Rectangle {
     }
     Rectangle { anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0.0; color: "#00000099" }
-            GradientStop { position: 0.5; color: "#00000033" }
-            GradientStop { position: 1.0; color: "#000000cc" }
+            GradientStop { position: 0.0; color: "#99000000" }
+            GradientStop { position: 0.5; color: "#33000000" }
+            GradientStop { position: 1.0; color: "#cc000000" }
         }
     }
 
@@ -53,7 +53,7 @@ Rectangle {
         anchors.margins: 56
         width: 520; height: 96
         radius: 48
-        color: "#0a0a0aee"
+        color: "#ee0a0a0a"
         border.color: root.red; border.width: 2
 
         Row {

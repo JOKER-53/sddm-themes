@@ -29,10 +29,10 @@ h1 { font-size: clamp(60px, 12vw, 160px); margin: 8px 0 0; line-height: .9; lett
 .cmd em { font-style: normal; color: var(--accent); }
 .cmd .copy { color: var(--mute); font-size: 11px; margin-left: 12px; }
 
-.stage { display: grid; grid-template-columns: 1fr 240px; gap: 24px; max-width: 1600px; margin: 32px auto; padding: 0 4vw; }
+.stage { display: block; max-width: 90%; margin: 32px auto; }
 @media (max-width: 880px) { .stage { grid-template-columns: 1fr; } }
 
-.preview { position: relative; aspect-ratio: 16/10; border: 1px solid var(--line); background: #000 center/cover no-repeat; overflow: hidden; color: #fff; font-family: ui-monospace, "JetBrains Mono", monospace; }
+.preview { position: relative; aspect-ratio: 16/9; max-height: 80vh; margin: 0 auto; border: 1px solid var(--line); border-radius: 12px; background: #000 center/cover no-repeat; overflow: hidden; color: #fff; font-family: ui-monospace, "JetBrains Mono", monospace; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
 .preview .chrome { position: absolute; left: 0; right: 0; bottom: 0; z-index: 10; padding: 16px; background: linear-gradient(180deg, transparent, rgba(0,0,0,.7)); }
 .preview .meta { font-size: 11px; color: rgba(255,255,255,.85); }
 .preview .meta strong { display: block; font-size: 18px; letter-spacing: -.01em; margin-bottom: 2px; }
@@ -131,16 +131,11 @@ h1 { font-size: clamp(60px, 12vw, 160px); margin: 8px 0 0; line-height: .9; lett
 .gm-bmw-clock { margin-left:auto; font-family:monospace; font-size:22px; color:rgba(255,255,255,.8); }
 
 /* picker / grid / footer */
-.picker { display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); padding: 8px; }
-.picker button { text-align: left; background: transparent; color: var(--fg); border: none; padding: 10px 12px; font: inherit; cursor: pointer; border-left: 2px solid transparent; }
-.picker button:hover { background: #111; }
-.picker button.active { background: #101010; border-left-color: var(--accent); color: var(--accent); }
-.picker .pid { color: var(--mute); font-size: 11px; margin-left: 6px; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; max-width: 1200px; margin: 48px auto; padding: 0 6vw; }
-.card { position: relative; aspect-ratio: 16/10; border: 1px solid var(--line); background: #000 center/cover no-repeat; cursor: pointer; overflow: hidden; }
-.card::after { content: attr(data-name); position: absolute; left: 8px; bottom: 6px; color: #fff; font-size: 11px; letter-spacing: .15em; text-shadow: 0 1px 2px #000; }
-.card:hover { outline: 1px solid var(--accent); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; max-width: 90%; margin: 64px auto; padding: 0; }
+.card { position: relative; aspect-ratio: 16/9; border: 1px solid var(--line); border-radius: 8px; background: #000 center/cover no-repeat; cursor: pointer; overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
+.card::after { content: attr(data-name); position: absolute; inset: auto 0 0 0; padding: 16px 12px 10px; background: linear-gradient(transparent, rgba(0,0,0,0.9)); color: #fff; font-size: 14px; font-weight: bold; letter-spacing: .1em; }
+.card:hover { outline: 2px solid var(--accent); transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
 .setup { max-width: 1200px; margin: 48px auto; padding: 0 6vw; }
 .setup h2 { font-size: 22px; letter-spacing: -.01em; }
@@ -148,3 +143,24 @@ h1 { font-size: clamp(60px, 12vw, 160px); margin: 8px 0 0; line-height: .9; lett
 .muted { color: var(--mute); font-size: 13px; }
 
 footer { max-width: 1200px; margin: 64px auto 32px; padding: 16px 6vw; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; color: var(--mute); font-size: 12px; border-top: 1px solid var(--line); }
+
+
+
+
+.picker::-webkit-scrollbar-track { background: transparent; }
+.picker::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+.picker::-webkit-scrollbar-thumb:hover { background: #555; }
+
+.mini-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(0.16);
+    pointer-events: none;
+    z-index: 1;
+}
+.card::after {
+    z-index: 2;
+}
