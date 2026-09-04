@@ -90,9 +90,9 @@ Rectangle {
         anchors.left: parent.left; anchors.bottom: parent.bottom
         anchors.margins: 40; spacing: 22
         Repeater {
-            model: [{l:"☠ SHUTDOWN", fn:function(){sddm.powerOff()}},
-                    {l:"↻ REBOOT",   fn:function(){sddm.reboot()}},
-                    {l:"💤 SUSPEND", fn:function(){sddm.suspend()}}]
+            model: [{l:"⏻ shutdown", fn:function(){sddm.powerOff()}},
+                    {l:"↻ restart",   fn:function(){sddm.reboot()}},
+                    {l:"☾ suspend", fn:function(){sddm.suspend()}}]
             delegate: Text {
                 text: modelData.l; color: root.sub
                 font.family: "Impact"; font.pixelSize: 13; font.letterSpacing: 3

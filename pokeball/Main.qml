@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#f44336"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 60; width: 300; height: 300; color: "#fff"; radius: 150; border.color: "#000"; border.width: 10
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "POKEBALL"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

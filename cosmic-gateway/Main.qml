@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.top: parent.top; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#9c27b0"; border.width: 4
+        anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 60; width: 400; height: 300; color: "#000"; radius: 0; border.color: "#9c27b0"; border.width: 8; transform: Rotation { angle: 5 }
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "COSMIC GATEWAY"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

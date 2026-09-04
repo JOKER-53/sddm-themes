@@ -77,12 +77,12 @@ Rectangle {
 
     // ---- Power controls bottom-right ----
     Row {
-        anchors.right: parent.right; anchors.bottom: parent.bottom
+        anchors.left: parent.left; anchors.bottom: parent.bottom
         anchors.margins: 32; spacing: 24
         Repeater {
-            model: [{l:"SHUTDOWN", fn:function(){sddm.powerOff()}},
-                    {l:"REBOOT",   fn:function(){sddm.reboot()}},
-                    {l:"SUSPEND",  fn:function(){sddm.suspend()}}]
+            model: [{l:"⏻ shutdown", fn:function(){sddm.powerOff()}},
+                    {l:"↻ restart",   fn:function(){sddm.reboot()}},
+                    {l:"☾ suspend",  fn:function(){sddm.suspend()}}]
             delegate: Text {
                 text: modelData.l
                 color: root.sub

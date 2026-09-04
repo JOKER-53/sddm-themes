@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#e91e63"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 60; width: 450; height: 280; color: "#ffebf0"; radius: 40; border.color: "#e91e63"; border.width: 1
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "PINK BLOOM"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }
@@ -24,7 +24,7 @@ Rectangle {
     }
 
         Row {
-         anchors.top: parent.top; anchors.horizontalCenter: parent.horizontalCenter; anchors.margins: 20; spacing: 15; z: 100
+         anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: parent.bottom; anchors.margins: 20; spacing: 15; z: 100
         ComboBox {
             id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
             background: Rectangle { color: "#aaff4081"; radius: 4; border.color: "#f8bbd0" }

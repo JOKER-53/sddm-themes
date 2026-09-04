@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#8bc34a"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 60; width: 450; height: 280; color: "#000"; radius: 0; border.color: "#8bc34a"; border.width: 6
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "PIXEL GAMING"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

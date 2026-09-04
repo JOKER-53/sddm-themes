@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#795548"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 60; width: 400; height: 350; color: "#8d6e63"; radius: 0; border.color: "#3e2723"; border.width: 10
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "BLACK PEARL"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

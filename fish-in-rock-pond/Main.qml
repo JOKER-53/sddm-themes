@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.left: parent.left; anchors.top: parent.top; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#ff9800"; border.width: 4
+        anchors.top: parent.top; anchors.left: parent.left; anchors.margins: 60; width: 150; height: 500; color: "#ddffffff"; radius: 0; border.color: "#ff9800"; border.width: 3
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "KOI POND"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

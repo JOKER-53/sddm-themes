@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#673ab7"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 60; width: 320; height: 380; color: "#aa1a237e"; radius: 0; border.color: "#7986cb"; border.width: 3; transform: Rotation { angle: -3 }
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "MOONLIT ROOFTOP"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#f06292"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.margins: 60; width: 400; height: 250; color: "#ffb6c1"; radius: 0; border.color: "#fff"; border.width: 4
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "PIXEL SAKURA"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }
@@ -24,7 +24,7 @@ Rectangle {
     }
 
         Row {
-         anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; anchors.margins: 20; spacing: 15; z: 100
+         anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: parent.bottom; anchors.margins: 20; spacing: 15; z: 100
         ComboBox {
             id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
             background: Rectangle { color: "#aaffb6c1"; radius: 4; border.color: "#fff" }

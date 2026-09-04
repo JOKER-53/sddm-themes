@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.right: parent.right; anchors.top: parent.top; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#e52521"; border.width: 4
+        anchors.top: parent.top; anchors.right: parent.right; anchors.margins: 60; width: 300; height: 300; color: "#fbc02d"; radius: 0; border.color: "#000"; border.width: 4
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "SUPER MARIO"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

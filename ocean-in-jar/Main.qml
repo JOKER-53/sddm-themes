@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#03a9f4"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.margins: 60; width: 300; height: 300; color: "#6603a9f4"; radius: 150; border.color: "#b3e5fc"; border.width: 2
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "OCEAN JAR"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }

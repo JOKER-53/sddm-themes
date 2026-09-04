@@ -6,7 +6,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     
     Rectangle {
-        anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 60; width: 400; height: 260; color: "#aadddddd"; radius: 15; border.color: "#e91e63"; border.width: 4
+        anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; anchors.margins: 60; width: 420; height: 200; color: "#dd000000"; radius: 0; border.color: "transparent"; border.width: 0
         Column {
             anchors.centerIn: parent; spacing: 15
             Text { text: "NTE ANIME"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }
@@ -24,7 +24,7 @@ Rectangle {
     }
 
         Row {
-         anchors.bottom: parent.bottom; anchors.horizontalCenter: parent.horizontalCenter; anchors.margins: 20; spacing: 15; z: 100
+         anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: parent.bottom; anchors.margins: 20; spacing: 15; z: 100
         ComboBox {
             id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
             background: Rectangle { color: "#aae91e63"; radius: 4; border.color: "#f8bbd0" }
