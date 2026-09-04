@@ -59,23 +59,41 @@ Rectangle {
                 background: Rectangle { color: "transparent" }
             }
         }
-        // Chat bubble — password (brand red)
-        Rectangle {
+        // Chat bubble — password (brand red) with glow
+        Item {
             Layout.preferredWidth: 460; Layout.preferredHeight: 52
-            radius: 26; color: root.brand
-            TextField {
-                id: passField
-                anchors.fill: parent; anchors.leftMargin: 22; anchors.rightMargin: 70
-                placeholderText: "type something snarky…"
-                placeholderTextColor: "#ffd6d6"
-                echoMode: TextInput.Password
-                color: "#ffffff"; font.pixelSize: 16
-                background: Rectangle { color: "transparent" }
-                onAccepted: sddm.login(userField.text, passField.text, sessionModel.lastIndex)
+
+            // Fake red glow layers
+            Rectangle {
+                anchors.centerIn: parent; width: parent.width + 24; height: parent.height + 24
+                radius: 38; color: root.brand; opacity: 0.1
             }
-            Text { anchors.right: parent.right; anchors.rightMargin: 22
-                anchors.verticalCenter: parent.verticalCenter
-                text: "↵"; color: "#fff"; font.pixelSize: 22 }
+            Rectangle {
+                anchors.centerIn: parent; width: parent.width + 12; height: parent.height + 12
+                radius: 32; color: root.brand; opacity: 0.2
+            }
+            Rectangle {
+                anchors.centerIn: parent; width: parent.width + 4; height: parent.height + 4
+                radius: 28; color: root.brand; opacity: 0.4
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                radius: 26; color: root.brand
+                TextField {
+                    id: passField
+                    anchors.fill: parent; anchors.leftMargin: 22; anchors.rightMargin: 70
+                    placeholderText: "type something snarky…"
+                    placeholderTextColor: "#ffd6d6"
+                    echoMode: TextInput.Password
+                    color: "#ffffff"; font.pixelSize: 16
+                    background: Rectangle { color: "transparent" }
+                    onAccepted: sddm.login(userField.text, passField.text, sessionModel.lastIndex)
+                }
+                Text { anchors.right: parent.right; anchors.rightMargin: 22
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: "↵"; color: "#fff"; font.pixelSize: 22 }
+            }
         }
 
         Text { text: "🌮  ⚔️  🔫  ❤️‍🩹"; font.pixelSize: 18; opacity: 0.7 }
