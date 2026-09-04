@@ -5,7 +5,8 @@ Rectangle {
     width: 1920; height: 1080; color: "#000"
     AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
     Rectangle { anchors.bottom: parent.bottom; width: parent.width; height: 300; color: "transparent"
-        gradient: Gradient { GradientStop { position: 0.0; color: "transparent" } GradientStop { position: 1.0; color: "#ff000000" } } }
+        gradient: Gradient { GradientStop { position: 0.0; color: "transparent" }
+ GradientStop { position: 1.0; color: "#ff000000" } } }
     Row {
         anchors.bottom: parent.bottom; anchors.bottomMargin: 60; anchors.right: parent.right; anchors.rightMargin: 80; spacing: 10
         ComboBox {
