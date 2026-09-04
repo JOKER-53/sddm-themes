@@ -27,11 +27,6 @@ echo -e "\n${BLD}${MAG}✦ SDDM Theme Installer ✦${RST}\n"
 
 # ── detect Qt version used by SDDM ───────────────────────────
 detect_qt_version() {
-  if command -v sddm &>/dev/null; then
-    local v
-    v=$(sddm --version 2>/dev/null | grep -oP 'Qt \K[\d]+' || true)
-    [[ -n "$v" ]] && { echo "$v"; return; }
-  fi
   if pacman -Qq sddm &>/dev/null 2>&1; then
     pacman -Qi sddm 2>/dev/null | grep -q 'qt6' && { echo "6"; return; }
     echo "5"; return
