@@ -10,21 +10,21 @@ no shared components, no copy-paste UI. Pick the one you want and install it.
 
 | Theme | Preview | Theme | Preview | Theme | Preview |
 |---|---|---|---|---|---|
-| `alienx` | <img src="alienx/assets/wallpaper.png" width="250"> | `bmw` | <img src="bmw/assets/wallpaper.jpg" width="250"> | `bmw-m3` | <img src="bmw-m3/assets/thumbnail.jpg" width="250"> |
-| `cat-pond` | <img src="cat-pond/assets/thumbnail.jpg" width="250"> | `classic-jdm` | <img src="classic-jdm/assets/wallpaper.jpg" width="250"> | `cosmic-gateway` | <img src="cosmic-gateway/assets/thumbnail.jpg" width="250"> |
-| `deadpool` | <img src="deadpool/assets/wallpaper.jpg" width="250"> | `dodge` | <img src="dodge/assets/thumbnail.jpg" width="250"> | `drag-racer` | <img src="drag-racer/assets/wallpaper.jpg" width="250"> |
-| `everest` | <img src="everest/assets/thumbnail.jpg" width="250"> | `fish-in-rock-pond` | <img src="fish-in-rock-pond/assets/thumbnail.jpg" width="250"> | `gojo` | <img src="gojo/assets/wallpaper.png" width="250"> |
-| `hilda-and-tepig` | <img src="hilda-and-tepig/assets/thumbnail.jpg" width="250"> | `hitagi-senjougahara` | <img src="hitagi-senjougahara/assets/thumbnail.jpg" width="250"> | `hoodie` | <img src="hoodie/assets/thumbnail.jpg" width="250"> |
-| `joker` | <img src="joker/assets/wallpaper.jpg" width="250"> | `kawaii` | <img src="kawaii/assets/wallpaper.png" width="250"> | `marvel` | <img src="marvel/assets/wallpaper.jpg" width="250"> |
-| `mazda-mx5` | <img src="mazda-mx5/assets/thumbnail.jpg" width="250"> | `moonlit-rooftop-cat` | <img src="moonlit-rooftop-cat/assets/thumbnail.jpg" width="250"> | `mount-fuji` | <img src="mount-fuji/assets/thumbnail.jpg" width="250"> |
-| `mountain-sunset` | <img src="mountain-sunset/assets/thumbnail.jpg" width="250"> | `neko-anime` | <img src="neko-anime/assets/thumbnail.jpg" width="250"> | `neon-gif` | <img src="neon-gif/assets/thumbnail.jpg" width="250"> |
-| `neverness-to-everness` | <img src="neverness-to-everness/assets/thumbnail.jpg" width="250"> | `nissan` | <img src="nissan/assets/thumbnail.jpg" width="250"> | `nissan-skyline` | <img src="nissan-skyline/assets/thumbnail.jpg" width="250"> |
-| `ocean-in-jar` | <img src="ocean-in-jar/assets/thumbnail.jpg" width="250"> | `oni-anime-girl` | <img src="oni-anime-girl/assets/thumbnail.jpg" width="250"> | `oni-robot` | <img src="oni-robot/assets/thumbnail.jpg" width="250"> |
-| `pink-bloom` | <img src="pink-bloom/assets/thumbnail.jpg" width="250"> | `pirates-of-the-caribbean` | <img src="pirates-of-the-caribbean/assets/thumbnail.jpg" width="250"> | `pixel-gaming-room` | <img src="pixel-gaming-room/assets/thumbnail.jpg" width="250"> |
-| `pixel-sakura-city` | <img src="pixel-sakura-city/assets/thumbnail.jpg" width="250"> | `pokeball` | <img src="pokeball/assets/thumbnail.jpg" width="250"> | `purrple-cat` | <img src="purrple-cat/assets/thumbnail.jpg" width="250"> |
-| `rdr2` | <img src="rdr2/assets/wallpaper.jpg" width="250"> | `sakura-lake` | <img src="sakura-lake/assets/thumbnail.jpg" width="250"> | `spiderman` | <img src="spiderman/assets/thumbnail.jpg" width="250"> |
-| `spiderverse` | <img src="spiderverse/assets/thumbnail.jpg" width="250"> | `super-mario-pixel` | <img src="super-mario-pixel/assets/thumbnail.jpg" width="250"> | `the-dark-river` | <img src="the-dark-river/assets/thumbnail.jpg" width="250"> |
-| `zoro-blue` | <img src="zoro-blue/assets/thumbnail.jpg" width="250"> | `zoro-dragon` | <img src="zoro-dragon/assets/thumbnail.jpg" width="250"> | | |
+| `alienx` | ![Preview](alienx/assets/wallpaper.png) | `bmw` | ![Preview](bmw/assets/wallpaper.jpg) | `bmw-m3` | ![Preview](bmw-m3/assets/thumbnail.jpg) |
+| `cat-pond` | ![Preview](cat-pond/assets/thumbnail.jpg) | `classic-jdm` | ![Preview](classic-jdm/assets/wallpaper.jpg) | `cosmic-gateway` | ![Preview](cosmic-gateway/assets/thumbnail.jpg) |
+| `deadpool` | ![Preview](deadpool/assets/wallpaper.jpg) | `dodge` | ![Preview](dodge/assets/thumbnail.jpg) | `drag-racer` | ![Preview](drag-racer/assets/wallpaper.jpg) |
+| `everest` | ![Preview](everest/assets/thumbnail.jpg) | `fish-in-rock-pond` | ![Preview](fish-in-rock-pond/assets/thumbnail.jpg) | `gojo` | ![Preview](gojo/assets/wallpaper.png) |
+| `hilda-and-tepig` | ![Preview](hilda-and-tepig/assets/thumbnail.jpg) | `hitagi-senjougahara` | ![Preview](hitagi-senjougahara/assets/thumbnail.jpg) | `hoodie` | ![Preview](hoodie/assets/thumbnail.jpg) |
+| `joker` | ![Preview](joker/assets/wallpaper.jpg) | `kawaii` | ![Preview](kawaii/assets/wallpaper.png) | `marvel` | ![Preview](marvel/assets/wallpaper.jpg) |
+| `mazda-mx5` | ![Preview](mazda-mx5/assets/thumbnail.jpg) | `moonlit-rooftop-cat` | ![Preview](moonlit-rooftop-cat/assets/thumbnail.jpg) | `mount-fuji` | ![Preview](mount-fuji/assets/thumbnail.jpg) |
+| `mountain-sunset` | ![Preview](mountain-sunset/assets/thumbnail.jpg) | `neko-anime` | ![Preview](neko-anime/assets/thumbnail.jpg) | `neon-gif` | ![Preview](neon-gif/assets/thumbnail.jpg) |
+| `neverness-to-everness` | ![Preview](neverness-to-everness/assets/thumbnail.jpg) | `nissan` | ![Preview](nissan/assets/thumbnail.jpg) | `nissan-skyline` | ![Preview](nissan-skyline/assets/thumbnail.jpg) |
+| `ocean-in-jar` | ![Preview](ocean-in-jar/assets/thumbnail.jpg) | `oni-anime-girl` | ![Preview](oni-anime-girl/assets/thumbnail.jpg) | `oni-robot` | ![Preview](oni-robot/assets/thumbnail.jpg) |
+| `pink-bloom` | ![Preview](pink-bloom/assets/thumbnail.jpg) | `pirates-of-the-caribbean` | ![Preview](pirates-of-the-caribbean/assets/thumbnail.jpg) | `pixel-gaming-room` | ![Preview](pixel-gaming-room/assets/thumbnail.jpg) |
+| `pixel-sakura-city` | ![Preview](pixel-sakura-city/assets/thumbnail.jpg) | `pokeball` | ![Preview](pokeball/assets/thumbnail.jpg) | `purrple-cat` | ![Preview](purrple-cat/assets/thumbnail.jpg) |
+| `rdr2` | ![Preview](rdr2/assets/wallpaper.jpg) | `sakura-lake` | ![Preview](sakura-lake/assets/thumbnail.jpg) | `spiderman` | ![Preview](spiderman/assets/thumbnail.jpg) |
+| `spiderverse` | ![Preview](spiderverse/assets/thumbnail.jpg) | `super-mario-pixel` | ![Preview](super-mario-pixel/assets/thumbnail.jpg) | `the-dark-river` | ![Preview](the-dark-river/assets/thumbnail.jpg) |
+| `zoro-blue` | ![Preview](zoro-blue/assets/thumbnail.jpg) | `zoro-dragon` | ![Preview](zoro-dragon/assets/thumbnail.jpg) | | |
 
 ---
 
