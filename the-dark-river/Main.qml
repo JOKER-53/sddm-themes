@@ -131,4 +131,36 @@ Rectangle {
             Behavior on color { ColorAnimation { duration: 200 } }
         }
     }
+
+    // Injected Top-Center Clock
+    Column {
+        anchors.top: parent.top; anchors.topMargin: 40
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: -10; z: 10
+        Text {
+            id: injectedClockTime
+            text: Qt.formatTime(new Date(), "hh:mm")
+            font.family: customFont.name
+            font.pixelSize: 84
+            color: "#c5a059"
+            style: Text.Outline; styleColor: "#66000000"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Text {
+            id: injectedClockDate
+            text: Qt.formatDate(new Date(), "dddd, MMMM d")
+            font.family: customFont.name
+            font.pixelSize: 24
+            color: "#c5a059"
+            style: Text.Outline; styleColor: "#66000000"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: {
+                injectedClockTime.text = Qt.formatTime(new Date(), "hh:mm")
+                injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d")
+            }
+        }
+    }
 }

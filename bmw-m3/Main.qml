@@ -94,4 +94,36 @@ Rectangle {
             MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true; onEntered: parent.color = "#33ff2e63"; onExited: parent.color = "#99000000"; onClicked: sddm.powerOff() }
         }
     }
+
+    // Injected Top-Center Clock
+    Column {
+        anchors.top: parent.top; anchors.topMargin: 40
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: -10; z: 10
+        Text {
+            id: injectedClockTime
+            text: Qt.formatTime(new Date(), "hh:mm")
+            font.family: customFont.name
+            font.pixelSize: 84
+            color: "#1c69d4"
+            style: Text.Outline; styleColor: "#66000000"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Text {
+            id: injectedClockDate
+            text: Qt.formatDate(new Date(), "dddd, MMMM d")
+            font.family: customFont.name
+            font.pixelSize: 24
+            color: "#1c69d4"
+            style: Text.Outline; styleColor: "#66000000"
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: {
+                injectedClockTime.text = Qt.formatTime(new Date(), "hh:mm")
+                injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d")
+            }
+        }
+    }
 }
