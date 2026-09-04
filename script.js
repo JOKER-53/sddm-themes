@@ -387,7 +387,8 @@ themes.forEach((t) => {
   const c = document.createElement("div");
   c.className = "card";
   c.dataset.name = t.name;
-  c.style.backgroundImage = `url("${t.wp}")`;
+  const thumbUrl = t.wp.endsWith(".gif") ? t.wp.replace("wallpaper.gif", "thumbnail.jpg") : t.wp;
+  c.style.backgroundImage = `url("${thumbUrl}")`;
     c.onclick = () => { 
     currentIndex = themes.findIndex(th => th.id === t.id);
     current = t; 
