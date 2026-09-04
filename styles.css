@@ -150,3 +150,17 @@ footer { max-width: 1200px; margin: 64px auto 32px; padding: 16px 6vw; display: 
 .picker::-webkit-scrollbar-track { background: transparent; }
 .picker::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
 .picker::-webkit-scrollbar-thumb:hover { background: #555; }
+
+.mini-ui {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1920px;
+    height: 1080px;
+    transform: translate(-50%, -50%) scale(0.16);
+    pointer-events: none;
+    z-index: 1;
+}
+.card::after {
+    z-index: 2;
+}
