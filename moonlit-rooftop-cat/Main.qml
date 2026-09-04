@@ -13,27 +13,17 @@ Rectangle {
     }
     FontLoader { id: customFont; source: "assets/font.ttf" }
 
-    // Subtle dark gradient from right to left
-    Rectangle {
-        anchors.right: parent.right; anchors.top: parent.top; anchors.bottom: parent.bottom
-        width: 800
-        gradient: Gradient {
-            GradientStop { position: 0.0; color: "transparent" }
-            GradientStop { position: 1.0; color: "#aa0a0a1a" } // Deep midnight
-        }
-        rotation: 90 // Horizontal gradient
-        transformOrigin: Item.Center
-    }
+    // Removed the broken gradient overlay that ruined the image
 
     // Lo-Fi Style Floating Glass Player
     Rectangle {
         id: loginCard
-        anchors.right: parent.right; anchors.rightMargin: 120
-        anchors.verticalCenter: parent.verticalCenter
-        width: 360; height: 420
-        color: "#330a0a2a" // Deep translucent purple/blue
-        radius: 24
-        border.color: "#33ffd54f"; border.width: 1 // Subtle moon-gold border
+        anchors.right: parent.right; anchors.rightMargin: 80
+        anchors.bottom: parent.bottom; anchors.bottomMargin: 80
+        width: 380; height: 380
+        color: "#44000000" // Simple, clean translucent glass
+        radius: 20
+        border.color: "#33ffffff"; border.width: 1 // Very subtle white border, much cleaner than yellow
         
         Column {
             anchors.centerIn: parent; spacing: 25
@@ -43,9 +33,9 @@ Rectangle {
                 spacing: 5; anchors.horizontalCenter: parent.horizontalCenter
                 Text { 
                     text: "MOONLIT ROOFTOP"; font.family: customFont.name; font.pixelSize: 26; 
-                    color: "#ffd54f"; font.letterSpacing: 3
+                    color: "#ffffff"; font.letterSpacing: 4
                     anchors.horizontalCenter: parent.horizontalCenter
-                    style: Text.Outline; styleColor: "#44000000"
+                    style: Text.Outline; styleColor: "#55000000"
                 }
                 Text { 
                     text: "lofi vibes ~ relax and focus"; font.family: "sans-serif"; font.pixelSize: 12; 
@@ -55,44 +45,44 @@ Rectangle {
             }
 
             ComboBox {
-                id: u; width: 280; height: 46; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
+                id: u; width: 300; height: 46; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
                 anchors.horizontalCenter: parent.horizontalCenter
                 background: Rectangle { 
-                    color: "#44000000"; radius: 23; border.color: u.activeFocus ? "#ffd54f" : "#44ffd54f"; border.width: 1 
+                    color: "#33000000"; radius: 23; border.color: u.activeFocus ? "#b39ddb" : "#44ffffff"; border.width: 1 
                 }
                 contentItem: Text { 
                     text: u.currentText; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 2
                     verticalAlignment: Text.AlignVCenter; horizontalAlignment: Text.AlignHCenter 
                 }
                 delegate: ItemDelegate {
-                    width: u.width; height: 40; background: Rectangle { color: parent.hovered ? "#33ffd54f" : "#111" }
+                    width: u.width; height: 40; background: Rectangle { color: parent.hovered ? "#55ffffff" : "#111" }
                     contentItem: Text { text: model.name; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 16; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                 }
             }
             
             TextField {
-                id: p; width: 280; height: 46; placeholderText: "PASSWORD"
-                placeholderTextColor: "#88b39ddb"
+                id: p; width: 300; height: 46; placeholderText: "PASSWORD"
+                placeholderTextColor: "#88ffffff"
                 echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 4
                 horizontalAlignment: TextInput.AlignHCenter
                 anchors.horizontalCenter: parent.horizontalCenter
                 background: Rectangle { 
-                    color: "#44000000"; radius: 23; border.color: p.activeFocus ? "#ffd54f" : "#44ffd54f"; border.width: 1 
+                    color: "#33000000"; radius: 23; border.color: p.activeFocus ? "#b39ddb" : "#44ffffff"; border.width: 1 
                 }
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
             }
             
             // Login Button (Play Button Style)
             Rectangle {
-                width: 160; height: 46; color: "transparent"; radius: 23; border.color: "#ffd54f"; border.width: 1
+                width: 160; height: 46; color: "transparent"; radius: 23; border.color: "#b39ddb"; border.width: 1
                 anchors.horizontalCenter: parent.horizontalCenter
                 
-                Text { anchors.centerIn: parent; text: "ENTER ▶"; color: "#ffd54f"; font.family: customFont.name; font.pixelSize: 16; font.letterSpacing: 4; font.bold: true }
+                Text { anchors.centerIn: parent; text: "ENTER ▶"; color: "#b39ddb"; font.family: customFont.name; font.pixelSize: 16; font.letterSpacing: 4; font.bold: true }
                 
                 MouseArea { 
                     anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
-                    onEntered: { parent.color = "#ffd54f"; parent.children[0].color = "#000" }
-                    onExited: { parent.color = "transparent"; parent.children[0].color = "#ffd54f" }
+                    onEntered: { parent.color = "#b39ddb"; parent.children[0].color = "#000" }
+                    onExited: { parent.color = "transparent"; parent.children[0].color = "#b39ddb" }
                     onClicked: sddm.login(u.currentText, p.text, sessionCombo.currentIndex) 
                 }
                 Behavior on color { ColorAnimation { duration: 250 } }
@@ -107,30 +97,30 @@ Rectangle {
         ComboBox {
             id: sessionCombo; width: 140; height: 36; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex
             background: Rectangle { color: "transparent" }
-            contentItem: Text { text: sessionCombo.currentText; color: "#b39ddb"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left }
+            contentItem: Text { text: sessionCombo.currentText; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left }
             delegate: ItemDelegate {
-                width: sessionCombo.width; height: 36; background: Rectangle { color: parent.hovered ? "#33ffd54f" : "#111" }
+                width: sessionCombo.width; height: 36; background: Rectangle { color: parent.hovered ? "#55ffffff" : "#111" }
                 contentItem: Text { text: model.name; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 12; horizontalAlignment: Text.AlignLeft; verticalAlignment: Text.AlignVCenter }
             }
         }
         
         Text { 
-            text: "RESTART"; color: "#b39ddb"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
+            text: "RESTART"; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
             MouseArea { 
                 anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
-                onEntered: { parent.color = "#ffd54f" }
-                onExited: { parent.color = "#b39ddb" }
+                onEntered: { parent.color = "#b39ddb" }
+                onExited: { parent.color = "#ffffff" }
                 onClicked: sddm.reboot() 
             }
             Behavior on color { ColorAnimation { duration: 150 } }
         }
         
         Text { 
-            text: "SHUTDOWN"; color: "#b39ddb"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
+            text: "SHUTDOWN"; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
             MouseArea { 
                 anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
-                onEntered: { parent.color = "#ffd54f" }
-                onExited: { parent.color = "#b39ddb" }
+                onEntered: { parent.color = "#b39ddb" }
+                onExited: { parent.color = "#ffffff" }
                 onClicked: sddm.powerOff() 
             }
             Behavior on color { ColorAnimation { duration: 150 } }
