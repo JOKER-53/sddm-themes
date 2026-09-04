@@ -33,7 +33,6 @@ const themes = [
 
 const $ = (s) => document.querySelector(s);
 const preview = $("#preview");
-const picker = $("#picker");
 const grid = $("#grid");
 const activeId = $("#activeId");
 const cmd = $("#installCmd");
@@ -367,23 +366,9 @@ function render() {
     </div>`;
   activeId.textContent = current.id;
   document.documentElement.style.setProperty("--accent", current.accent);
-  [...picker.children].forEach((b) =>
-    b.classList.toggle("active", b.dataset.id === current.id)
-  );
 }
 
 themes.forEach((t) => {
-  const b = document.createElement("button");
-  b.dataset.id = t.id;
-  b.innerHTML = `${t.name} <span class="pid">${t.id}</span>`;
-    b.onclick = () => { 
-    currentIndex = themes.findIndex(th => th.id === t.id);
-    current = t; 
-    render(); 
-    pauseAutoplay();
-  };
-  picker.appendChild(b);
-
   const c = document.createElement("div");
   c.className = "card";
   c.dataset.name = t.name;
