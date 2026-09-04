@@ -1,6 +1,3 @@
-// Deadpool — fourth-wall-breaking chat layout.
-// Structure: hero portrait pinned right, snarky chat bubbles on the left
-// leading down into the password "reply" box. Power row as fake emoji bar.
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -14,29 +11,28 @@ Rectangle {
     property color ink:   "#f5e9e9"
     property color sub:   "#8a6a6a"
 
-    // Diagonal red slash background
-    Rectangle {
-        anchors.fill: parent
-        gradient: Gradient {
-            orientation: Gradient.Horizontal
-            GradientStop { position: 0.0; color: "#1a0608" }
-            GradientStop { position: 0.6; color: "#0a0203" }
-            GradientStop { position: 1.0; color: "#000000" }
-        }
-    }
-
-    // Hero portrait — bottom-right, lets the face stay visible
+    // Hero portrait — full screen now!
     Image {
         id: hero
         source: "assets/wallpaper.jpg"
-        fillMode: Image.PreserveAspectFit
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        width: parent.width * 0.55
+        fillMode: Image.PreserveAspectCrop
+        anchors.fill: parent
         smooth: true
     }
 
-    // Chat column on the LEFT — keeps the face uncovered
+    // Dark gradient overlay to make text readable against the full-screen image
+    Rectangle {
+        anchors.fill: parent
+        opacity: 0.8
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: "#e60a0203" } // Darkest on the left where text is
+            GradientStop { position: 0.5; color: "#800a0203" }
+            GradientStop { position: 1.0; color: "transparent" } // Transparent on the right to show Deadpool
+        }
+    }
+
+    // Chat column on the LEFT
     ColumnLayout {
         anchors.left: parent.left
         anchors.top: parent.top
@@ -87,8 +83,7 @@ Rectangle {
 
     // Power row bottom-left
     Row {
-        anchors.left: parent.left; anchors.bottom: parent.bottom
-        anchors.margins: 40; spacing: 22
+        anchors.left: parent.left; anchors.bottom: parent.bottom; anchors.margins: 40; spacing: 22
         Repeater {
             model: [{l:"⏻ shutdown", fn:function(){sddm.powerOff()}},
                     {l:"↻ restart",   fn:function(){sddm.reboot()}},
