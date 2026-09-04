@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 Rectangle { width: 1920; height: 1080; color: "#000"; AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
  FontLoader { id: customFont; source: "assets/font.ttf" }
- Rectangle { anchors.left: parent.left; anchors.bottom: parent.bottom; width: 500; height: 350; color: "#bb000000"; border.topColor: "#00aaff"; border.rightColor: "#00aaff"; border.width: 5; Column { anchors.centerIn: parent; spacing: 20; Text { text: "ASHURA"; font.family: customFont.name; font.pixelSize: 64; color: "#00aaff" }
+ Rectangle { anchors.left: parent.left; anchors.bottom: parent.bottom; width: 500; height: 350; color: "#bb000000"; border.color: "#00aaff"; border.width: 5; Column { anchors.centerIn: parent; spacing: 20; Text { text: "ASHURA"; font.family: customFont.name; font.pixelSize: 64; color: "#00aaff" }
  ComboBox { id: u; width: 350; height: 50; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex; background: Rectangle { color: "#00aaff" }
  contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 24; color: "#000"; anchors.centerIn: parent } }
  TextField { id: p; width: 350; height: 50; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#fff"; background: Rectangle { color: "#000"; border.color: "#00aaff"; border.width: 2 }
