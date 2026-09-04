@@ -1,44 +1,146 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQml 2.15
+
 Rectangle {
+    id: root
     width: 1920; height: 1080; color: "#000"
-    AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
-    FontLoader { id: customFont; source: "assets/font.ttf" }
     
+    AnimatedImage { 
+        anchors.fill: parent; source: "assets/wallpaper.gif"; 
+        fillMode: Image.PreserveAspectCrop; playing: true 
+    }
+    FontLoader { id: customFont; source: "assets/font.ttf" }
+
+    // Subtle dark gradient from bottom
     Rectangle {
-        anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; anchors.margins: 60; width: 420; height: 200; color: "#dd000000"; radius: 0; border.color: "transparent"; border.width: 0
-        Column {
-            anchors.centerIn: parent; spacing: 15
-            Text { text: "NTE ANIME"; font.family: customFont.name; font.pixelSize: 42; color: "#000" }
-            ComboBox {
-                id: u; width: 280; height: 50; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
-                background: Rectangle { color: "#fff"; border.color: "#e91e63"; border.width: 2 }
-                contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 24; color: "#000"; anchors.centerIn: parent }
+        anchors.fill: parent
+        gradient: Gradient {
+            GradientStop { position: 0.0; color: "transparent" }
+            GradientStop { position: 0.6; color: "transparent" }
+            GradientStop { position: 1.0; color: "#77000000" }
+        }
+    }
+
+    // Anime Slice-of-Life Clock
+    Text {
+        id: timeDisplay
+        anchors.top: parent.top; anchors.topMargin: 80
+        anchors.horizontalCenter: parent.horizontalCenter
+        font.family: "sans-serif"; font.pixelSize: 84; font.weight: Font.Light
+        color: "#ffffff"
+        style: Text.Outline; styleColor: "#33000000"
+        
+        Timer {
+            interval: 1000; running: true; repeat: true
+            onTriggered: {
+                var d = new Date();
+                timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm");
             }
-            TextField {
-                id: p; width: 280; height: 50; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#000"
-                background: Rectangle { color: "#fff"; border.color: "#e91e63"; border.width: 2 }
-                onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
+            Component.onCompleted: {
+                var d = new Date();
+                timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm");
             }
         }
     }
 
-        Row {
-         anchors.horizontalCenter: parent.horizontalCenter; anchors.bottom: parent.bottom; anchors.margins: 20; spacing: 15; z: 100
+    Text {
+        anchors.top: timeDisplay.bottom; anchors.topMargin: 5
+        anchors.horizontalCenter: parent.horizontalCenter
+        text: "NEVERNESS TO EVERNESS"
+        font.family: customFont.name; font.pixelSize: 18; font.letterSpacing: 8
+        color: "#ffffff"; opacity: 0.8
+        style: Text.Outline; styleColor: "#33000000"
+    }
+
+    // Elegant Login Panel
+    Rectangle {
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: 60
+        width: 380; height: 260
+        color: "#22ffffff" // Very soft translucent glass
+        radius: 20
+        border.color: "#66ffffff"; border.width: 1
+        
+        Column {
+            anchors.centerIn: parent; spacing: 25
+
+            ComboBox {
+                id: u; width: 300; height: 46; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
+                background: Rectangle { 
+                    color: "#44000000"; radius: 23; border.color: u.activeFocus ? "#ff77a9" : "transparent"; border.width: 1 
+                }
+                contentItem: Text { 
+                    text: u.currentText; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 2
+                    verticalAlignment: Text.AlignVCenter; horizontalAlignment: Text.AlignHCenter 
+                }
+                delegate: ItemDelegate {
+                    width: u.width; height: 40; background: Rectangle { color: parent.hovered ? "#33ff77a9" : "#dd000000"; radius: 20 }
+                    contentItem: Text { text: model.name; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 16; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
+                }
+            }
+            
+            TextField {
+                id: p; width: 300; height: 46; placeholderText: "PASSWORD"
+                placeholderTextColor: "#88ffffff"
+                echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 6
+                horizontalAlignment: TextInput.AlignHCenter
+                background: Rectangle { 
+                    color: "#44000000"; radius: 23; border.color: p.activeFocus ? "#ff77a9" : "transparent"; border.width: 1 
+                }
+                onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
+            }
+            
+            Rectangle {
+                width: 180; height: 46; color: "transparent"; radius: 23; border.color: "#ffffff"; border.width: 1
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text { anchors.centerIn: parent; text: "LOGIN"; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 16; font.letterSpacing: 6; font.bold: true }
+                MouseArea { 
+                    anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
+                    onEntered: { parent.color = "#ffffff"; parent.children[0].color = "#000000" }
+                    onExited: { parent.color = "transparent"; parent.children[0].color = "#ffffff" }
+                    onClicked: sddm.login(u.currentText, p.text, sessionCombo.currentIndex) 
+                }
+                Behavior on color { ColorAnimation { duration: 250 } }
+            }
+        }
+    }
+
+    // Power Controls (Bottom Right)
+    Row {
+        anchors.bottom: parent.bottom; anchors.right: parent.right; anchors.margins: 40; spacing: 20; z: 100
+        
         ComboBox {
-            id: sessionCombo; width: 120; height: 30; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex; font.pixelSize: 11
-            background: Rectangle { color: "#aae91e63"; radius: 4; border.color: "#f8bbd0" }
-            contentItem: Text { text: sessionCombo.currentText; color: "#fff"; font.pixelSize: 12; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 10 }
+            id: sessionCombo; width: 140; height: 36; model: sessionModel; textRole: "name"; currentIndex: sessionModel.lastIndex
+            background: Rectangle { color: "transparent" }
+            contentItem: Text { text: sessionCombo.currentText; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2; verticalAlignment: Text.AlignVCenter; anchors.right: parent.right }
+            delegate: ItemDelegate {
+                width: sessionCombo.width; height: 36; background: Rectangle { color: parent.hovered ? "#55ffffff" : "#222" }
+                contentItem: Text { text: model.name; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 12; horizontalAlignment: Text.AlignRight; verticalAlignment: Text.AlignVCenter }
+            }
         }
-        Rectangle {
-            width: 80; height: 30; color: "#aae91e63"; radius: 4; border.color: "#f8bbd0"
-            Text { anchors.centerIn: parent; text: "REBOOT"; color: "#fff"; font.pixelSize: 11; font.bold: true }
-            MouseArea { anchors.fill: parent; onClicked: sddm.reboot() }
+        
+        Text { 
+            text: "RESTART"; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
+            MouseArea { 
+                anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
+                onEntered: { parent.color = "#ff77a9" }
+                onExited: { parent.color = "#ffffff" }
+                onClicked: sddm.reboot() 
+            }
+            Behavior on color { ColorAnimation { duration: 200 } }
         }
-        Rectangle {
-            width: 90; height: 30; color: "#aae91e63"; radius: 4; border.color: "#ff2e63"
-            Text { anchors.centerIn: parent; text: "SHUTDOWN"; color: "#ff2e63"; font.pixelSize: 11; font.bold: true }
-            MouseArea { anchors.fill: parent; onClicked: sddm.powerOff() }
+        
+        Text { 
+            text: "SHUTDOWN"; color: "#ffffff"; font.family: customFont.name; font.pixelSize: 13; font.letterSpacing: 2
+            MouseArea { 
+                anchors.fill: parent; cursorShape: Qt.PointingHandCursor; hoverEnabled: true
+                onEntered: { parent.color = "#ff77a9" }
+                onExited: { parent.color = "#ffffff" }
+                onClicked: sddm.powerOff() 
+            }
+            Behavior on color { ColorAnimation { duration: 200 } }
         }
     }
 }
