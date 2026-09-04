@@ -328,7 +328,7 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "hilda-and-tepig": (n) => `
-    <div style="font-family:'Chewy', cursive; position:absolute; left:60px; bottom:60px; width:350px; height:250px; background:#ff8c00; border-radius:30px; border:6px solid #fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+    <div style="font-family:'Chewy', cursive; position:absolute; right:60px; bottom:60px; width:350px; height:250px; background:#ff8c00; border-radius:30px; border:6px solid #fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="font-size:42px; color:#fff;">BATTLE!</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px;">${USER} ▾</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
