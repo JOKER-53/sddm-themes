@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=COSMIC GATEWAY
+Description=deep space portal
+Author=JOKER53
+Theme-Id=cosmic-gateway
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf

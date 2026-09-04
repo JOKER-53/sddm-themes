@@ -29,6 +29,20 @@ const themes = [
   { id: "hoodie", name: "HOODIE HACKER", wp: "./hoodie/assets/wallpaper.gif", tag: "urban glitch green", accent: "#39ff14" },
   { id: "neko-anime", name: "NEKO KAWAII", wp: "./neko-anime/assets/wallpaper.gif", tag: "pastel pink cyan box", accent: "#00ffff" },
   { id: "zoro-blue", name: "ZORO BLUE", wp: "./zoro-blue/assets/wallpaper.gif", tag: "intense sword aura", accent: "#00aaff" },
+  { id: "cat-pond", name: "CAT POND", wp: "./cat-pond/assets/wallpaper.gif", tag: "tranquil nature vibe", accent: "#4caf50" },
+  { id: "cosmic-gateway", name: "COSMIC GATEWAY", wp: "./cosmic-gateway/assets/wallpaper.gif", tag: "deep space portal", accent: "#9c27b0" },
+  { id: "everest", name: "MT. EVEREST", wp: "./everest/assets/wallpaper.gif", tag: "snowy peak minimal", accent: "#00bcd4" },
+  { id: "fish-in-rock-pond", name: "KOI POND", wp: "./fish-in-rock-pond/assets/wallpaper.gif", tag: "zen rock pool", accent: "#ff9800" },
+  { id: "moonlit-rooftop-cat", name: "MOONLIT ROOFTOP", wp: "./moonlit-rooftop-cat/assets/wallpaper.gif", tag: "lo-fi starry night", accent: "#673ab7" },
+  { id: "neverness-to-everness", name: "NTE ANIME", wp: "./neverness-to-everness/assets/wallpaper.gif", tag: "action character frame", accent: "#e91e63" },
+  { id: "nissan-skyline", name: "NISSAN SKYLINE", wp: "./nissan-skyline/assets/wallpaper.gif", tag: "r34 pure JDM", accent: "#f44336" },
+  { id: "ocean-in-jar", name: "OCEAN JAR", wp: "./ocean-in-jar/assets/wallpaper.gif", tag: "surreal desktop pet", accent: "#03a9f4" },
+  { id: "pink-bloom", name: "PINK BLOOM", wp: "./pink-bloom/assets/wallpaper.gif", tag: "soft floral pastel", accent: "#e91e63" },
+  { id: "pirates-of-the-caribbean", name: "BLACK PEARL", wp: "./pirates-of-the-caribbean/assets/wallpaper.gif", tag: "cinematic stormy sea", accent: "#795548" },
+  { id: "pixel-gaming-room", name: "PIXEL GAMING", wp: "./pixel-gaming-room/assets/wallpaper.gif", tag: "retro 8-bit den", accent: "#8bc34a" },
+  { id: "pixel-sakura-city", name: "PIXEL SAKURA", wp: "./pixel-sakura-city/assets/wallpaper.gif", tag: "retro tokyo dusk", accent: "#f06292" },
+  { id: "pokeball", name: "POKEBALL", wp: "./pokeball/assets/wallpaper.gif", tag: "clean catch layout", accent: "#f44336" },
+  { id: "super-mario-pixel", name: "SUPER MARIO", wp: "./super-mario-pixel/assets/wallpaper.gif", tag: "nostalgic 8-bit", accent: "#e52521" },
 ];
 
 const $ = (s) => document.querySelector(s);
@@ -351,6 +365,102 @@ const layouts = {
       <div style="width:350px; height:50px; background:#000; border:2px solid #00aaff; font-size:24px; color:#fff; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
 
+  "cat-pond": (n) => `
+    <div style="font-family:'Mali', cursive; position:absolute; bottom:60px; right:60px; width:350px; height:350px; background:rgba(46,125,50,0.67); border:4px solid #4caf50; border-radius:100px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:32px; color:#fff;">CAT POND</div>
+      <div style="width:220px; height:45px; background:#fff; border-radius:22.5px; font-size:18px; color:#2e7d32; text-align:center; line-height:45px;">${USER} ▾</div>
+      <div style="width:220px; height:45px; background:#fff; border-radius:22.5px; font-size:18px; color:#2e7d32; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "cosmic-gateway": (n) => `
+    <div style="font-family:'Orbitron', sans-serif; position:absolute; top:60px; right:60px; width:400px; height:300px; background:#000; border:8px solid #9c27b0; transform:rotate(5deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3; box-shadow: 0 0 30px #9c27b0;">
+      <div style="font-size:48px; color:#9c27b0;">GATEWAY</div>
+      <div style="width:300px; height:50px; background:transparent; border:2px solid #9c27b0; font-size:24px; color:#fff; text-align:center; line-height:46px;">${USER} ▾</div>
+      <div style="width:300px; height:50px; background:transparent; border:2px solid #9c27b0; font-size:24px; color:#fff; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "everest": (n) => `
+    <div style="font-family:'Cinzel', serif; position:absolute; bottom:60px; left:60px; width:500px; height:120px; background:rgba(255,255,255,0.53); border:1px solid #fff; display:flex; justify-content:center; align-items:center; gap:30px; z-index:3;">
+      <div style="font-size:24px; color:#00bcd4;">EVEREST</div>
+      <div style="width:150px; height:40px; background:#fff; font-size:18px; color:#333; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:150px; height:40px; background:#fff; font-size:18px; color:#333; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "fish-in-rock-pond": (n) => `
+    <div style="font-family:'Yusei Magic', sans-serif; position:absolute; top:60px; left:60px; width:150px; height:500px; background:rgba(255,255,255,0.87); border:3px solid #ff9800; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:3;">
+      <div style="font-size:32px; color:#ff9800; text-align:center;">KOI<br>POND</div>
+      <div style="width:120px; height:40px; background:transparent; border:1px solid #333; font-size:16px; color:#333; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:120px; height:40px; background:transparent; border:1px solid #333; font-size:16px; color:#333; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "moonlit-rooftop-cat": (n) => `
+    <div style="font-family:'Patrick Hand', cursive; position:absolute; bottom:60px; right:60px; width:320px; height:380px; background:rgba(26,35,126,0.67); border:3px solid #7986cb; transform:rotate(-3deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:25px; z-index:3;">
+      <div style="font-size:48px; color:#c5cae9;">NIGHT</div>
+      <div style="width:200px; height:50px; background:#c5cae9; border-radius:5px; font-size:22px; color:#1a237e; text-align:center; line-height:50px;">${USER} ▾</div>
+      <div style="width:200px; height:50px; background:#c5cae9; border-radius:5px; font-size:22px; color:#1a237e; text-align:center; line-height:50px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "neverness-to-everness": (n) => `
+    <div style="font-family:'Shojumaru', cursive; position:absolute; bottom:60px; left:60px; width:420px; height:200px; background:rgba(0,0,0,0.87); border-left:8px solid #e91e63; border-right:8px solid #e91e63; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
+      <div style="font-size:36px; color:#fff;">NTE_</div>
+      <div style="display:flex; gap:10px;">
+        <div style="width:150px; height:40px; background:#e91e63; font-size:18px; color:#fff; text-align:center; line-height:40px;">${USER} ▾</div>
+        <div style="width:150px; height:40px; background:#333; border:1px solid #e91e63; font-size:18px; color:#fff; text-align:center; line-height:38px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "nissan-skyline": (n) => `
+    <div style="font-family:'Russo One', sans-serif; position:absolute; bottom:60px; right:60px; width:500px; height:180px; background:rgba(0,0,0,0.67); border:4px solid #f44336; transform:rotate(-4deg); display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:64px; color:#f44336; font-style:italic;">R34</div>
+      <div style="display:flex; flex-direction:column; gap:15px;">
+        <div style="width:250px; height:45px; background:#f44336; font-size:22px; color:#fff; text-align:center; line-height:45px;">${USER} ▾</div>
+        <div style="width:250px; height:45px; background:#000; border:2px solid #f44336; font-size:22px; color:#f44336; text-align:center; line-height:41px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "ocean-in-jar": (n) => `
+    <div style="font-family:'Comfortaa', cursive; position:absolute; bottom:60px; left:60px; width:300px; height:300px; background:rgba(3,169,244,0.4); border:2px solid #b3e5fc; border-radius:150px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:32px; color:#fff;">ocean</div>
+      <div style="width:180px; height:40px; background:#fff; border-radius:20px; font-size:18px; color:#0277bd; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:180px; height:40px; background:#fff; border-radius:20px; font-size:18px; color:#0277bd; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "pink-bloom": (n) => `
+    <div style="font-family:'Pacifico', cursive; position:absolute; bottom:60px; right:60px; width:450px; height:280px; background:#ffebf0; border:1px solid #e91e63; border-radius:40px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:56px; color:#e91e63;">Bloom</div>
+      <div style="display:flex; gap:15px;">
+        <div style="width:150px; height:45px; background:#e91e63; border-radius:10px; font-size:20px; color:#fff; text-align:center; line-height:45px;">${USER} ▾</div>
+        <div style="width:150px; height:45px; background:#fff; border:1px solid #e91e63; border-radius:10px; font-size:20px; color:#e91e63; text-align:center; line-height:43px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "pirates-of-the-caribbean": (n) => `
+    <div style="font-family:'Pirata One', cursive; position:absolute; bottom:60px; right:60px; width:400px; height:350px; background:#8d6e63; border:10px solid #3e2723; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:30px; z-index:3;">
+      <div style="position:absolute; top:10px; left:10px; right:10px; bottom:10px; border:2px solid #5d4037; pointer-events:none;"></div>
+      <div style="font-size:42px; color:#3e2723;">Captain's Log</div>
+      <div style="width:260px; height:50px; background:#3e2723; font-size:24px; color:#d7ccc8; text-align:center; line-height:50px;">${USER} ▾</div>
+      <div style="width:260px; height:50px; background:#d7ccc8; border:2px solid #3e2723; font-size:24px; color:#3e2723; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "pixel-gaming-room": (n) => `
+    <div style="font-family:'VT323', monospace; position:absolute; bottom:60px; right:60px; width:450px; height:280px; background:#000; border:6px solid #8bc34a; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:42px; color:#8bc34a;">> LOGIN_</div>
+      <div style="width:350px; height:45px; background:#8bc34a; font-size:24px; color:#000; text-align:center; line-height:45px;">${USER} ▾</div>
+      <div style="width:350px; height:45px; background:#000; border:2px solid #8bc34a; font-size:24px; color:#8bc34a; text-align:center; line-height:41px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "pixel-sakura-city": (n) => `
+    <div style="font-family:'VT323', monospace; position:absolute; bottom:60px; left:60px; width:400px; height:250px; background:#ffb6c1; border:4px solid #fff; display:flex; flex-direction:column; align-items:center; z-index:3;">
+      <div style="width:100%; height:35px; background:#f06292; color:#fff; font-size:16px; display:flex; align-items:center; padding-left:10px; box-sizing:border-box;"> System Auth</div>
+      <div style="margin-top:35px; display:flex; flex-direction:column; gap:15px;">
+        <div style="width:300px; height:40px; background:#fff; border:2px solid #f06292; font-size:20px; color:#f06292; text-align:center; line-height:36px;">${USER} ▾</div>
+        <div style="width:300px; height:40px; background:#fff; border:2px solid #f06292; font-size:20px; color:#f06292; text-align:center; line-height:36px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "pokeball": (n) => `
+    <div style="font-family:'Chewy', cursive; position:absolute; bottom:60px; right:60px; width:300px; height:300px; background:#fff; border:10px solid #000; border-radius:150px; overflow:hidden; display:flex; flex-direction:column; align-items:center; z-index:3;">
+      <div style="width:100%; height:145px; background:#f44336;"></div>
+      <div style="width:100%; height:10px; background:#000;"></div>
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; gap:40px;">
+        <div style="width:160px; height:40px; background:#fff; border:4px solid #000; border-radius:20px; font-size:18px; color:#000; text-align:center; line-height:32px;">${USER} ▾</div>
+        <div style="width:160px; height:40px; background:#fff; border:4px solid #000; border-radius:20px; font-size:18px; color:#000; text-align:center; line-height:32px; letter-spacing:4px;">••••••••</div>
+      </div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+  "super-mario-pixel": (n) => `
+    <div style="font-family:'VT323', monospace; position:absolute; top:60px; right:60px; width:300px; height:300px; background:#fbc02d; border:4px solid #000; box-shadow: inset 4px 4px 0 #fff, inset -4px -4px 0 #b71c1c; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
+      <div style="font-size:100px; color:#d32f2f; line-height:1;">?</div>
+      <div style="width:220px; height:40px; background:#d32f2f; font-size:20px; color:#fff; text-align:center; line-height:40px;">${USER} ▾</div>
+      <div style="width:220px; height:40px; background:#d32f2f; font-size:20px; color:#fff; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
+    </div></div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
 };
 
 function render() {
