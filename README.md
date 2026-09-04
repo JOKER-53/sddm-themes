@@ -2,7 +2,7 @@
 
 For reference visit the showcase → **[kadhiravaneg.github.io/sddm-themes](https://kadhiravaneg.github.io/sddm-themes)**
 
-Ten self-contained SDDM (Qt5/Qt6) themes, each built around one of the
+44 self-contained SDDM (Qt5/Qt6) themes, each built around one of the
 reference wallpapers with a **deliberately different layout structure** —
 no shared components, no copy-paste UI. Pick the one you want and install it.
 

@@ -244,6 +244,7 @@ const layouts = {
     <div style="position:absolute; top:30px; right:30px; color:#05d9e8; font-family:monospace; font-size:12px; letter-spacing:2px; z-index:3;">SYS.SHUTDOWN &nbsp;&nbsp; SYS.REBOOT</div>`,
 
   "zoro-dragon": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#00ff44; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="position:absolute; left:0; width:500px; height:100%; background:rgba(0,0,0,0.8); border-right:2px solid #00ff44; display:flex; flex-direction:column; justify-content:center; padding-left:50px; z-index:3;">
       <div style="color:#00ff44; font-family:'Shojumaru', cursive; font-size:42px; font-weight:bold; margin-bottom:30px;">ZORO // DRAGON</div>
       <div style="width:350px; height:50px; background:rgba(0,255,68,0.1); border:1px solid #00ff44; color:#00ff44; line-height:50px; padding-left:15px; font-size:18px; margin-bottom:30px;">${USER} ▾</div>
@@ -251,17 +252,20 @@ const layouts = {
       <div style="width:350px; height:50px; background:#00ff44; color:#000; text-align:center; line-height:50px; font-weight:bold; font-size:18px;">UNLEASH</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "bmw-m3": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#1c69d4; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Audiowide', sans-serif; position:absolute; bottom:0; width:100%; height:150px; background:rgba(10,10,10,0.9); border-top:1px solid #1c69d4; display:flex; justify-content:center; align-items:center; gap:40px; z-index:3;">
       <div style="width:250px; height:50px; border:2px solid #1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-size:18px;">${USER} ▾</div>
       <div style="width:300px; height:50px; border:2px solid #1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-size:18px; letter-spacing:4px;">••••</div>
       <div style="width:150px; height:50px; background:#1c69d4; border-radius:25px; color:#fff; text-align:center; line-height:50px; font-weight:bold;">START ENGINE</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "nissan": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff3b00; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Russo One', sans-serif; position:absolute; bottom:60px; right:60px; transform:rotate(-3deg); width:600px; height:100px; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="width:200px; height:40px; background:#ffb020; color:#000; text-align:center; line-height:40px; font-weight:bold; font-size:18px;">${USER} ▾</div>
       <div style="width:250px; height:40px; background:#000; border:2px solid #ffb020; color:#fff; text-align:center; line-height:40px; font-size:18px; letter-spacing:4px;">••••••••</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "oni-anime-girl": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff00ff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Rajdhani', sans-serif; position:absolute; right:100px; bottom:60px; width:350px; height:450px; background:rgba(0,0,0,0.6); border:1px solid #ff00ff; border-radius:15px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:25px; z-index:3;">
       <div style="color:#ff00ff; font-size:24px; font-weight:bold; letter-spacing:4px;">ONI // SYSTEM</div>
       <div style="width:280px; height:45px; border:1px solid #ff00ff; color:#ff00ff; line-height:45px; padding-left:10px; font-size:16px;">${USER} ▾</div>
@@ -269,12 +273,14 @@ const layouts = {
       <div style="width:280px; height:45px; background:#ff00ff; color:#000; text-align:center; line-height:45px; font-weight:bold;">CONNECT</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "mazda-mx5": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#05d9e8; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Righteous', cursive; position:absolute; bottom:60px; right:60px; width:350px; height:auto; display:flex; flex-direction:column; align-items:flex-end; gap:15px; z-index:3;">
       <div style="color:#05d9e8; font-size:50px; font-weight:bold; font-style:italic;">NIGHT DRIVE</div>
       <div style="width:300px; height:40px; background:rgba(0,0,0,0.6); border:2px solid #ff2a6d; color:#fff; font-style:italic; text-align:center; line-height:40px; font-size:18px;">${USER} ▾</div>
       <div style="width:300px; height:40px; background:rgba(0,0,0,0.6); border:2px solid #05d9e8; color:#fff; font-style:italic; text-align:center; line-height:40px; font-size:18px; letter-spacing:4px;">••••••••</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "oni-robot": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff5500; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="position:absolute; top:0; left:0; width:100%; height:100%; border:10px solid rgba(255,85,0,0.8); box-sizing:border-box; pointer-events:none; z-index:2;"></div>
     <div style="position:absolute; top:80px; left:80px; width:400px; height:300px; background:rgba(0,0,0,0.8); border:2px solid #ff5500; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="color:#ff5500; font-family:'VT323', monospace; font-size:22px;">[ PILOT LOGIN ]</div>
@@ -282,43 +288,64 @@ const layouts = {
       <div style="width:300px; height:40px; background:#000; border:1px solid #ff5500; color:#ff5500; font-family:'VT323', monospace; font-size:18px; line-height:40px; padding-left:10px; letter-spacing:4px;">••••••••</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "dodge": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#d4202c; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Bebas Neue', sans-serif; position:absolute; bottom:0; left:0; width:100%; height:300px; background:linear-gradient(to top, rgba(0,0,0,1), transparent); z-index:2;"></div>
     <div style="position:absolute; bottom:60px; right:80px; display:flex; gap:10px; z-index:3;">
       <div style="width:220px; height:60px; background:#d4202c; color:#fff; font-size:24px; font-weight:bold; text-align:center; line-height:60px;">${USER} ▾</div>
       <div style="width:280px; height:60px; background:#000; border:3px solid #d4202c; color:#fff; font-size:24px; text-align:center; line-height:54px; letter-spacing:4px; box-sizing:border-box;">••••••</div>
     </div>\n    <div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
 
-  "spiderverse": (n) => `
-    <div style="font-family:'Bangers', cursive; position:absolute; left:0; bottom:0; margin:60px; width:400px; height:300px; background:#e23636; border:5px solid #000; transform:rotate(-2deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:10px; z-index:3;">
-      <div style="font-size:48px; color:#000;">INTO THE SYSTEM</div>
-      <div style="width:300px; height:50px; background:#00ffff; border:3px solid #000; font-size:24px; color:#000; text-align:center; line-height:44px;">${USER} ▾</div>
-      <div style="width:300px; height:50px; background:#000; border:3px solid transparent; font-size:24px; color:#fff; text-align:center; line-height:44px; letter-spacing:4px;">••••••••</div>
-    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+"spiderverse": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff00ff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.4); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
+    <!-- webs -->
+    <div style="position:absolute; top:0; left:60%; width:200px; height:2px; background:#fff; transform:rotate(45deg); opacity:0.5; z-index:2;"></div>
+    <div style="position:absolute; bottom:0; left:60%; width:200px; height:2px; background:#fff; transform:rotate(-45deg); opacity:0.5; z-index:2;"></div>
+    
+    <div style="position:absolute; right:150px; top:50%; transform:translateY(-50%); width:380px; height:480px; background:#111; border:2px solid #222; border-radius:10px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:25px; z-index:3; box-shadow: -4px 2px 0 #00ffff, 4px -2px 0 #ff00ff;">
+      <div style="font-size:64px; color:#ff0044; line-height:1;">🕷</div>
+      <div style="font-size:28px; color:#fff; letter-spacing:2px;">SYSTEM_ACCESS</div>
+      <div style="width:300px; height:50px; background:#000; border:2px solid #333; color:#00ffff; font-size:20px; line-height:46px; padding-left:15px; box-sizing:border-box;">joker53 ▾</div>
+      <div style="width:300px; height:50px; background:#000; border:2px solid #333; color:#ff00ff; font-size:20px; line-height:46px; padding-left:15px; box-sizing:border-box; letter-spacing:4px;">••••••••</div>
+      <div style="width:300px; height:50px; background:#ff0044; color:#fff; font-size:20px; font-weight:bold; line-height:50px; text-align:center; letter-spacing:4px;">CONNECT</div>
+    </div><div class="gm-power" style="top:40px; left:40px; font-family:sans-serif; text-transform:none; font-size:14px; color:#fff; display:flex; gap:20px; z-index:100;"><div style="width:140px; height:36px; border:1px solid #00ffff; color:#00ffff; text-align:center; line-height:36px; letter-spacing:2px;">PLASMA ▾</div><div style="width:120px; height:36px; border:1px solid #ff00ff; color:#ff00ff; text-align:center; line-height:36px; letter-spacing:2px;">REBOOT</div><div style="width:120px; height:36px; border:1px solid #ff0044; color:#ff0044; text-align:center; line-height:36px; letter-spacing:2px;">SHUTDOWN</div></div>`,
   "spiderman": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#e23636; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Anton', sans-serif; position:absolute; bottom:60px; right:60px; width:350px; height:350px; background:rgba(0,0,0,0.7); border:8px solid #e23636; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:36px; color:#e23636;">WEB SHOOTER</div>
       <div style="width:280px; height:50px; background:transparent; border:4px solid #0055ff; font-size:20px; color:#0055ff; text-align:center; line-height:42px;">${USER} ▾</div>
       <div style="width:280px; height:50px; background:#000; border:4px solid #e23636; font-size:20px; color:#fff; text-align:center; line-height:42px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "sakura-lake": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff2e63; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Yusei Magic', sans-serif; position:absolute; bottom:60px; left:60px; width:500px; height:80px; background:rgba(255,255,255,0.8); border-radius:40px; display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="width:200px; height:40px; font-size:24px; color:#ffb7c5; text-align:center; line-height:40px;">${USER} ▾</div>
       <div style="width:1px; height:30px; background:#ffb7c5;"></div>
       <div style="width:200px; height:40px; font-size:24px; color:#555; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
-  "mountain-sunset": (n) => `
-    <div style="font-family:'Lobster', cursive; position:absolute; top:80px; right:80px; width:400px; height:250px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
-      <div style="font-size:52px; color:#ff007f; text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;">SUNSET DRIVE</div>
-      <div style="width:300px; height:45px; background:#ff007f; border-radius:22px; font-size:24px; color:#fff; text-align:center; line-height:45px;">${USER} ▾</div>
-      <div style="width:300px; height:45px; background:#fff; border-radius:22px; font-size:24px; color:#ff007f; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
-    </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+"mountain-sunset": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff9d76; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.4); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
+    <div style="position:absolute; bottom:140px; width:100%; text-align:center; font-size:64px; color:#ff9d76; text-shadow:0 0 10px rgba(0,0,0,0.4); z-index:3;">SUNSET DRIVE</div>
+    <div style="position:absolute; bottom:80px; left:50%; transform:translateX(-50%); width:820px; height:60px; background:rgba(10,8,17,0.4); border:1px solid rgba(255,157,118,0.27); border-radius:30px; display:flex; align-items:center; padding:0 10px 0 20px; gap:15px; z-index:3; box-shadow:0 0 0 4px rgba(255,157,118,0.13);">
+      <div style="width:140px; color:#ff9d76; font-weight:bold; font-size:16px; text-align:center;">joker53 ▾</div>
+      <div style="width:1px; height:30px; background:rgba(255,157,118,0.27);"></div>
+      <div style="width:220px; color:#fff; font-size:16px; letter-spacing:2px;">••••••••</div>
+      <div style="width:40px; height:40px; background:#ff9d76; border-radius:20px; color:#111; font-weight:bold; font-size:20px; display:flex; justify-content:center; align-items:center;">→</div>
+      <div style="width:1px; height:30px; background:rgba(255,157,118,0.27);"></div>
+      <div style="width:100px; color:#ff9d76; font-size:13px; text-align:center;">PLASMA ▾</div>
+      <div style="width:1px; height:30px; background:rgba(255,157,118,0.27);"></div>
+      <div style="display:flex; gap:15px; color:#ff9d76; font-size:22px; font-weight:bold;">
+        <div>⟳</div><div style="color:#ff5050;">⏻</div>
+      </div>
+    </div>`,
   "mount-fuji": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#333; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Kosugi', sans-serif; position:absolute; right:0; top:0; width:400px; height:100%; background:rgba(255,255,255,0.9); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:3;">
       <div style="font-size:72px; color:#333;">ZEN</div>
       <div style="width:250px; height:40px; border:1px solid #333; font-size:22px; color:#333; line-height:38px; padding-left:15px;">${USER} ▾</div>
       <div style="width:250px; height:40px; border:1px solid #333; font-size:22px; color:#333; line-height:38px; padding-left:15px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "the-dark-river": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#c5a059; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'MedievalSharp', cursive; position:absolute; top:60px; right:60px; width:600px; height:250px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:42px; color:#c5a059;">THE DARK RIVER</div>
       <div style="display:flex; gap:20px;">
@@ -327,12 +354,14 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "purrple-cat": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#a854f7; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Patrick Hand', cursive; position:absolute; bottom:80px; right:80px; width:320px; height:200px; background:rgba(255,255,255,0.6); border-radius:20px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="font-size:32px; color:#a854f7;">chill out...</div>
       <div style="width:250px; height:40px; background:#fff; border-radius:10px; font-size:20px; color:#a854f7; text-align:center; line-height:40px;">${USER} ▾</div>
       <div style="width:250px; height:40px; background:#fff; border-radius:10px; font-size:20px; color:#555; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "hitagi-senjougahara": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#dc143c; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Fjalla One', sans-serif; position:absolute; right:50px; bottom:50px; width:350px; height:200px; background:rgba(0,0,0,0.8); border:4px solid #ff0000; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:3;">
       <div style="font-size:64px; color:#ff0000;">CRAB</div>
       <div style="display:flex; gap:10px;">
@@ -341,24 +370,28 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "hilda-and-tepig": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff8c00; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Chewy', cursive; position:absolute; right:60px; bottom:60px; width:350px; height:250px; background:#ff8c00; border-radius:30px; border:6px solid #fff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="font-size:42px; color:#fff;">BATTLE!</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px;">${USER} ▾</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:22px; font-size:22px; color:#ff8c00; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "hoodie": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#39ff14; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Rubik Glitch', system-ui; position:absolute; bottom:60px; right:60px; width:450px; height:350px; background:rgba(0,0,0,0.6); border:2px solid #39ff14; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:64px; color:#39ff14;">0xACCESS</div>
       <div style="width:350px; height:50px; background:transparent; border:1px solid #39ff14; font-size:28px; color:#39ff14; text-align:center; line-height:48px;">${USER} ▾</div>
       <div style="width:350px; height:50px; background:transparent; border:1px solid #39ff14; font-size:28px; color:#fff; text-align:center; line-height:48px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "neko-anime": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#00ffff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Mali', cursive; position:absolute; right:80px; top:80px; width:320px; height:280px; background:#ffb6c1; border-radius:15px; border:4px solid #00ffff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="font-size:36px; color:#00ffff; text-shadow:-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">Mya-nee~</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:10px; border:2px solid #00ffff; font-size:22px; color:#ffb6c1; text-align:center; line-height:41px;">${USER} ▾</div>
       <div style="width:250px; height:45px; background:#fff; border-radius:10px; border:2px solid #00ffff; font-size:22px; color:#000; text-align:center; line-height:41px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "zoro-blue": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#00aaff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Black Ops One', system-ui; position:absolute; left:0; bottom:0; width:500px; height:350px; background:rgba(0,0,0,0.7); border-top:5px solid #00aaff; border-right:5px solid #00aaff; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:64px; color:#00aaff;">ASHURA</div>
       <div style="width:350px; height:50px; background:#00aaff; font-size:24px; color:#000; text-align:center; line-height:50px;">${USER} ▾</div>
@@ -366,30 +399,35 @@ const layouts = {
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.3); border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,0,0,0.6); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
 
   "cat-pond": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#1b5e20; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Mali', cursive; position:absolute; bottom:60px; right:60px; width:350px; height:350px; background:rgba(46,125,50,0.67); border:4px solid #4caf50; border-radius:100px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:15px; z-index:3;">
       <div style="font-size:32px; color:#fff;">CAT POND</div>
       <div style="width:220px; height:45px; background:#fff; border-radius:22.5px; font-size:18px; color:#2e7d32; text-align:center; line-height:45px;">${USER} ▾</div>
       <div style="width:220px; height:45px; background:#fff; border-radius:22.5px; font-size:18px; color:#2e7d32; text-align:center; line-height:45px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(76,175,80,0.7); border:1px solid #81c784; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(76,175,80,0.7); border:1px solid #81c784; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(76,175,80,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "cosmic-gateway": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ffffff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Orbitron', sans-serif; position:absolute; top:60px; right:60px; width:400px; height:300px; background:#000; border:8px solid #9c27b0; transform:rotate(5deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3; box-shadow: 0 0 30px #9c27b0;">
       <div style="font-size:48px; color:#9c27b0;">GATEWAY</div>
       <div style="width:300px; height:50px; background:transparent; border:2px solid #9c27b0; font-size:24px; color:#fff; text-align:center; line-height:46px;">${USER} ▾</div>
       <div style="width:300px; height:50px; background:transparent; border:2px solid #9c27b0; font-size:24px; color:#fff; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="bottom:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(156,39,176,0.7); border:1px solid #e1bee7; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(156,39,176,0.7); border:1px solid #e1bee7; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(156,39,176,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "everest": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ffffff; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Cinzel', serif; position:absolute; bottom:60px; left:60px; width:500px; height:120px; background:rgba(255,255,255,0.53); border:1px solid #fff; display:flex; justify-content:center; align-items:center; gap:30px; z-index:3;">
       <div style="font-size:24px; color:#00bcd4;">EVEREST</div>
       <div style="width:150px; height:40px; background:#fff; font-size:18px; color:#333; text-align:center; line-height:40px;">${USER} ▾</div>
       <div style="width:150px; height:40px; background:#fff; font-size:18px; color:#333; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:50%; transform:translateX(-50%); font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(0,188,212,0.7); border:1px solid #b2ebf2; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(0,188,212,0.7); border:1px solid #b2ebf2; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(0,188,212,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "fish-in-rock-pond": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff9800; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Yusei Magic', sans-serif; position:absolute; top:60px; left:60px; width:150px; height:500px; background:rgba(255,255,255,0.87); border:3px solid #ff9800; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:40px; z-index:3;">
       <div style="font-size:32px; color:#ff9800; text-align:center;">KOI<br>POND</div>
       <div style="width:120px; height:40px; background:transparent; border:1px solid #333; font-size:16px; color:#333; text-align:center; line-height:40px;">${USER} ▾</div>
       <div style="width:120px; height:40px; background:transparent; border:1px solid #333; font-size:16px; color:#333; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="bottom:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(121,85,72,0.7); border:1px solid #d7ccc8; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(121,85,72,0.7); border:1px solid #d7ccc8; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(121,85,72,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "moonlit-rooftop-cat": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#b39ddb; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Patrick Hand', cursive; position:absolute; bottom:60px; right:60px; width:320px; height:380px; background:rgba(26,35,126,0.67); border:3px solid #7986cb; transform:rotate(-3deg); display:flex; flex-direction:column; justify-content:center; align-items:center; gap:25px; z-index:3;">
       <div style="font-size:48px; color:#c5cae9;">NIGHT</div>
       <div style="width:200px; height:50px; background:#c5cae9; border-radius:5px; font-size:22px; color:#1a237e; text-align:center; line-height:50px;">${USER} ▾</div>
@@ -404,6 +442,7 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="bottom:20px; left:50%; transform:translateX(-50%); font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(233,30,99,0.7); border:1px solid #f8bbd0; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(233,30,99,0.7); border:1px solid #f8bbd0; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(233,30,99,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "nissan-skyline": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ffb7c5; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Russo One', sans-serif; position:absolute; bottom:60px; right:60px; width:500px; height:180px; background:rgba(0,0,0,0.67); border:4px solid #f44336; transform:rotate(-4deg); display:flex; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:64px; color:#f44336; font-style:italic;">R34</div>
       <div style="display:flex; flex-direction:column; gap:15px;">
@@ -412,12 +451,14 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="bottom:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(211,47,47,0.7); border:1px solid #ffcdd2; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(211,47,47,0.7); border:1px solid #ffcdd2; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(211,47,47,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "ocean-in-jar": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#b3e5fc; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Comfortaa', cursive; position:absolute; bottom:60px; left:60px; width:300px; height:300px; background:rgba(3,169,244,0.4); border:2px solid #b3e5fc; border-radius:150px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:32px; color:#fff;">ocean</div>
       <div style="width:180px; height:40px; background:#fff; border-radius:20px; font-size:18px; color:#0277bd; text-align:center; line-height:40px;">${USER} ▾</div>
       <div style="width:180px; height:40px; background:#fff; border-radius:20px; font-size:18px; color:#0277bd; text-align:center; line-height:40px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(2,119,189,0.7); border:1px solid #b3e5fc; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(2,119,189,0.7); border:1px solid #b3e5fc; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(2,119,189,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "pink-bloom": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ff4081; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Pacifico', cursive; position:absolute; bottom:60px; right:60px; width:450px; height:280px; background:#ffebf0; border:1px solid #e91e63; border-radius:40px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:56px; color:#e91e63;">Bloom</div>
       <div style="display:flex; gap:15px;">
@@ -426,6 +467,7 @@ const layouts = {
       </div>
     </div><div class="gm-power" style="top:20px; left:50%; transform:translateX(-50%); font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(255,64,129,0.7); border:1px solid #f8bbd0; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(255,64,129,0.7); border:1px solid #f8bbd0; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(255,64,129,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "pirates-of-the-caribbean": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#5d4037; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'Pirata One', cursive; position:absolute; bottom:60px; right:60px; width:400px; height:350px; background:#8d6e63; border:10px solid #3e2723; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:30px; z-index:3;">
       <div style="position:absolute; top:10px; left:10px; right:10px; bottom:10px; border:2px solid #5d4037; pointer-events:none;"></div>
       <div style="font-size:42px; color:#3e2723;">Captain's Log</div>
@@ -433,12 +475,14 @@ const layouts = {
       <div style="width:260px; height:50px; background:#d7ccc8; border:2px solid #3e2723; font-size:24px; color:#3e2723; text-align:center; line-height:46px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; left:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(93,64,55,0.7); border:1px solid #d7ccc8; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(93,64,55,0.7); border:1px solid #d7ccc8; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(93,64,55,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "pixel-gaming-room": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#8bc34a; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'VT323', monospace; position:absolute; bottom:60px; right:60px; width:450px; height:280px; background:#000; border:6px solid #8bc34a; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:42px; color:#8bc34a;">> LOGIN_</div>
       <div style="width:350px; height:45px; background:#8bc34a; font-size:24px; color:#000; text-align:center; line-height:45px;">${USER} ▾</div>
       <div style="width:350px; height:45px; background:#000; border:2px solid #8bc34a; font-size:24px; color:#8bc34a; text-align:center; line-height:41px; letter-spacing:4px;">••••••••</div>
     </div><div class="gm-power" style="top:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#000; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(139,195,74,0.7); border:1px solid #dcedc8; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(139,195,74,0.7); border:1px solid #dcedc8; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(139,195,74,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
   "pixel-sakura-city": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#ffb6c1; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'VT323', monospace; position:absolute; bottom:60px; left:60px; width:400px; height:250px; background:#ffb6c1; border:4px solid #fff; display:flex; flex-direction:column; align-items:center; z-index:3;">
       <div style="width:100%; height:35px; background:#f06292; color:#fff; font-size:16px; display:flex; align-items:center; padding-left:10px; box-sizing:border-box;"> System Auth</div>
       <div style="margin-top:35px; display:flex; flex-direction:column; gap:15px;">
@@ -446,16 +490,22 @@ const layouts = {
         <div style="width:300px; height:40px; background:#fff; border:2px solid #f06292; font-size:20px; color:#f06292; text-align:center; line-height:36px; letter-spacing:4px;">••••••••</div>
       </div>
     </div><div class="gm-power" style="bottom:20px; left:50%; transform:translateX(-50%); font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#000; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(255,182,193,0.7); border:1px solid #fff; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(255,182,193,0.7); border:1px solid #fff; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(255,182,193,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
-  "pokeball": (n) => `
-    <div style="font-family:'Chewy', cursive; position:absolute; bottom:60px; right:60px; width:300px; height:300px; background:#fff; border:10px solid #000; border-radius:150px; overflow:hidden; display:flex; flex-direction:column; align-items:center; z-index:3;">
-      <div style="width:100%; height:145px; background:#f44336;"></div>
-      <div style="width:100%; height:10px; background:#000;"></div>
-      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); display:flex; flex-direction:column; gap:40px;">
-        <div style="width:160px; height:40px; background:#fff; border:4px solid #000; border-radius:20px; font-size:18px; color:#000; text-align:center; line-height:32px;">${USER} ▾</div>
-        <div style="width:160px; height:40px; background:#fff; border:4px solid #000; border-radius:20px; font-size:18px; color:#000; text-align:center; line-height:32px; letter-spacing:4px;">••••••••</div>
+"pokeball": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#222; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.4); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:380px; height:480px; border-radius:190px; border:6px solid #222; overflow:hidden; display:flex; flex-direction:column; z-index:3;">
+      <div style="flex:1; background:#E3350D; display:flex; justify-content:center; align-items:center;">
+        <div style="width:260px; height:46px; background:#fff; border:4px solid #222; border-radius:23px; color:#E3350D; font-size:20px; font-weight:bold; line-height:38px; text-align:center; transform:translateY(-20px);">joker53 ▾</div>
       </div>
-    </div><div class="gm-power" style="top:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#fff; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; background:rgba(229,57,53,0.7); border:1px solid #ffcdd2; border-radius:4px;">PLASMA ▾</div><div style="padding:6px 12px; background:rgba(229,57,53,0.7); border:1px solid #ffcdd2; border-radius:4px;">REBOOT</div><div style="padding:6px 12px; background:rgba(229,57,53,0.7); border:1px solid #ff2e63; border-radius:4px; color:#ff2e63;">SHUTDOWN</div></div>`,
+      <div style="height:12px; background:#222;"></div>
+      <div style="flex:1; background:#ffffff; display:flex; justify-content:center; align-items:center;">
+        <div style="width:260px; height:46px; background:#eee; border:4px solid #222; border-radius:23px; color:#E3350D; font-size:20px; font-weight:bold; line-height:38px; text-align:center; letter-spacing:4px; transform:translateY(20px);">••••••••</div>
+      </div>
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:100px; height:100px; background:#fff; border:8px solid #222; border-radius:50%; display:flex; justify-content:center; align-items:center;">
+        <div style="width:60px; height:60px; border:4px solid #222; border-radius:50%; background:#fff;"></div>
+      </div>
+    </div><div class="gm-power" style="top:20px; right:20px; font-family:sans-serif; text-transform:none; font-size:11px; font-weight:bold; color:#222; display:flex; gap:15px; z-index:100;"><div style="padding:6px 12px; border:2px solid #222; border-radius:8px;">PLASMA ▾</div><div style="padding:6px 12px; border:2px solid #222; border-radius:8px;">REBOOT</div><div style="padding:6px 12px; border:2px solid #222; border-radius:8px; color:#E3350D;">SHUTDOWN</div></div>`,
   "super-mario-pixel": (n) => `
+    <div style="position:absolute; top:40px; width:100%; text-align:center; color:#fbc02d; font-family:sans-serif; font-size:84px; text-shadow:0 0 10px rgba(0,0,0,0.5); z-index:10;">${n.getHours().toString().padStart(2,'0')}:${n.getMinutes().toString().padStart(2,'0')}</div>
     <div style="font-family:'VT323', monospace; position:absolute; top:60px; right:60px; width:300px; height:300px; background:#fbc02d; border:4px solid #000; box-shadow: inset 4px 4px 0 #fff, inset -4px -4px 0 #b71c1c; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:20px; z-index:3;">
       <div style="font-size:100px; color:#d32f2f; line-height:1;">?</div>
       <div style="width:220px; height:40px; background:#d32f2f; font-size:20px; color:#fff; text-align:center; line-height:40px;">${USER} ▾</div>
