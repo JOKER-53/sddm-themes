@@ -6,18 +6,25 @@ For reference visit the showcase → **[kadhiravaneg.github.io/sddm-themes](http
 reference wallpapers with a **deliberately different layout structure** —
 no shared components, no copy-paste UI. Pick the one you want and install it.
 
-| ID            | Vibe                        | Layout                                                    |
-| ------------- | --------------------------- | --------------------------------------------------------- |
-| `marvel`      | Cinematic title card        | Tiny logo top → huge red `ENTER` block → underline inputs |
-| `classic-jdm` | JDM dashboard               | Full-bleed photo + bottom HUD bar (clock · login · power) |
-| `alienx`      | Sci-fi command terminal     | Subject right, vertical green console left + scanlines    |
-| `drag-racer`  | Racing telemetry HUD        | Top-left mega clock, bottom-right pill login + GO button  |
-| `gojo`        | Manga monochrome split      | Left-pinned `INFINITY` panel, Gojo face stays clear right |
-| `kawaii`      | Pastel rounded card         | Subject right, big rounded pink card + floating hearts    |
-| `joker`       | Off-center theatrical serif | Vignette portrait, narrow right-third login column        |
-| `rdr2`        | Wanted-poster western       | Bottom-center parchment card, framed clock top-right      |
-| `deadpool`    | Snarky chat-bubble panel    | Left chat-bubble login, hero portrait stays right         |
-| `bmw`         | BMW M-stripe ignition HUD   | Left key-fob ignition panel, classic cars stay right      |
+## 44 Themes Gallery
+
+| Theme | Preview | Theme | Preview | Theme | Preview |
+|---|---|---|---|---|---|
+| `alienx` | <img src="alienx/assets/wallpaper.png" width="250"> | `bmw` | <img src="bmw/assets/wallpaper.jpg" width="250"> | `bmw-m3` | <img src="bmw-m3/assets/thumbnail.jpg" width="250"> |
+| `cat-pond` | <img src="cat-pond/assets/thumbnail.jpg" width="250"> | `classic-jdm` | <img src="classic-jdm/assets/wallpaper.jpg" width="250"> | `cosmic-gateway` | <img src="cosmic-gateway/assets/thumbnail.jpg" width="250"> |
+| `deadpool` | <img src="deadpool/assets/wallpaper.jpg" width="250"> | `dodge` | <img src="dodge/assets/thumbnail.jpg" width="250"> | `drag-racer` | <img src="drag-racer/assets/wallpaper.jpg" width="250"> |
+| `everest` | <img src="everest/assets/thumbnail.jpg" width="250"> | `fish-in-rock-pond` | <img src="fish-in-rock-pond/assets/thumbnail.jpg" width="250"> | `gojo` | <img src="gojo/assets/wallpaper.png" width="250"> |
+| `hilda-and-tepig` | <img src="hilda-and-tepig/assets/thumbnail.jpg" width="250"> | `hitagi-senjougahara` | <img src="hitagi-senjougahara/assets/thumbnail.jpg" width="250"> | `hoodie` | <img src="hoodie/assets/thumbnail.jpg" width="250"> |
+| `joker` | <img src="joker/assets/wallpaper.jpg" width="250"> | `kawaii` | <img src="kawaii/assets/wallpaper.png" width="250"> | `marvel` | <img src="marvel/assets/wallpaper.jpg" width="250"> |
+| `mazda-mx5` | <img src="mazda-mx5/assets/thumbnail.jpg" width="250"> | `moonlit-rooftop-cat` | <img src="moonlit-rooftop-cat/assets/thumbnail.jpg" width="250"> | `mount-fuji` | <img src="mount-fuji/assets/thumbnail.jpg" width="250"> |
+| `mountain-sunset` | <img src="mountain-sunset/assets/thumbnail.jpg" width="250"> | `neko-anime` | <img src="neko-anime/assets/thumbnail.jpg" width="250"> | `neon-gif` | <img src="neon-gif/assets/thumbnail.jpg" width="250"> |
+| `neverness-to-everness` | <img src="neverness-to-everness/assets/thumbnail.jpg" width="250"> | `nissan` | <img src="nissan/assets/thumbnail.jpg" width="250"> | `nissan-skyline` | <img src="nissan-skyline/assets/thumbnail.jpg" width="250"> |
+| `ocean-in-jar` | <img src="ocean-in-jar/assets/thumbnail.jpg" width="250"> | `oni-anime-girl` | <img src="oni-anime-girl/assets/thumbnail.jpg" width="250"> | `oni-robot` | <img src="oni-robot/assets/thumbnail.jpg" width="250"> |
+| `pink-bloom` | <img src="pink-bloom/assets/thumbnail.jpg" width="250"> | `pirates-of-the-caribbean` | <img src="pirates-of-the-caribbean/assets/thumbnail.jpg" width="250"> | `pixel-gaming-room` | <img src="pixel-gaming-room/assets/thumbnail.jpg" width="250"> |
+| `pixel-sakura-city` | <img src="pixel-sakura-city/assets/thumbnail.jpg" width="250"> | `pokeball` | <img src="pokeball/assets/thumbnail.jpg" width="250"> | `purrple-cat` | <img src="purrple-cat/assets/thumbnail.jpg" width="250"> |
+| `rdr2` | <img src="rdr2/assets/wallpaper.jpg" width="250"> | `sakura-lake` | <img src="sakura-lake/assets/thumbnail.jpg" width="250"> | `spiderman` | <img src="spiderman/assets/thumbnail.jpg" width="250"> |
+| `spiderverse` | <img src="spiderverse/assets/thumbnail.jpg" width="250"> | `super-mario-pixel` | <img src="super-mario-pixel/assets/thumbnail.jpg" width="250"> | `the-dark-river` | <img src="the-dark-river/assets/thumbnail.jpg" width="250"> |
+| `zoro-blue` | <img src="zoro-blue/assets/thumbnail.jpg" width="250"> | `zoro-dragon` | <img src="zoro-dragon/assets/thumbnail.jpg" width="250"> | | |
 
 ---
 
