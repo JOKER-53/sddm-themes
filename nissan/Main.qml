@@ -4,7 +4,7 @@ Rectangle {
     FontLoader { id: customFont; source: "assets/font.ttf" }
     width: 1920; height: 1080; color: "#000"
     AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
-    Rectangle { anchors.centerIn: parent; width: 600; height: 100; color: "#dd000000"; transform: Rotation { angle: -3 } }
+    Rectangle { anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; width: 600; height: 100; color: "#dd000000"; transform: Rotation { angle: -3 } }
     Row {
         anchors.centerIn: parent; spacing: 20
         ComboBox {

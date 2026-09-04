@@ -5,8 +5,7 @@ Rectangle {
     width: 1920; height: 1080; color: "#000"
     AnimatedImage { anchors.fill: parent; source: "assets/wallpaper.gif"; fillMode: Image.PreserveAspectFit; playing: true }
     Rectangle { anchors.fill: parent; color: "#33000000" }
-    Column {
-        anchors.centerIn: parent; spacing: 15
+    Column { anchors.right: parent.right; anchors.bottom: parent.bottom; anchors.margins: 60; spacing: 15
         Text { text: "NIGHT DRIVE"; color: "#05d9e8"; font.pixelSize: 50; font.bold: true; font.italic: true }
         ComboBox {
             id: u; width: 300; height: 40; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex
