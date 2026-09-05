@@ -226,6 +226,14 @@ mkdir -p "$DEST"
 cp -r "$THEME_SRC"/. "$DEST"/
 
 # ── patch for Qt5 if needed ───────────────────────────────────
+# ── patch QtVersion in metadata ───────────────────────────────
+if [[ "$QT_VER" == "6" ]]; then
+  if ! grep -q "^QtVersion=" "$DEST/metadata.desktop"; then
+    echo "QtVersion=6" >> "$DEST/metadata.desktop"
+    info "Appended QtVersion=6 to metadata.desktop"
+  fi
+fi
+
 if [[ "$QT_VER" == "5" ]]; then
   transpile_for_qt5 "$DEST"
 fi
