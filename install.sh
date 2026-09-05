@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# ═══════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
 #   JOKER53 · SDDM THEME INSTALLER
 #   Usage:  sudo ./install.sh [theme-id]
-# ═══════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════
 set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -10,102 +10,75 @@ THEMES_DIR="$REPO_DIR"
 SDDM_THEMES="/usr/share/sddm/themes"
 SDDM_CONF="/etc/sddm.conf"
 
-# ── 256-colour palette ──────────────────────────────────────────────
-ESC=$'\033'
-RST="${ESC}[0m"
-BLD="${ESC}[1m"
-DIM="${ESC}[2m"
-ITL="${ESC}[3m"
+# ── Colours ────────────────────────────────────────────
+R=$'\033[0m'      # reset
+B=$'\033[1m'      # bold
+D=$'\033[2m'      # dim
+IT=$'\033[3m'     # italic
 
-# foreground colours
-BLK="${ESC}[30m";  RED="${ESC}[31m";  GRN="${ESC}[32m";  YEL="${ESC}[33m"
-BLU="${ESC}[34m";  MAG="${ESC}[35m";  CYN="${ESC}[36m";  WHT="${ESC}[37m"
+K=$'\033[30m';  RD=$'\033[31m';  GR=$'\033[32m';  YL=$'\033[33m'
+BL=$'\033[34m';  MG=$'\033[35m';  CY=$'\033[36m';  WH=$'\033[37m'
 
-# bright foreground
-BBLK="${ESC}[90m"; BRED="${ESC}[91m"; BGRN="${ESC}[92m"; BYEL="${ESC}[93m"
-BBLU="${ESC}[94m"; BMAG="${ESC}[95m"; BCYN="${ESC}[96m"; BWHT="${ESC}[97m"
+BK=$'\033[90m'; BR=$'\033[91m'; BG=$'\033[92m'; BY=$'\033[93m'
+BB=$'\033[94m'; BM=$'\033[95m'; BC=$'\033[96m'; BW=$'\033[97m'
 
-# 256-colour extras (vivid accent colours)
-ORG="${ESC}[38;5;208m"   # orange
-PNK="${ESC}[38;5;213m"   # pink
-LVN="${ESC}[38;5;135m"   # lavender
-TRQ="${ESC}[38;5;51m"    # turquoise
-GLD="${ESC}[38;5;220m"   # gold
-LME="${ESC}[38;5;154m"   # lime
-SKY="${ESC}[38;5;117m"   # sky blue
-CRL="${ESC}[38;5;203m"   # coral
-MNT="${ESC}[38;5;121m"   # mint
-PRP="${ESC}[38;5;141m"   # purple
+ORG=$'\033[38;5;208m'
+PNK=$'\033[38;5;213m'
+SKY=$'\033[38;5;117m'
+GLD=$'\033[38;5;220m'
+LME=$'\033[38;5;154m'
+MNT=$'\033[38;5;121m'
+LVN=$'\033[38;5;135m'
+CRL=$'\033[38;5;203m'
 
-# background colours (for inline highlights)
-BG_BLU="${ESC}[44m"
-BG_MAG="${ESC}[45m"
-BG_CYN="${ESC}[46m"
-BG_GRN="${ESC}[42m"
-BG_RED="${ESC}[41m"
-BG_YEL="${ESC}[43m"
+# ── Helpers ─────────────────────────────────────────────
+tw() { tput cols 2>/dev/null || echo 80; }
 
-# ── helpers ─────────────────────────────────────────────────────────
-cols()  { tput cols 2>/dev/null || echo 72; }
-center(){ local s="$1"; local w=${2:-$(cols)}; local pad=$(( (w - ${#s}) / 2 ))
-          printf "%*s%s%*s\n" "$pad" "" "$s" "$pad" ""; }
-hline() { local c="${1:-─}"; local w=$(cols); printf '%*s\n' "$w" '' | tr ' ' "$c"; }
-hline2(){ printf "${BBLK}"; hline "─"; printf "${RST}"; }
+# solid line with repeating ASCII char
+line()  { local c="${1:--}" n="${2:-$(tw)}"; printf "%${n}s\n" | tr ' ' "$c"; }
+bline() { printf "${BK}"; line "${1:--}"; printf "${R}"; }
 
-info()  { echo -e "  ${SKY}◆${RST}  $*"; }
-ok()    { echo -e "  ${BGRN}✔${RST}  $*"; }
-warn()  { echo -e "  ${GLD}⚠${RST}  $*"; }
-step()  { echo -e "  ${PNK}▶${RST}  ${BLD}$*${RST}"; }
-die()   { echo -e "\n  ${BRED}✖${RST}  ${BRED}${BLD}ERROR:${RST} $*" >&2; exit 1; }
-
-# animated spinner while running a command silently
-spin() {
-  local msg="$1"; shift
-  local frames=('⠋' '⠙' '⠹' '⠸' '⠼' '⠴' '⠦' '⠧' '⠇' '⠏')
-  ("$@") &
-  local pid=$!
-  local i=0
-  while kill -0 $pid 2>/dev/null; do
-    printf "\r  ${BCYN}%s${RST}  %s…" "${frames[$i]}" "$msg"
-    i=$(( (i+1) % ${#frames[@]} ))
-    sleep 0.08
-  done
-  printf "\r  ${BGRN}✔${RST}  %s — ${BGRN}done${RST}\n" "$msg"
-  wait $pid
+# centred text
+ctr() {
+  local s="$1" w="${2:-$(tw)}" raw
+  raw="${s//$'\033'[0-9;]*m/}"   # strip ANSI for length calc
+  raw="${raw//$'\033'[0m/}"
+  local pad=$(( (w - ${#raw}) / 2 ))
+  [[ $pad -lt 0 ]] && pad=0
+  printf "%*s%s\n" "$pad" "" "$s"
 }
 
-# print a coloured progress bar  usage: pbar current total label
-pbar() {
-  local cur=$1 tot=$2 lbl="${3:-}"
-  local w=30
-  local fill=$(( cur * w / tot ))
-  local empty=$(( w - fill ))
-  printf "  ${BBLK}[${BGRN}"
-  printf '%0.s█' $(seq 1 $fill 2>/dev/null) 2>/dev/null || true
-  printf "${BBLK}"
-  printf '%0.s░' $(seq 1 $empty 2>/dev/null) 2>/dev/null || true
-  printf "${BBLK}]${RST} ${BLD}%d%%${RST}  %s\n" $(( cur * 100 / tot )) "$lbl"
-}
+ok()   { echo -e " ${BG}[  OK  ]${R}  $*"; }
+info() { echo -e " ${SKY}[ INFO ]${R}  $*"; }
+warn() { echo -e " ${GLD}[ WARN ]${R}  $*"; }
+step() { echo -e " ${BM}[  >>  ]${R}  ${B}$*${R}"; }
+die()  { echo -e "\n ${BR}[ FAIL ]${R}  ${BR}${B}$*${R}" >&2; exit 1; }
 
-# ── root check ──────────────────────────────────────────────────────
-[[ $EUID -eq 0 ]] || die "Run as root:  ${CYN}sudo $0 ${1:-}${RST}"
+# ── Root check ──────────────────────────────────────────
+[[ $EUID -eq 0 ]] || die "Run as root:  sudo $0 ${1:-}"
 
-# ── big banner ──────────────────────────────────────────────────────
+# ── Banner ──────────────────────────────────────────────
 clear
 echo ""
-echo -e "${BBLK}$(hline '═')${RST}"
+printf "${BM}${B}"
+line "="
 echo ""
-echo -e "${BMAG}${BLD}$(center "   ░░░ JOKER53 · SDDM THEME INSTALLER ░░░   ")${RST}"
+ctr "${BW}${B}     ___  ___  ___  __  __    ___  ___  ___  ___  ___  ___ "
+ctr "${BM}${B}    |   ||   ||   ||  \/  |  |__ ||   ||  _||   ||   ||   |"
+ctr "${BC}${B}    | J || O || K || |\/| |  | __|| E || |_ | S || D || M |"
+ctr "${BB}${B}    |___||___||___||_|  |_|  |___||___||___||___||___||___|"
 echo ""
-echo -e "${BBLK}$(hline '═')${RST}"
+ctr "${BK}${D}        S D D M   T H E M E   I N S T A L L E R${R}"
 echo ""
-echo -e "$(center "${DIM}${BBLK}Anime · JDM · Cyberpunk · Marvel · Nature · Pixel${RST}")"
-echo -e "$(center "${BBLK}${DIM}44 hand-crafted themes · Pure QML · Qt5 & Qt6${RST}")"
+printf "${BM}${B}"
+line "="
+printf "${R}"
 echo ""
-echo -e "${BBLK}$(hline '─')${RST}"
+ctr "${BK}${D}  Anime  .  JDM  .  Cyberpunk  .  Marvel  .  Nature  .  Pixel  ${R}"
+ctr "${BK}${D}         44 hand-crafted themes  .  Pure QML  .  Qt5 & Qt6      ${R}"
 echo ""
 
-# ── detect Qt version ───────────────────────────────────────────────
+# ── Qt version ──────────────────────────────────────────
 detect_qt_version() {
   if pacman -Qq sddm &>/dev/null 2>&1; then
     pacman -Qi sddm 2>/dev/null | grep -q 'qt6' && { echo "6"; return; }
@@ -119,12 +92,12 @@ detect_qt_version() {
 }
 
 QT_VER=$(detect_qt_version)
-echo -e "  ${SKY}◈${RST}  SDDM runtime  →  ${BLD}${BCYN}Qt${QT_VER}${RST}"
+info "SDDM runtime  ->  ${B}${BC}Qt${QT_VER}${R}"
 
-# ── dependency check ────────────────────────────────────────────────
+# ── Dependencies ────────────────────────────────────────
 install_missing() {
   local pm=$1; shift; local pkgs=("$@")
-  step "Installing missing packages: ${CYN}${pkgs[*]}${RST}"
+  step "Installing: ${CY}${pkgs[*]}${R}"
   case "$pm" in
     pacman) pacman -S --noconfirm "${pkgs[@]}" ;;
     apt)    apt update && apt install -y "${pkgs[@]}" ;;
@@ -136,114 +109,110 @@ install_missing() {
 check_deps_qt6() {
   local pm="" missing=()
   if   command -v pacman &>/dev/null; then pm="pacman"
-    for pkg in qt6-declarative qt6-5compat qt6-svg; do
-      pacman -Qq "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qt6-declarative qt6-5compat qt6-svg; do
+      pacman -Qq "$p" &>/dev/null || missing+=("$p"); done
   elif command -v apt    &>/dev/null; then pm="apt"
-    for pkg in qml6-module-qtquick qml6-module-qt5compat-graphicaleffects libqt6svg6; do
-      dpkg -l "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qml6-module-qtquick qml6-module-qt5compat-graphicaleffects libqt6svg6; do
+      dpkg -l "$p" &>/dev/null || missing+=("$p"); done
   elif command -v dnf    &>/dev/null; then pm="dnf"
-    for pkg in qt6-qtdeclarative qt6-qt5compat qt6-qtsvg; do
-      rpm -q "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qt6-qtdeclarative qt6-qt5compat qt6-qtsvg; do
+      rpm -q "$p" &>/dev/null || missing+=("$p"); done
   elif command -v zypper &>/dev/null; then pm="zypper"
-    for pkg in qt6-declarative qt6-5compat qt6-svg; do
-      rpm -q "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qt6-declarative qt6-5compat qt6-svg; do
+      rpm -q "$p" &>/dev/null || missing+=("$p"); done
   fi
-  if [[ ${#missing[@]} -gt 0 ]]; then
-    [[ -n "$pm" ]] && install_missing "$pm" "${missing[@]}" \
-                   || warn "Missing Qt6 packages: ${missing[*]}  (install manually)"
-  else
-    ok "All Qt6 dependencies satisfied"
-  fi
+  [[ ${#missing[@]} -gt 0 ]] \
+    && { [[ -n "$pm" ]] && install_missing "$pm" "${missing[@]}" \
+                        || warn "Missing Qt6 packages: ${missing[*]}"; } \
+    || ok "All Qt6 dependencies satisfied"
 }
 
 check_deps_qt5() {
   local pm="" missing=()
   if   command -v pacman &>/dev/null; then pm="pacman"
-    for pkg in qt5-declarative qt5-graphicaleffects qt5-quickcontrols2; do
-      pacman -Qq "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qt5-declarative qt5-graphicaleffects qt5-quickcontrols2; do
+      pacman -Qq "$p" &>/dev/null || missing+=("$p"); done
   elif command -v apt    &>/dev/null; then pm="apt"
-    for pkg in qml-module-qtquick2 qml-module-qtgraphicaleffects qml-module-qtquick-controls2; do
-      dpkg -l "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qml-module-qtquick2 qml-module-qtgraphicaleffects qml-module-qtquick-controls2; do
+      dpkg -l "$p" &>/dev/null || missing+=("$p"); done
   elif command -v dnf    &>/dev/null; then pm="dnf"
-    for pkg in qt5-qtdeclarative qt5-qtgraphicaleffects qt5-qtquickcontrols2; do
-      rpm -q "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in qt5-qtdeclarative qt5-qtgraphicaleffects qt5-qtquickcontrols2; do
+      rpm -q "$p" &>/dev/null || missing+=("$p"); done
   elif command -v zypper &>/dev/null; then pm="zypper"
-    for pkg in libqt5-qtdeclarative qt5-graphicaleffects; do
-      rpm -q "$pkg" &>/dev/null || missing+=("$pkg"); done
+    for p in libqt5-qtdeclarative qt5-graphicaleffects; do
+      rpm -q "$p" &>/dev/null || missing+=("$p"); done
   fi
-  if [[ ${#missing[@]} -gt 0 ]]; then
-    [[ -n "$pm" ]] && install_missing "$pm" "${missing[@]}" \
-                   || warn "Missing Qt5 packages: ${missing[*]}  (install manually)"
-  else
-    ok "All Qt5 dependencies satisfied"
-  fi
+  [[ ${#missing[@]} -gt 0 ]] \
+    && { [[ -n "$pm" ]] && install_missing "$pm" "${missing[@]}" \
+                        || warn "Missing Qt5 packages: ${missing[*]}"; } \
+    || ok "All Qt5 dependencies satisfied"
 }
 
-if [[ "$QT_VER" == "6" ]]; then check_deps_qt6; else check_deps_qt5; fi
+[[ "$QT_VER" == "6" ]] && check_deps_qt6 || check_deps_qt5
 
-# ── gather themes ────────────────────────────────────────────────────
+# ── Gather themes ────────────────────────────────────────
 THEMES=()
 for d in "$THEMES_DIR"/*/; do
   [[ -f "$d/metadata.desktop" ]] && THEMES+=("$(basename "$d")")
 done
-
 TOTAL=${#THEMES[@]}
 
-# ── category colours map ─────────────────────────────────────────────
+# ── Category colour ──────────────────────────────────────
 theme_colour() {
   case "$1" in
-    marvel|deadpool|joker|spiderverse|spiderman) echo "$BRED" ;;
-    bmw|bmw-m3|classic-jdm|drag-racer|dodge|mazda-mx5|nissan|nissan-skyline) echo "$BYEL" ;;
-    neon-gif|alienx|hoodie|oni-robot|cosmic-gateway) echo "$BCYN" ;;
-    gojo|kawaii|neko-anime|zoro-dragon|zoro-blue|oni-anime-girl|hitagi-senjougahara|hilda-and-tepig|neverness-to-everness|purrple-cat|moonlit-rooftop-cat|sakura-lake|pokeball|pixel-sakura-city) echo "$BMAG" ;;
-    pixel-gaming-room|super-mario-pixel) echo "$BGRN" ;;
-    cat-pond|everest|fish-in-rock-pond|mount-fuji|mountain-sunset|ocean-in-jar|pink-bloom|the-dark-river|pirates-of-the-caribbean) echo "$MNT" ;;
+    marvel|deadpool|joker|spiderverse|spiderman) echo "$BR" ;;
+    bmw|bmw-m3|classic-jdm|drag-racer|dodge|mazda-mx5|nissan|nissan-skyline) echo "$BY" ;;
+    neon-gif|alienx|hoodie|oni-robot|cosmic-gateway|mountain-sunset) echo "$BC" ;;
+    gojo|kawaii|neko-anime|zoro-dragon|zoro-blue|oni-anime-girl|hitagi-senjougahara|hilda-and-tepig|neverness-to-everness|purrple-cat|moonlit-rooftop-cat|sakura-lake|pokeball|pixel-sakura-city) echo "$BM" ;;
+    pixel-gaming-room|super-mario-pixel) echo "$BG" ;;
+    cat-pond|everest|fish-in-rock-pond|mount-fuji|ocean-in-jar|pink-bloom) echo "$MNT" ;;
     rdr2|the-dark-river|pirates-of-the-caribbean) echo "$ORG" ;;
-    *) echo "$BWHT" ;;
+    *) echo "$BW" ;;
   esac
 }
 
-# ── theme selection ───────────────────────────────────────────────────
+# ── Theme menu ───────────────────────────────────────────
 THEME="${1:-}"
 
 if [[ -z "$THEME" ]]; then
-
   echo ""
-  echo -e "${BBLK}$(hline '─')${RST}"
-  echo -e "$(center "${BLD}${BWHT}  AVAILABLE THEMES  ${RST}")"
-  echo -e "${BBLK}$(hline '─')${RST}"
+  bline "-"
+  ctr "${B}${BW}  AVAILABLE THEMES  ${R}"
+  bline "-"
   echo ""
 
   num=$TOTAL
   half=$(( (num + 1) / 2 ))
-  col_w=36
 
   for (( i=0; i<half; i++ )); do
     j=$(( i + half ))
     t1="${THEMES[$i]}"
     c1=$(theme_colour "$t1")
     n1=$(printf "%2d" $((i+1)))
-    pad1=$(( col_w - ${#t1} ))
-    left="  ${BBLK}[${RST}${BYEL}${BLD}${n1}${RST}${BBLK}]${RST} ${c1}${t1}${RST}$(printf '%*s' $pad1 '')"
+
+    # left column: fixed 40-char wide
+    left=$(printf "  ${BK}%s${R} ${c1}%-36s${R}" "$n1" "$t1")
 
     if [[ $j -lt $num ]]; then
       t2="${THEMES[$j]}"
       c2=$(theme_colour "$t2")
       n2=$(printf "%2d" $((j+1)))
-      right="${BBLK}[${RST}${BYEL}${BLD}${n2}${RST}${BBLK}]${RST} ${c2}${t2}${RST}"
-      echo -e "${left}${right}"
+      right=$(printf "${BK}%s${R} ${c2}%s${R}" "$n2" "$t2")
+      echo -e "${left}  ${right}"
     else
       echo -e "${left}"
     fi
   done
 
   echo ""
-  echo -e "${BBLK}$(hline '─')${RST}"
+  bline "-"
   echo ""
-  echo -e "  ${BBLK}┌─────────────────────────────────────┐${RST}"
-  printf "  ${BBLK}│${RST}  ${SKY}🚀${RST}  ${BLD}Enter theme number:${RST}  "
-  read -r choice
-  echo -e "  ${BBLK}└─────────────────────────────────────┘${RST}"
+
+  # Prompt
+  echo -e "  ${GLD}+---------------------------------------+${R}"
+  echo -e "  ${GLD}|${R}  ${BY}${B}Enter theme number (1-${TOTAL}):${R}           ${GLD}|${R}"
+  printf  "  ${GLD}|${R}  ${BW}> ${R}"; read -r choice
+  echo -e "  ${GLD}+---------------------------------------+${R}"
   echo ""
 
   if ! [[ "$choice" =~ ^[0-9]+$ ]] || \
@@ -254,61 +223,66 @@ if [[ -z "$THEME" ]]; then
   THEME="${THEMES[$((choice-1))]}"
 fi
 
-
-# ── validate ──────────────────────────────────────────────────────────
+# ── Validate ─────────────────────────────────────────────
 THEME_SRC="$THEMES_DIR/$THEME"
-[[ -d "$THEME_SRC" ]]                   || die "Theme '${THEME}' not found."
-[[ -f "$THEME_SRC/Main.qml" ]]          || die "Theme '${THEME}' is missing Main.qml"
-[[ -f "$THEME_SRC/metadata.desktop" ]]  || die "Theme '${THEME}' is missing metadata.desktop"
+[[ -d  "$THEME_SRC" ]]                  || die "Theme '${THEME}' not found."
+[[ -f  "$THEME_SRC/Main.qml" ]]         || die "Theme '${THEME}' missing Main.qml"
+[[ -f  "$THEME_SRC/metadata.desktop" ]] || die "Theme '${THEME}' missing metadata.desktop"
 
 DEST="$SDDM_THEMES/$THEME"
 [[ "$DEST" == /usr/share/sddm/themes/* ]] \
   || die "Destination path looks wrong: ${DEST}"
 
-# ── installation header ───────────────────────────────────────────────
+# ── Install header ────────────────────────────────────────
 echo ""
-echo -e "${BBLK}$(hline '═')${RST}"
+TC=$(theme_colour "$THEME")
+printf "${TC}${B}"
+line "*"
 echo ""
-echo -e "$(center "${BLD}${BCYN}  Installing:  ${BMAG}${THEME^^}${RST}")"
+ctr "${BW}${B}  Installing  >>  ${TC}${THEME^^}${R}"
 echo ""
-echo -e "${BBLK}$(hline '═')${RST}"
+printf "${TC}${B}"
+line "*"
+printf "${R}"
 echo ""
 
-# ── backup ────────────────────────────────────────────────────────────
+# ── Backup ────────────────────────────────────────────────
 if [[ -d "$DEST" ]]; then
   BACKUP="${DEST}.bak.$(date +%Y%m%d_%H%M%S)"
   step "Backing up existing theme"
   cp -r "$DEST" "$BACKUP"
-  ok  "Saved to ${DIM}${BACKUP}${RST}"
+  ok  "Saved  ->  ${D}${BACKUP}${R}"
 fi
+[[ -f "$SDDM_CONF" ]] && cp "$SDDM_CONF" "${SDDM_CONF}.bak.$(date +%Y%m%d_%H%M%S)" 2>/dev/null || true
 
-if [[ -f "$SDDM_CONF" ]]; then
-  cp "$SDDM_CONF" "${SDDM_CONF}.bak.$(date +%Y%m%d_%H%M%S)" || true
-fi
-
-# ── copy with progress ────────────────────────────────────────────────
+# ── Copy files ────────────────────────────────────────────
 step "Copying theme files"
 rm -rf "$DEST"
 mkdir -p "$DEST"
 
-# count files for progress
-file_count=$(find "$THEME_SRC" -type f | wc -l)
+file_total=$(find "$THEME_SRC" -type f | wc -l)
 copied=0
-while IFS= read -r -d '' src_file; do
-  rel="${src_file#$THEME_SRC/}"
-  dst_file="$DEST/$rel"
-  mkdir -p "$(dirname "$dst_file")"
-  cp "$src_file" "$dst_file"
-  (( copied++ )) || true
-  pbar "$copied" "$file_count" "${rel}" 2>/dev/null
-  printf "\033[A"  # move cursor up one line to overwrite pbar
-done < <(find "$THEME_SRC" -type f -print0)
-pbar "$file_count" "$file_count" "Complete"
-echo ""
 
-# ── Qt patches ────────────────────────────────────────────────────────
+while IFS= read -r -d '' src; do
+  rel="${src#$THEME_SRC/}"
+  dst="$DEST/$rel"
+  mkdir -p "$(dirname "$dst")"
+  cp "$src" "$dst"
+  (( copied++ )) || true
+  pct=$(( copied * 100 / file_total ))
+  fill=$(( copied * 24 / file_total ))
+  empty=$(( 24 - fill ))
+  bar="${BG}$(printf '%0.s#' $(seq 1 $fill) 2>/dev/null)${BK}$(printf '%0.s-' $(seq 1 $empty) 2>/dev/null)${R}"
+  printf "\r  ${BK}[${R}%s${BK}]${R} ${B}%3d%%${R}  %s" "$bar" "$pct" "$rel"
+done < <(find "$THEME_SRC" -type f -print0)
+
+fill=24
+bar="${BG}$(printf '%0.s#' $(seq 1 $fill))${R}"
+printf "\r  ${BK}[${R}%s${BK}]${R} ${B}100%%${R}  done                              \n" "$bar"
+
+# ── Qt patches ────────────────────────────────────────────
 transpile_for_qt5() {
-  step "Patching QML imports for Qt5…"
+  step "Patching QML imports for Qt5"
   find "$DEST" -name "*.qml" | while read -r f; do
     perl -i -pe '
       s/^(\s*import\s+QtQuick\s*)(\n|$)/${1}2.15\n/;
@@ -323,7 +297,7 @@ transpile_for_qt5() {
 if [[ "$QT_VER" == "6" ]]; then
   if ! grep -q "^QtVersion=" "$DEST/metadata.desktop"; then
     echo "QtVersion=6" >> "$DEST/metadata.desktop"
-    ok "QtVersion=6 appended to metadata.desktop"
+    ok "QtVersion=6 added to metadata.desktop"
   else
     ok "metadata.desktop already has QtVersion"
   fi
@@ -331,20 +305,18 @@ else
   transpile_for_qt5
 fi
 
-# ── permissions ────────────────────────────────────────────────────────
+# ── Permissions ───────────────────────────────────────────
 step "Setting permissions"
 chmod -R a+rX "$DEST"
 ok  "Permissions set (a+rX)"
 
-# ── update sddm.conf ────────────────────────────────────────────────────
+# ── sddm.conf ─────────────────────────────────────────────
 step "Updating SDDM configuration"
 touch "$SDDM_CONF"
 if grep -q '^\[Theme\]' "$SDDM_CONF"; then
-  if grep -q '^Current=' "$SDDM_CONF"; then
-    sed -i "s|^Current=.*|Current=$THEME|" "$SDDM_CONF"
-  else
-    sed -i "/^\[Theme\]/a Current=$THEME" "$SDDM_CONF"
-  fi
+  grep -q '^Current=' "$SDDM_CONF" \
+    && sed -i "s|^Current=.*|Current=$THEME|" "$SDDM_CONF" \
+    || sed -i "/^\[Theme\]/a Current=$THEME" "$SDDM_CONF"
 else
   printf '\n[Theme]\nCurrent=%s\n' "$THEME" >> "$SDDM_CONF"
 fi
@@ -354,33 +326,35 @@ if [[ -d "$CONFD" ]]; then
   for f in "$CONFD"/*.conf; do
     [[ -f "$f" ]] && grep -q '^Current=' "$f" && \
       sed -i "s|^Current=.*|Current=$THEME|" "$f" && \
-      ok "Also updated ${DIM}$f${RST}"
+      ok "Updated ${D}$f${R}"
   done
 fi
-ok "SDDM will use ${BLD}${BCYN}${THEME}${RST} on next login"
+ok "SDDM will use ${B}${BC}${THEME}${R} on next login"
 
-# ── success banner ─────────────────────────────────────────────────────
+# ── Success ───────────────────────────────────────────────
 echo ""
-echo -e "${BGRN}$(hline '═')${RST}"
+printf "${BG}${B}"
+line "="
 echo ""
-echo -e "$(center "${BGRN}${BLD}  ✓  INSTALLATION COMPLETE  ✓  ${RST}")"
+ctr "${BW}${B}  ** INSTALLATION COMPLETE **  ${R}"
 echo ""
-echo -e "$(center "${BLD}${BMAG}  ${THEME^^}  ${RST}${DIM}is ready on your login screen${RST}")"
+ctr "${BG}${B}  ${THEME^^}  is now your login screen  ${R}"
 echo ""
-echo -e "${BGRN}$(hline '═')${RST}"
+printf "${BG}${B}"
+line "="
+printf "${R}"
 echo ""
 
-# ── next steps ─────────────────────────────────────────────────────────
-echo -e "  ${BYEL}NEXT STEPS${RST}"
-echo -e "  ${BBLK}──────────────────────────────────────────────────────${RST}"
+echo -e "  ${BY}NEXT STEPS${R}"
+bline "-"
 echo ""
-echo -e "  ${SKY}◈${RST}  ${BLD}Preview without rebooting:${RST}"
-echo -e "      ${BCYN}sddm-greeter-qt6 --test-mode --theme ${DEST}${RST}"
+echo -e "  ${SKY}>>  Preview without rebooting:${R}"
+echo -e "      ${BC}sddm-greeter-qt6 --test-mode --theme ${DEST}${R}"
 echo ""
-echo -e "  ${SKY}◈${RST}  ${BLD}Apply permanently:${RST}"
-echo -e "      ${BGRN}reboot${RST}  ${BBLK}(recommended)${RST}"
-echo -e "      ${DIM}— or —${RST}  ${BCYN}systemctl restart sddm${RST}  ${BBLK}(while in TTY only)${RST}"
+echo -e "  ${SKY}>>  Apply permanently:${R}"
+echo -e "      ${BG}reboot${R}  ${BK}(recommended)${R}"
+echo -e "      ${D}-- or --${R}  ${BC}systemctl restart sddm${R}  ${BK}(from TTY only)${R}"
 echo ""
-echo -e "  ${BBLK}──────────────────────────────────────────────────────${RST}"
-echo -e "  ${BBLK}  github.com/KADHIRAVANEG/sddm-themes${RST}"
+bline "-"
+echo -e "  ${BK}  github.com/KADHIRAVANEG/sddm-themes${R}"
 echo ""
