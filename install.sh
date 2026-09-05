@@ -280,6 +280,47 @@ fill=24
 bar="${BG}$(printf '%0.s#' $(seq 1 $fill))${R}"
 printf "\r  ${BK}[${R}%s${BK}]${R} ${B}100%%${R}  done                              \n" "$bar"
 
+# ── Dynamic MP4 Conversion ────────────────────────────────
+
+if [[ -f "$DEST/assets/wallpaper.mp4" ]]; then
+
+  echo ""
+
+  step "Converting MP4 to high-quality GIF (saves repo space!)"
+
+  if ! command -v ffmpeg &> /dev/null; then
+
+    echo -e "  ${BR}>> Error: ffmpeg is missing!${R}"
+
+    echo -e "     Please install ffmpeg (e.g., sudo pacman -S ffmpeg)"
+
+    exit 1
+
+  fi
+
+  
+
+  printf "  ${TC}... analyzing cinematic colors ...${R}\n"
+
+  ffmpeg -y -i "$DEST/assets/wallpaper.mp4" -vf fps=24,palettegen=stats_mode=diff "$DEST/assets/palette.png" </dev/null &>/dev/null
+
+  
+
+  printf "  ${TC}... rendering optimized gif ...${R}\n"
+
+  ffmpeg -y -i "$DEST/assets/wallpaper.mp4" -i "$DEST/assets/palette.png" -filter_complex "fps=24[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" "$DEST/assets/wallpaper.gif" </dev/null &>/dev/null
+
+  
+
+  rm -f "$DEST/assets/palette.png"
+
+  rm -f "$DEST/assets/wallpaper.mp4"
+
+  ok "GIF rendered perfectly!"
+
+fi
+
+
 # ── Qt patches ────────────────────────────────────────────
 transpile_for_qt5() {
   step "Patching QML imports for Qt5"
