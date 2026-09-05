@@ -208,79 +208,52 @@ THEME="${1:-}"
 
 if [[ -z "$THEME" ]]; then
 
-  # ── whiptail TUI (if available) ───────────────────────────────────
-  if command -v whiptail &>/dev/null; then
-    options=()
-    for i in "${!THEMES[@]}"; do
-      options+=("$((i+1))" "${THEMES[$i]}")
-    done
-    choice=$(whiptail \
-      --backtitle "JOKER53 · SDDM Themes — github.com/KADHIRAVANEG/sddm-themes" \
-      --title "  ✦  SELECT A THEME  ✦  " \
-      --menu "\n  Use ↑ ↓ arrows · ENTER to install · ESC to quit\n" \
-      26 52 16 "${options[@]}" \
-      3>&1 1>&2 2>&3) || true
+  echo ""
+  echo -e "${BBLK}$(hline '─')${RST}"
+  echo -e "$(center "${BLD}${BWHT}  AVAILABLE THEMES  ${RST}")"
+  echo -e "${BBLK}$(hline '─')${RST}"
+  echo ""
 
-    [[ -z "$choice" ]] && {
-      echo ""
-      echo -e "${BBLK}$(hline '─')${RST}"
-      echo -e "$(center "${BYEL}${BLD}  Installation cancelled.${RST}")"
-      echo -e "${BBLK}$(hline '─')${RST}"
-      echo ""
-      exit 0
-    }
-    THEME="${THEMES[$((choice-1))]}"
+  num=$TOTAL
+  half=$(( (num + 1) / 2 ))
+  col_w=36
 
-  else
-    # ── fancy plain-text grid ─────────────────────────────────────
-    echo ""
-    echo -e "${BBLK}$(hline '─')${RST}"
-    echo -e "$(center "${BLD}${BWHT}  AVAILABLE THEMES  ${RST}")"
-    echo -e "${BBLK}$(hline '─')${RST}"
-    echo ""
+  for (( i=0; i<half; i++ )); do
+    j=$(( i + half ))
+    t1="${THEMES[$i]}"
+    c1=$(theme_colour "$t1")
+    n1=$(printf "%2d" $((i+1)))
+    pad1=$(( col_w - ${#t1} ))
+    left="  ${BBLK}[${RST}${BYEL}${BLD}${n1}${RST}${BBLK}]${RST} ${c1}${t1}${RST}$(printf '%*s' $pad1 '')"
 
-    num=$TOTAL
-    half=$(( (num + 1) / 2 ))
-    col_w=36
-
-    for (( i=0; i<half; i++ )); do
-      j=$(( i + half ))
-      t1="${THEMES[$i]}"
-      c1=$(theme_colour "$t1")
-      n1=$(printf "%2d" $((i+1)))
-      pad1=$(( col_w - ${#t1} ))
-      left="  ${BBLK}[${RST}${BYEL}${BLD}${n1}${RST}${BBLK}]${RST} ${c1}${t1}${RST}$(printf '%*s' $pad1 '')"
-
-      if [[ $j -lt $num ]]; then
-        t2="${THEMES[$j]}"
-        c2=$(theme_colour "$t2")
-        n2=$(printf "%2d" $((j+1)))
-        right="${BBLK}[${RST}${BYEL}${BLD}${n2}${RST}${BBLK}]${RST} ${c2}${t2}${RST}"
-        echo -e "${left}${right}"
-      else
-        echo -e "${left}"
-      fi
-    done
-
-    echo ""
-    echo -e "${BBLK}$(hline '─')${RST}"
-    echo ""
-    # styled prompt box
-    prompt_line="  ${BBLK}┌─────────────────────────────────────┐${RST}"
-    echo -e "$prompt_line"
-    printf "  ${BBLK}│${RST}  ${SKY}🚀${RST}  ${BLD}Enter theme number:${RST}  "
-    read -r choice
-    echo -e "  ${BBLK}└─────────────────────────────────────┘${RST}"
-    echo ""
-
-    if ! [[ "$choice" =~ ^[0-9]+$ ]] || \
-       [[ "$choice" -lt 1 ]] || \
-       [[ "$choice" -gt "$num" ]]; then
-      die "Invalid selection: '${choice}'"
+    if [[ $j -lt $num ]]; then
+      t2="${THEMES[$j]}"
+      c2=$(theme_colour "$t2")
+      n2=$(printf "%2d" $((j+1)))
+      right="${BBLK}[${RST}${BYEL}${BLD}${n2}${RST}${BBLK}]${RST} ${c2}${t2}${RST}"
+      echo -e "${left}${right}"
+    else
+      echo -e "${left}"
     fi
-    THEME="${THEMES[$((choice-1))]}"
+  done
+
+  echo ""
+  echo -e "${BBLK}$(hline '─')${RST}"
+  echo ""
+  echo -e "  ${BBLK}┌─────────────────────────────────────┐${RST}"
+  printf "  ${BBLK}│${RST}  ${SKY}🚀${RST}  ${BLD}Enter theme number:${RST}  "
+  read -r choice
+  echo -e "  ${BBLK}└─────────────────────────────────────┘${RST}"
+  echo ""
+
+  if ! [[ "$choice" =~ ^[0-9]+$ ]] || \
+     [[ "$choice" -lt 1 ]] || \
+     [[ "$choice" -gt "$num" ]]; then
+    die "Invalid selection: '${choice}'"
   fi
+  THEME="${THEMES[$((choice-1))]}"
 fi
+
 
 # ── validate ──────────────────────────────────────────────────────────
 THEME_SRC="$THEMES_DIR/$THEME"
