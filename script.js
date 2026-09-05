@@ -63,7 +63,14 @@ const GIF_IDS = new Set([
 ]);
 const PNG_IDS = new Set(["alienx","gojo","kawaii"]);
 const wpUrl    = id => GIF_IDS.has(id) ? `./${id}/assets/wallpaper.gif` : PNG_IDS.has(id) ? `./${id}/assets/wallpaper.png` : `./${id}/assets/wallpaper.jpg`;
-const thumbUrl = id => `./${id}/assets/thumbnail.jpg`;
+
+/* themes that have no thumbnail.jpg — fall back to their wallpaper */
+const NO_THUMB = new Set(["marvel","classic-jdm","alienx","drag-racer","gojo","kawaii","joker","rdr2","deadpool","bmw"]);
+function thumbUrl(id) {
+  if (NO_THUMB.has(id)) return wpUrl(id);   // use wallpaper as card bg
+  return `./${id}/assets/thumbnail.jpg`;
+}
+
 
 /* ── Clock helpers ──────────────────────────────────── */
 const pad     = n => String(n).padStart(2,"0");
