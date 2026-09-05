@@ -483,23 +483,6 @@ function goTo(idx) {
   const t = themes[activeIndex];
 
   $bg.style.opacity = "0";
-<<<<<<< Updated upstream
-
-  // Preload image and fallback to thumbnail if missing
-  const targetUrl = wpUrl(t.id);
-  const fallbackUrl = thumbUrl(t.id);
-  
-  const img = new Image();
-  img.onload = () => {
-    $bg.style.backgroundImage = `url(${targetUrl})`;
-    $bg.style.opacity = "1";
-  };
-  img.onerror = () => {
-    $bg.style.backgroundImage = `url(${fallbackUrl})`;
-    $bg.style.opacity = "1";
-  };
-  img.src = targetUrl;
-=======
   $vid.style.opacity = "0";
 
   const targetUrl = wpUrl(t.id);
@@ -524,7 +507,6 @@ function goTo(idx) {
     };
     img.src = targetUrl;
   }
->>>>>>> Stashed changes
 
   $name.textContent = t.name;
   $desc.textContent = t.tag;
