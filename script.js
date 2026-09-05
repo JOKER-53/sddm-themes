@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────────────
    JOKER53 · SDDM Themes  —  Site Script
-   Stack: Vanilla JS, no deps
+   Vanilla JS, no deps
 ───────────────────────────────────────────────────── */
 
 const themes = [
@@ -50,77 +50,172 @@ const themes = [
   { id: "super-mario-pixel",       name: "SUPER MARIO",         tag: "nostalgic 8-bit",            accent: "#e52521", cats: ["pixel"] },
 ];
 
-/* Wallpaper helper — try gif first, fall back to jpg/png */
+/* wallpaper url — gif > png > jpg */
+const GIF_IDS = new Set([
+  "neon-gif","zoro-dragon","bmw-m3","nissan","oni-anime-girl","mazda-mx5",
+  "oni-robot","dodge","spiderverse","spiderman","sakura-lake","mountain-sunset",
+  "mount-fuji","the-dark-river","purrple-cat","hitagi-senjougahara",
+  "hilda-and-tepig","hoodie","neko-anime","zoro-blue","cat-pond",
+  "cosmic-gateway","everest","fish-in-rock-pond","moonlit-rooftop-cat",
+  "neverness-to-everness","nissan-skyline","ocean-in-jar","pink-bloom",
+  "pirates-of-the-caribbean","pixel-gaming-room","pixel-sakura-city",
+  "pokeball","super-mario-pixel",
+]);
+const PNG_IDS = new Set(["alienx","gojo","kawaii"]);
+
 function wpUrl(id) {
-  // themes with known GIF wallpapers
-  const gifs = new Set([
-    "neon-gif","zoro-dragon","bmw-m3","nissan","oni-anime-girl","mazda-mx5",
-    "oni-robot","dodge","spiderverse","spiderman","sakura-lake","mountain-sunset",
-    "mount-fuji","the-dark-river","purrple-cat","hitagi-senjougahara",
-    "hilda-and-tepig","hoodie","neko-anime","zoro-blue","cat-pond",
-    "cosmic-gateway","everest","fish-in-rock-pond","moonlit-rooftop-cat",
-    "neverness-to-everness","nissan-skyline","ocean-in-jar","pink-bloom",
-    "pirates-of-the-caribbean","pixel-gaming-room","pixel-sakura-city",
-    "pokeball","super-mario-pixel",
-  ]);
-  if (gifs.has(id)) return `./${id}/assets/wallpaper.gif`;
-  const pngs = new Set(["alienx","gojo","kawaii"]);
-  if (pngs.has(id)) return `./${id}/assets/wallpaper.png`;
+  if (GIF_IDS.has(id)) return `./${id}/assets/wallpaper.gif`;
+  if (PNG_IDS.has(id)) return `./${id}/assets/wallpaper.png`;
   return `./${id}/assets/wallpaper.jpg`;
 }
-
-/* ── State ──────────────────────────────────────────── */
-let activeTheme = themes[0];
-let activeFilter = "all";
-let searchQ = "";
-
-/* ── DOM refs ───────────────────────────────────────── */
-const $wp   = document.getElementById("spotlightWp");
-const $name = document.getElementById("spotlightName");
-const $desc = document.getElementById("spotlightDesc");
-const $line = document.getElementById("spotlightLine");
-const $cmd  = document.getElementById("spotlightCmd");
-const $grid = document.getElementById("grid");
-const $noResults = document.getElementById("noResults");
-const $toast = document.getElementById("toast");
-
-/* ── Spotlight ──────────────────────────────────────── */
-function setSpotlight(t) {
-  activeTheme = t;
-
-  $wp.style.opacity = "0";
-  setTimeout(() => {
-    $wp.src = wpUrl(t.id);
-    $wp.onload = () => { $wp.style.opacity = "1"; };
-    $name.textContent = t.name;
-    $desc.textContent = t.tag;
-    $line.style.background = t.accent;
-    $cmd.textContent  = `sudo ./install.sh ${t.id}`;
-    // update active card
-    document.querySelectorAll(".card").forEach(c =>
-      c.classList.toggle("active-card", c.dataset.id === t.id)
-    );
-  }, 150);
+function thumbUrl(id) {
+  return `./${id}/assets/thumbnail.jpg`;
 }
 
-/* ── Copy helper ────────────────────────────────────── */
-function showToast(msg = "Copied!") {
-  $toast.textContent = msg;
+/* ── DOM refs ─────────────────────────────── */
+const $bg     = document.getElementById("spotlightBg");
+const $name   = document.getElementById("spotlightName");
+const $desc   = document.getElementById("spotlightDesc");
+const $line   = document.getElementById("spotlightLine");
+const $cmd    = document.getElementById("spotlightCmd");
+const $grid   = document.getElementById("grid");
+const $noRes  = document.getElementById("noResults");
+const $toast  = document.getElementById("toast");
+const $dots   = document.getElementById("slideDots");
+const $play   = document.getElementById("playBtn");
+const $prev   = document.getElementById("prevBtn");
+const $next   = document.getElementById("nextBtn");
+
+/* ── Slideshow state ──────────────────────── */
+let activeIndex = 0;
+let activeFilter = "all";
+let searchQ = "";
+let autoplay = false;
+let autoTimer = null;
+const AUTOPLAY_INTERVAL = 4000; // ms per slide
+
+/* progress bar el */
+const $progress = document.createElement("div");
+$progress.className = "slide-progress";
+document.querySelector(".spotlight-screen").appendChild($progress);
+
+/* ── Build dots ───────────────────────────── */
+function buildDots() {
+  $dots.innerHTML = "";
+  // show only first 8 dots to avoid overflow
+  const visible = Math.min(themes.length, 8);
+  for (let i = 0; i < visible; i++) {
+    const d = document.createElement("div");
+    d.className = "sdot" + (i === 0 ? " active" : "");
+    d.addEventListener("click", () => goTo(i));
+    $dots.appendChild(d);
+  }
+}
+
+function updateDots(idx) {
+  const dots = $dots.querySelectorAll(".sdot");
+  const vis = dots.length;
+  dots.forEach((d, i) => {
+    // sliding window: show dots around current
+    const offset = idx < vis ? idx : vis - 1;
+    d.classList.toggle("active", i === Math.min(idx, vis - 1));
+  });
+}
+
+/* ── Spotlight ────────────────────────────── */
+function goTo(idx, skipScroll) {
+  activeIndex = (idx + themes.length) % themes.length;
+  const t = themes[activeIndex];
+
+  // fade out
+  $bg.style.opacity = "0";
+  setTimeout(() => {
+    $bg.style.backgroundImage = `url(${wpUrl(t.id)})`;
+    $bg.style.opacity = "1";
+  }, 200);
+
+  $name.textContent = t.name;
+  $desc.textContent = t.tag;
+  $line.style.background = t.accent;
+  $line.style.width = "40px";
+  $cmd.textContent  = `sudo ./install.sh ${t.id}`;
+
+  // highlight active card
+  document.querySelectorAll(".card").forEach(c =>
+    c.classList.toggle("active-card", c.dataset.id === t.id)
+  );
+
+  updateDots(activeIndex);
+  resetProgress();
+}
+
+/* ── Progress bar ─────────────────────────── */
+function resetProgress() {
+  $progress.style.transition = "none";
+  $progress.style.width = "0%";
+  if (autoplay) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        $progress.style.transition = `width ${AUTOPLAY_INTERVAL}ms linear`;
+        $progress.style.width = "100%";
+      });
+    });
+  }
+}
+
+/* ── Auto-play ────────────────────────────── */
+function startAuto() {
+  autoplay = true;
+  $play.textContent = "⏸";
+  $play.classList.add("playing");
+  resetProgress();
+  autoTimer = setInterval(() => goTo(activeIndex + 1), AUTOPLAY_INTERVAL);
+}
+
+function stopAuto() {
+  autoplay = false;
+  $play.textContent = "▶";
+  $play.classList.remove("playing");
+  clearInterval(autoTimer);
+  $progress.style.transition = "none";
+  $progress.style.width = "0%";
+}
+
+$play.addEventListener("click", () => autoplay ? stopAuto() : startAuto());
+$prev.addEventListener("click", () => { stopAuto(); goTo(activeIndex - 1); });
+$next.addEventListener("click", () => { stopAuto(); goTo(activeIndex + 1); });
+
+// pause on hover
+document.querySelector(".spotlight-screen").addEventListener("mouseenter", () => {
+  if (autoplay) { clearInterval(autoTimer); $progress.style.transition = "none"; }
+});
+document.querySelector(".spotlight-screen").addEventListener("mouseleave", () => {
+  if (autoplay) {
+    const remaining = (parseFloat($progress.style.width) / 100) * AUTOPLAY_INTERVAL;
+    $progress.style.transition = `width ${remaining}ms linear`;
+    $progress.style.width = "100%";
+    autoTimer = setInterval(() => goTo(activeIndex + 1), AUTOPLAY_INTERVAL);
+  }
+});
+
+/* ── Copy helpers ─────────────────────────── */
+function showToast(msg) {
+  $toast.textContent = msg || "Copied!";
   $toast.classList.add("show");
   setTimeout(() => $toast.classList.remove("show"), 2200);
 }
 
-document.getElementById("spotlightCopy").onclick = () => {
-  navigator.clipboard.writeText(`sudo ./install.sh ${activeTheme.id}`);
+document.getElementById("spotlightCopy").addEventListener("click", () => {
+  navigator.clipboard.writeText($cmd.textContent);
   showToast("Command copied!");
-};
+});
 
-document.getElementById("copyBtn").onclick = () => {
+document.getElementById("copyBtn").addEventListener("click", () => {
   navigator.clipboard.writeText("sudo ./install.sh");
   showToast("Copied!");
-};
+});
 
-/* ── Grid ───────────────────────────────────────────── */
+/* ── Grid ──────────────────────────────────── */
 function buildGrid() {
   const q = searchQ.trim().toLowerCase();
   const filtered = themes.filter(t => {
@@ -129,14 +224,18 @@ function buildGrid() {
     return matchCat && matchQ;
   });
 
-  $noResults.hidden = filtered.length > 0;
+  $noRes.hidden = filtered.length > 0;
   $grid.innerHTML = "";
 
   filtered.forEach(t => {
     const card = document.createElement("div");
-    card.className = "card" + (t.id === activeTheme.id ? " active-card" : "");
+    card.className = "card" + (t.id === themes[activeIndex].id ? " active-card" : "");
     card.dataset.id = t.id;
-    card.style.backgroundImage = `url(${t.id}/assets/thumbnail.jpg)`;
+
+    // Use background-image so both JPG thumbnails and GIFs render correctly
+    card.style.backgroundImage = `url(${thumbUrl(t.id)})`;
+    card.style.backgroundSize = "cover";
+    card.style.backgroundPosition = "center";
 
     card.innerHTML = `
       <div class="card-overlay"></div>
@@ -148,15 +247,17 @@ function buildGrid() {
     `;
 
     card.addEventListener("click", () => {
-      setSpotlight(t);
-      document.querySelector(".spotlight").scrollIntoView({ behavior: "smooth", block: "start" });
+      stopAuto();
+      activeIndex = themes.indexOf(t);
+      goTo(activeIndex);
+      document.getElementById("themes").scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
     $grid.appendChild(card);
   });
 }
 
-/* ── Filters ────────────────────────────────────────── */
+/* ── Filters ───────────────────────────────── */
 document.getElementById("filters").addEventListener("click", e => {
   const btn = e.target.closest(".filter");
   if (!btn) return;
@@ -166,7 +267,7 @@ document.getElementById("filters").addEventListener("click", e => {
   buildGrid();
 });
 
-/* ── Search ─────────────────────────────────────────── */
+/* ── Search ────────────────────────────────── */
 document.getElementById("search").addEventListener("input", e => {
   searchQ = e.target.value;
   buildGrid();
@@ -178,6 +279,10 @@ window.clearSearch = () => {
   buildGrid();
 };
 
-/* ── Init ───────────────────────────────────────────── */
-setSpotlight(themes[0]);
+/* ── Init ──────────────────────────────────── */
+buildDots();
+goTo(0);
 buildGrid();
+
+// Start autoplay automatically after 2s
+setTimeout(startAuto, 2000);
