@@ -11,19 +11,26 @@ SDDM_THEMES="/usr/share/sddm/themes"
 SDDM_CONF="/etc/sddm.conf"
 
 # ── colours ──────────────────────────────────────────────────
-RED='\033[0;31m'; YEL='\033[1;33m'; GRN='\033[0;32m'
-CYN='\033[0;36m'; BLU='\033[0;34m'; MAG='\033[0;35m'
-BLD='\033[1m'; RST='\033[0m'
+RED='\e[0;31m'; YEL='\e[1;33m'; GRN='\e[0;32m'
+CYN='\e[0;36m'; BLU='\e[0;34m'; MAG='\e[0;35m'
+BRED='\e[1;31m'; BYEL='\e[1;33m'; BGRN='\e[1;32m'
+BCYN='\e[1;36m'; BBLU='\e[1;34m'; BMAG='\e[1;35m'
+WHT='\e[1;37m'; GRY='\e[0;90m'
+BLD='\e[1m'; RST='\e[0m'
 
-info()  { echo -e "${CYN}→${RST} $*"; }
-ok()    { echo -e "${GRN}✓${RST} $*"; }
-warn()  { echo -e "${YEL}⚠${RST} $*"; }
-die()   { echo -e "${RED}✗${RST} $*" >&2; exit 1; }
+info()  { echo -e " ${BMAG}✦${RST} $*"; }
+ok()    { echo -e " ${BGRN}✔${RST} $*"; }
+warn()  { echo -e " ${BYEL}⚠${RST} $*"; }
+die()   { echo -e " ${BRED}✖${RST} $*" >&2; exit 1; }
 
 # ── root check ───────────────────────────────────────────────
 [[ $EUID -eq 0 ]] || die "Run as root: sudo $0 ${1:-}"
 
-echo -e "\n${BLD}${MAG}✦ SDDM Theme Installer ✦${RST}\n"
+echo -e "
+${BCYN}╭──────────────────────────────────────────╮${RST}
+${BCYN}│${RST}  ${BMAG}✨${RST}  ${WHT}SDDM THEME INSTALLER UTILITY${RST}  ${BMAG}✨${RST}  ${BCYN}│${RST}
+${BCYN}╰──────────────────────────────────────────╯${RST}
+"
 
 # ── detect Qt version used by SDDM ───────────────────────────
 detect_qt_version() {
@@ -146,7 +153,8 @@ done
 THEME="${1:-}"
 
 if [[ -z "$THEME" ]]; then
-  echo -e "${BLD}Available themes to install:${RST}\n"
+  echo -e "${WHT}Available themes to install:${RST}
+"
   
   num_themes=${#THEMES[@]}
   half=$(( (num_themes + 1) / 2 ))
@@ -157,12 +165,12 @@ if [[ -z "$THEME" ]]; then
     # format index nicely
     idx1=$(printf "%2d" $((i+1)))
     pad1=$(printf '%*s' $(( 32 - ${#t1} )) '')
-    col1="  ${BLD}${CYN}${idx1})${RST} ${t1}${pad1}"
+    col1="  ${BCYN}${idx1}${RST} ${GRY}•${RST} ${WHT}${t1}${RST}${pad1}"
     
     if [[ $j -lt $num_themes ]]; then
       t2="${THEMES[$j]}"
       idx2=$(printf "%2d" $((j+1)))
-      col2="  ${BLD}${CYN}${idx2})${RST} ${t2}"
+      col2="  ${BCYN}${idx2}${RST} ${GRY}•${RST} ${WHT}${t2}${RST}"
       echo -e "$col1 $col2"
     else
       echo -e "$col1"
@@ -170,7 +178,10 @@ if [[ -z "$THEME" ]]; then
   done
   
   echo ""
-  read -p "$(echo -e "${BLD}Enter the number of the theme you want to install:${RST} ")" choice
+  echo -e "╭──────────────────────────────────────────╮"
+  read -p "$(echo -e "│ ${BCYN}🚀${RST} ${WHT}Enter theme number to install: ${RST}")" choice
+  echo -e "╰──────────────────────────────────────────╯
+"
   
   if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$num_themes" ]; then
     die "Invalid selection."
@@ -265,13 +276,17 @@ if [[ -d "$CONFD" ]]; then
 fi
 
 # ── done ─────────────────────────────────────────────────────
-echo -e "\n${BLD}${MAG}✦ Success! ✦${RST}"
-echo -e "${GRN}Enjoy your gorgeous new ${BLD}${THEME}${RST}${GRN} login screen!${RST}\n"
+echo -e "
+${BGRN}╭──────────────────────────────────────────╮${RST}
+${BGRN}│${RST}  ${WHT}🎉  INSTALLATION SUCCESSFUL!  🎉${RST}        ${BGRN}│${RST}
+${BGRN}╰──────────────────────────────────────────╯${RST}
+ ${WHT}Enjoy your gorgeous new ${BCYN}${THEME}${WHT} login screen!${RST}
 
-echo -e "  ${CYN}Preview without rebooting:${RST}"
-echo -e "    sddm-greeter --test-mode --theme $DEST"
-echo -e "  ${CYN}Or for Qt6 systems:${RST}"
-echo -e "    sddm-greeter-qt6 --test-mode --theme $DEST\n"
+ ${GRY}►${RST} ${WHT}Preview without rebooting:${RST}
+    ${BCYN}sddm-greeter --test-mode --theme $DEST${RST}
+    ${GRY}(Or for Qt6 systems):${RST}
+    ${BCYN}sddm-greeter-qt6 --test-mode --theme $DEST${RST}
 
-echo -e "  ${CYN}Apply permanently:${RST}"
-echo -e "    systemctl restart sddm   (or reboot)\n"
+ ${GRY}►${RST} ${WHT}Apply permanently:${RST}
+    ${BCYN}systemctl restart sddm${RST} ${GRY}(or reboot)${RST}
+"
