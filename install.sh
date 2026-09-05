@@ -153,41 +153,58 @@ done
 THEME="${1:-}"
 
 if [[ -z "$THEME" ]]; then
-  echo -e "${WHT}Available themes to install:${RST}
-"
-  
-  num_themes=${#THEMES[@]}
-  half=$(( (num_themes + 1) / 2 ))
-  
-  for ((i=0; i<half; i++)); do
-    j=$((i + half))
-    t1="${THEMES[$i]}"
-    # format index nicely
-    idx1=$(printf "%2d" $((i+1)))
-    pad1=$(printf '%*s' $(( 32 - ${#t1} )) '')
-    col1="  ${BCYN}${idx1}${RST} ${GRY}•${RST} ${WHT}${t1}${RST}${pad1}"
+  if command -v whiptail &>/dev/null; then
+    options=()
+    for i in "${!THEMES[@]}"; do
+      options+=("$((i+1))" "${THEMES[$i]}")
+    done
     
-    if [[ $j -lt $num_themes ]]; then
-      t2="${THEMES[$j]}"
-      idx2=$(printf "%2d" $((j+1)))
-      col2="  ${BCYN}${idx2}${RST} ${GRY}•${RST} ${WHT}${t2}${RST}"
-      echo -e "$col1 $col2"
-    else
-      echo -e "$col1"
+    choice=$(whiptail --title "✦ SDDM THEME INSTALLER ✦" \
+      --menu "Use UP/DOWN arrows to select a theme, then press ENTER:" \
+      24 50 14 "${options[@]}" \
+      3>&1 1>&2 2>&3) || true
+      
+    if [[ -z "$choice" ]]; then
+      echo -e "\n${BCYN}╭──────────────────────────────────────────╮${RST}"
+      echo -e "${BCYN}│${RST}  ${BYEL}⚠${RST}  ${WHT}INSTALLATION CANCELLED${RST}              ${BCYN}│${RST}"
+      echo -e "${BCYN}╰──────────────────────────────────────────╯${RST}\n"
+      exit 0
     fi
-  done
-  
-  echo ""
-  echo -e "╭──────────────────────────────────────────╮"
-  read -p "$(echo -e "│ ${BCYN}🚀${RST} ${WHT}Enter theme number to install: ${RST}")" choice
-  echo -e "╰──────────────────────────────────────────╯
-"
-  
-  if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$num_themes" ]; then
-    die "Invalid selection."
+    THEME="${THEMES[$((choice-1))]}"
+  else
+    echo -e "${WHT}Available themes to install:${RST}\n"
+    
+    num_themes=${#THEMES[@]}
+    half=$(( (num_themes + 1) / 2 ))
+    
+    for ((i=0; i<half; i++)); do
+      j=$((i + half))
+      t1="${THEMES[$i]}"
+      idx1=$(printf "%2d" $((i+1)))
+      pad1=$(printf '%*s' $(( 32 - ${#t1} )) '')
+      col1="  ${BCYN}${idx1}${RST} ${GRY}•${RST} ${WHT}${t1}${RST}${pad1}"
+      
+      if [[ $j -lt $num_themes ]]; then
+        t2="${THEMES[$j]}"
+        idx2=$(printf "%2d" $((j+1)))
+        col2="  ${BCYN}${idx2}${RST} ${GRY}•${RST} ${WHT}${t2}${RST}"
+        echo -e "$col1 $col2"
+      else
+        echo -e "$col1"
+      fi
+    done
+    
+    echo ""
+    echo -e "╭──────────────────────────────────────────╮"
+    read -p "$(echo -e "│ ${BCYN}🚀${RST} ${WHT}Enter theme number to install: ${RST}")" choice
+    echo -e "╰──────────────────────────────────────────╯\n"
+    
+    if ! [[ "$choice" =~ ^[0-9]+$ ]] || [ "$choice" -lt 1 ] || [ "$choice" -gt "$num_themes" ]; then
+      die "Invalid selection."
+    fi
+    THEME="${THEMES[$((choice-1))]}"
+    echo ""
   fi
-  THEME="${THEMES[$((choice-1))]}"
-  echo ""
 fi
 
 # ── validate theme exists ────────────────────────────────────
