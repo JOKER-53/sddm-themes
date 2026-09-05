@@ -1,52 +1,162 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bebas+Neue&family=Rajdhani:wght@700&family=Righteous&family=Russo+One&family=Shojumaru&family=VT323&display=swap" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SDDM collections</title>
-  <meta name="description" content="10 ricer-grade SDDM lockscreen themes — pure QML, no JS deps." />
-  <link rel="stylesheet" href="./styles.css?v=20260626-greeter-layouts" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Black+Ops+One&family=Chewy&family=Fjalla+One&family=Kosugi&family=Lobster&family=Mali:wght@700&family=MedievalSharp&family=Patrick+Hand&family=Rubik+Glitch&family=Yusei+Magic&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Mali&family=Orbitron&family=Cinzel&family=Yusei+Magic&family=Patrick+Hand&family=Shojumaru&family=Russo+One&family=Comfortaa&family=Pacifico&family=Pirata+One&family=VT323&family=Chewy&display=swap" rel="stylesheet">
+  <title>JOKER53 · SDDM Themes</title>
+  <meta name="description" content="44 hand-crafted SDDM login themes for Arch, KDE, and Hyprland." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
+
+  <!-- ── NAV ───────────────────────────────────────── -->
+  <nav>
+    <span class="nav-logo">JOKER53<span class="dot">.</span>SDDM</span>
+    <div class="nav-links">
+      <a href="#themes">Themes</a>
+      <a href="#install">Install</a>
+      <a href="https://github.com/KADHIRAVANEG/sddm-themes" target="_blank" class="nav-gh">
+        <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────── -->
   <header class="hero">
-    <div class="tag">// sddm · qml · arch / hyprland / kde</div>
-    <h1>JOKER53-SDDM<span class="cursor">_</span></h1>
-    <p class="lede">
-      44 self-contained SDDM greeter themes. Drop into
-      <code>/usr/share/sddm/themes/</code>, pick your aesthetic, lock in.
-    </p>
-    <div class="cmd" id="installCmd" title="click to copy">
-      <span class="prompt">$</span>
-      <span class="cmd-text">sudo ./install.sh <em id="activeId">marvel</em></span>
-      <span class="copy">copy</span>
+    <div class="hero-eyebrow">
+      <span class="badge">QML</span>
+      <span class="badge">SDDM</span>
+      <span class="badge">ARCH</span>
+      <span class="badge">KDE</span>
+      <span class="badge">HYPRLAND</span>
+    </div>
+
+    <h1 class="hero-title">
+      Your login screen<br>
+      <span class="hero-accent">deserves better.</span>
+    </h1>
+
+    <p class="hero-sub">44 hand-crafted SDDM themes — anime, JDM, cyberpunk, zen.<br>Pure QML. Zero runtime dependencies. One command to install.</p>
+
+    <div class="hero-actions">
+      <div class="install-bar" id="installBar" title="click to copy">
+        <span class="install-prompt">$</span>
+        <span class="install-text">sudo ./install.sh</span>
+        <button class="install-copy" id="copyBtn" aria-label="Copy command">
+          <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="9" height="9" rx="1"/><path d="M3 11H2a1 1 0 01-1-1V2a1 1 0 011-1h8a1 1 0 011 1v1"/></svg>
+          <span>copy</span>
+        </button>
+      </div>
+      <a href="#themes" class="btn-browse">Browse Themes ↓</a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-n">44</span><span class="stat-l">Themes</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-n">QML</span><span class="stat-l">Pure</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-n">Qt5/6</span><span class="stat-l">Compatible</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-n">MIT</span><span class="stat-l">License</span></div>
     </div>
   </header>
 
-  <section class="stage">
-    <div class="preview" id="preview"></div>
+  <!-- ── FEATURED PREVIEW ──────────────────────────── -->
+  <section class="spotlight" id="themes">
+    <div class="spotlight-screen" id="spotlightScreen">
+      <img class="spotlight-wp" id="spotlightWp" src="" alt="" />
+      <div class="spotlight-bars">
+        <div class="sbar top"></div>
+        <div class="sbar bottom"></div>
+      </div>
+    </div>
+    <div class="spotlight-info">
+      <div class="spotlight-tag">now previewing</div>
+      <h2 class="spotlight-name" id="spotlightName">MARVEL</h2>
+      <p class="spotlight-desc" id="spotlightDesc">cinematic title card</p>
+      <div class="spotlight-line" id="spotlightLine"></div>
+      <code class="spotlight-cmd" id="spotlightCmd">sudo ./install.sh marvel</code>
+      <button class="spotlight-install" id="spotlightCopy">Copy command</button>
+    </div>
   </section>
 
+  <!-- ── FILTERS ───────────────────────────────────── -->
+  <div class="filters-wrap">
+    <div class="filters" id="filters">
+      <button class="filter active" data-tag="all">All <span class="fc">44</span></button>
+      <button class="filter" data-tag="anime">Anime</button>
+      <button class="filter" data-tag="cars">Cars</button>
+      <button class="filter" data-tag="cyber">Cyber</button>
+      <button class="filter" data-tag="marvel">Marvel</button>
+      <button class="filter" data-tag="pixel">Pixel</button>
+      <button class="filter" data-tag="nature">Nature</button>
+      <button class="filter" data-tag="dark">Dark</button>
+    </div>
+    <div class="search-wrap">
+      <svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6.5" cy="6.5" r="5"/><path d="M11 11l3 3"/></svg>
+      <input class="search" id="search" type="text" placeholder="search themes…" />
+    </div>
+  </div>
+
+  <!-- ── GRID ──────────────────────────────────────── -->
   <section class="grid" id="grid"></section>
+  <p class="no-results" id="noResults" hidden>No themes match — <button onclick="clearSearch()">clear search</button></p>
 
-  <section class="setup">
-    <h2>three commands</h2>
-    <pre><code>git clone https://github.com/KADHIRAVANEG/sddm-themes
-cd sddm-themes
-sudo ./install.sh &lt;theme-id&gt;</code></pre>
-    <p class="muted">
-      Test without rebooting: <code>sddm-greeter --test-mode --theme /usr/share/sddm/themes/&lt;theme-id&gt;</code>
-    </p>
+  <!-- ── INSTALL ───────────────────────────────────── -->
+  <section class="install-section" id="install">
+    <div class="install-inner">
+      <h2 class="section-title">Get it running<span class="dot">.</span></h2>
+      <p class="section-sub">Three commands is all it takes. The installer handles everything — dependency check, existing theme backup, Qt5/Qt6 detection, and sddm.conf update.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Clone the repo</div>
+            <pre><code>git clone https://github.com/KADHIRAVANEG/sddm-themes</code></pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title">Run the installer as root</div>
+            <pre><code>cd sddm-themes
+sudo ./install.sh</code></pre>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Pick your theme &amp; reboot</div>
+            <p class="step-note">An interactive arrow-key menu lists all 44 themes. Select and hit Enter. Reboot to apply.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <span class="tip-label">TIP</span>
+        <span>Preview without rebooting: <code>sddm-greeter-qt6 --test-mode --theme /usr/share/sddm/themes/&lt;id&gt;</code></span>
+      </div>
+    </div>
   </section>
 
+  <!-- ── FOOTER ────────────────────────────────────── -->
   <footer>
-    <span>pure QML · zero JS deps in the greeter · MIT</span>
-    <span>GitHub Pages files live directly in <code>sddm-themes/</code></span>
+    <div class="footer-logo">JOKER53<span class="dot">.</span>SDDM</div>
+    <div class="footer-links">
+      <a href="https://github.com/KADHIRAVANEG/sddm-themes" target="_blank">GitHub</a>
+      <span>·</span>
+      <span>MIT License</span>
+      <span>·</span>
+      <span>Pure QML · No JS in greeter</span>
+    </div>
   </footer>
 
-  <script src="./script.js?v=20260626-greeter-layouts"></script>
+  <div class="toast" id="toast">Copied!</div>
+
+  <script src="./script.js"></script>
 </body>
 </html>
