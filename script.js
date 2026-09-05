@@ -404,6 +404,7 @@ function genericLayout(t, n) {
 
 /* ── DOM refs ─────────────────────────────── */
 const $bg    = document.getElementById("spotlightBg");
+const $vid   = document.getElementById("spotlightVideo");
 const $name  = document.getElementById("spotlightName");
 const $desc  = document.getElementById("spotlightDesc");
 const $line  = document.getElementById("spotlightLine");
