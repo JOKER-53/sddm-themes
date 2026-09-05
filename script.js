@@ -483,10 +483,21 @@ function goTo(idx) {
   const t = themes[activeIndex];
 
   $bg.style.opacity = "0";
-  setTimeout(() => {
-    $bg.style.backgroundImage = `url(${wpUrl(t.id)})`;
+
+  // Preload image and fallback to thumbnail if missing
+  const targetUrl = wpUrl(t.id);
+  const fallbackUrl = thumbUrl(t.id);
+  
+  const img = new Image();
+  img.onload = () => {
+    $bg.style.backgroundImage = `url(${targetUrl})`;
     $bg.style.opacity = "1";
-  }, 200);
+  };
+  img.onerror = () => {
+    $bg.style.backgroundImage = `url(${fallbackUrl})`;
+    $bg.style.opacity = "1";
+  };
+  img.src = targetUrl;
 
   $name.textContent = t.name;
   $desc.textContent = t.tag;
