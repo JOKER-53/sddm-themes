@@ -49,7 +49,7 @@ Rectangle {
         }
         TextField {
             id: p; width: parent.width
-            placeholderText: "the punchline"; echoMode: TextInput.Password
+            placeholderText: "the punchline"; focus: true; echoMode: TextInput.Password
             color: root.text; font.family: "Georgia"; font.italic: true; font.pixelSize: 18
             background: Rectangle { color: "transparent"
                 Rectangle { anchors.bottom: parent.bottom; width: parent.width; height: 1; color: root.smile } }

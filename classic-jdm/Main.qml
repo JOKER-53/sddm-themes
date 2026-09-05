@@ -157,7 +157,7 @@ Rectangle {
             }
             TextField {
                 id: p; width: 320; height: 50
-                placeholderText: "PASSWORD"; echoMode: TextInput.Password
+                placeholderText: "PASSWORD"; focus: true; echoMode: TextInput.Password
                 color: root.text; font.family: "Monospace"; font.pixelSize: 20; font.bold: true; horizontalAlignment: TextInput.AlignHCenter; font.letterSpacing: 6
                 background: Rectangle { color: "#33000000"; border.color: p.activeFocus ? root.amber : root.dim; border.width: 2 }
                 onAccepted: sddm.login(u.text, p.text, s.currentIndex)

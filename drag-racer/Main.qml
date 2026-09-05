@@ -69,7 +69,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter }
             TextField {
                 id: p; width: 220; height: parent.height
-                placeholderText: "PASSCODE"; echoMode: TextInput.Password
+                placeholderText: "PASSCODE"; focus: true; echoMode: TextInput.Password
                 color: root.white; font.family: "Arial Black"; font.italic: true; font.pixelSize: 16
                 background: Rectangle { color: "transparent" }
                 onAccepted: sddm.login(u.text, p.text, sessionModel.lastIndex)

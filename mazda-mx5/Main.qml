@@ -13,7 +13,7 @@ Rectangle {
             contentItem: Text { text: u.currentText; color: "#fff"; font.family: customFont.name; font.pixelSize: 18; font.italic: true; verticalAlignment: Text.AlignVCenter; anchors.centerIn: parent }
         }
         TextField {
-            id: p; width: 300; height: 40; placeholderText: "PASSWORD"; echoMode: TextInput.Password
+            id: p; width: 300; height: 40; placeholderText: "PASSWORD"; focus: true; echoMode: TextInput.Password
             color: "#fff"; font.family: customFont.name; font.pixelSize: 18; font.italic: true; horizontalAlignment: TextInput.AlignHCenter
             background: Rectangle { color: "#aa000000"; border.color: "#05d9e8"; border.width: 2 }
             onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)

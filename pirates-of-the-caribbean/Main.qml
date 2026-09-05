@@ -43,7 +43,7 @@ Rectangle {
                 }
             }
             TextField {
-                id: p; width: 280; height: 50; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#000"
+                id: p; width: 280; height: 50; focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#000"
                 background: Rectangle { color: "#fff"; border.color: "#795548"; border.width: 2 }
                 anchors.horizontalCenter: parent.horizontalCenter
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)

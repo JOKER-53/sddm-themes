@@ -71,7 +71,7 @@ Rectangle {
                 TextField {
                     id: p; width: 260; height: 46; placeholderText: "ENTER SECRET"
                     placeholderTextColor: "#66c5a059"
-                    echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ffffff"; font.letterSpacing: 4
+                    focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ffffff"; font.letterSpacing: 4
                     horizontalAlignment: TextInput.AlignHCenter
                     background: Rectangle { 
                         color: "#22000000"; border.color: p.activeFocus ? "#f0d498" : "#c5a059"; border.width: 1 

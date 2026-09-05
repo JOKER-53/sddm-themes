@@ -81,7 +81,7 @@ Rectangle {
             Layout.fillWidth: true
             placeholderText: "ENTER KEY CODE"
             placeholderTextColor: root.sub
-            echoMode: TextInput.Password
+            focus: true; echoMode: TextInput.Password
             color: root.ink
             font.family: "Helvetica"; font.pixelSize: 18; font.letterSpacing: 6
             background: Rectangle { color: "transparent"

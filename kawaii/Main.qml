@@ -71,7 +71,7 @@ Rectangle {
                 color: "#2a1530"; border.color: root.pink; border.width: 1
                 TextField {
                     id: p; anchors.fill: parent; anchors.leftMargin: 20; anchors.rightMargin: 20
-                    placeholderText: "password ♡"; echoMode: TextInput.Password
+                    placeholderText: "password ♡"; focus: true; echoMode: TextInput.Password
                     color: root.soft; font.family: "Comic Sans MS"; font.pixelSize: 16
                     background: Rectangle { color: "transparent" }
                     onAccepted: sddm.login(u.text, p.text, sessionModel.lastIndex)

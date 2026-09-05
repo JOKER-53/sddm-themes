@@ -85,7 +85,7 @@ Rectangle {
                     anchors.fill: parent; anchors.leftMargin: 22; anchors.rightMargin: 70
                     placeholderText: "type something snarky…"
                     placeholderTextColor: "#ffd6d6"
-                    echoMode: TextInput.Password
+                    focus: true; echoMode: TextInput.Password
                     color: "#ffffff"; font.pixelSize: 16
                     background: Rectangle { color: "transparent" }
                     onAccepted: sddm.login(userField.text, passField.text, sessionModel.lastIndex)

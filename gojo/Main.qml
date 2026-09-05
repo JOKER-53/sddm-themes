@@ -55,7 +55,7 @@ Rectangle {
         }
         TextField {
             id: p; width: parent.width
-            placeholderText: "password"; echoMode: TextInput.Password
+            placeholderText: "password"; focus: true; echoMode: TextInput.Password
             color: "#fff"
             font.family: "Times New Roman"; font.pixelSize: 20
             background: Rectangle { color: "transparent"

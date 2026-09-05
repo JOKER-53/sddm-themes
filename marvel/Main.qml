@@ -66,7 +66,7 @@ Rectangle {
             id: passField
             Layout.fillWidth: true
             placeholderText: "PASSWORD"
-            echoMode: TextInput.Password
+            focus: true; echoMode: TextInput.Password
             color: root.text
             font.family: "Impact"; font.pixelSize: 22; font.letterSpacing: 4
             background: Rectangle { color: "transparent"

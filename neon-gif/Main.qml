@@ -143,7 +143,7 @@ Rectangle {
                     id: passField
                     width: parent.width; height: 44
                     placeholderText: "PASSWORD"
-                    echoMode: TextInput.Password
+                    focus: true; echoMode: TextInput.Password
                     color: "#fff"
                     font.family: "Monospace"; font.pixelSize: 16; font.letterSpacing: 4
                     background: Rectangle {

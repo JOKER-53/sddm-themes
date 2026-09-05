@@ -5,7 +5,7 @@ Rectangle { width: 1920; height: 1080; color: "#000"; AnimatedImage { anchors.fi
  Rectangle { anchors.right: parent.right; anchors.top: parent.top; width: 400; height: parent.height; color: "#eeffffff"; Column { anchors.centerIn: parent; spacing: 40; Text { text: "ZEN"; font.family: customFont.name; font.pixelSize: 72; color: "#333" }
  ComboBox { id: u; width: 250; height: 40; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex; background: Rectangle { color: "transparent"; border.color: "#333" }
  contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 22; color: "#333"; anchors.left: parent.left; anchors.leftMargin: 15 } }
- TextField { id: p; width: 250; height: 40; echoMode: TextInput.Password; placeholderText: "password"; font.family: customFont.name; font.pixelSize: 22; color: "#333"; background: Rectangle { color: "transparent"; border.color: "#333" }
+ TextField { id: p; width: 250; height: 40; focus: true; echoMode: TextInput.Password; placeholderText: "password"; font.family: customFont.name; font.pixelSize: 22; color: "#333"; background: Rectangle { color: "transparent"; border.color: "#333" }
  onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex) } } } 
     Row {
         anchors.top: parent.top; anchors.left: parent.left

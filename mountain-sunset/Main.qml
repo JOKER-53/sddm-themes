@@ -74,7 +74,7 @@ Rectangle {
                 anchors.verticalCenter: parent.verticalCenter
                 placeholderText: "Enter password..."
                 placeholderTextColor: "#88ff9d76"
-                echoMode: TextInput.Password; font.family: "sans-serif"; font.pixelSize: 16; color: "#ffffff"; font.letterSpacing: 2
+                focus: true; echoMode: TextInput.Password; font.family: "sans-serif"; font.pixelSize: 16; color: "#ffffff"; font.letterSpacing: 2
                 background: Rectangle { color: "transparent" }
                 verticalAlignment: TextInput.AlignVCenter
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)

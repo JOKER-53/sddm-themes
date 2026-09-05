@@ -97,7 +97,7 @@ Rectangle {
         TextField {
             id: p; width: 240; height: 46; placeholderText: "PASSWORD"
             placeholderTextColor: "#aaaaaa"
-            echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#222222"
+            focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#222222"
             horizontalAlignment: TextInput.AlignHCenter; font.letterSpacing: 4
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom; anchors.bottomMargin: 50

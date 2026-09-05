@@ -74,7 +74,7 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter; width: 80 }
                 Rectangle { width: 380; height: 38; color: "transparent"; border.color: root.ink; border.width: 1
                     TextField { id: p; anchors.fill: parent; anchors.margins: 4
-                        echoMode: TextInput.Password
+                        focus: true; echoMode: TextInput.Password
                         color: root.ink; font.family: "Georgia"; font.pixelSize: 16
                         background: Rectangle { color: "transparent" }
                         onAccepted: sddm.login(u.text, p.text, sessionModel.lastIndex) } }

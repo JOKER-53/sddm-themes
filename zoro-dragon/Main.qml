@@ -14,7 +14,7 @@ Rectangle {
             contentItem: Text { text: u.currentText; color: "#00ff44"; font.pixelSize: 18; verticalAlignment: Text.AlignVCenter; anchors.left: parent.left; anchors.leftMargin: 15 }
         }
         TextField {
-            id: p; width: 350; height: 50; placeholderText: "PASSWORD"; echoMode: TextInput.Password
+            id: p; width: 350; height: 50; placeholderText: "PASSWORD"; focus: true; echoMode: TextInput.Password
             color: "#fff"; font.pixelSize: 18; background: Rectangle { color: "#11ffffff"; border.color: "#00ff44" }
             onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
         }

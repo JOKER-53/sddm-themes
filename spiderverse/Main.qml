@@ -106,7 +106,7 @@ Rectangle {
             TextField {
                 id: p; width: 300; height: 50; placeholderText: "PASSWORD"
                 placeholderTextColor: "#666666"
-                echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ff00ff"; font.letterSpacing: 4
+                focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ff00ff"; font.letterSpacing: 4
                 anchors.leftMargin: 15; padding: 15
                 background: Rectangle { 
                     color: "#000000"; border.color: p.activeFocus ? "#ff00ff" : "#333333"; border.width: 2 

@@ -44,7 +44,7 @@ Rectangle {
             TextField {
                 id: p; width: 300; height: 50; placeholderText: "PIN CODE"
                 placeholderTextColor: "#88ffffff"
-                echoMode: TextInput.Password
+                focus: true; echoMode: TextInput.Password
                 color: "#fff"; font.family: customFont.name; font.pixelSize: 22; horizontalAlignment: TextInput.AlignHCenter; font.letterSpacing: 4
                 background: Rectangle { color: "transparent"; border.color: "#1c69d4"; border.width: 2; radius: 25 }
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)

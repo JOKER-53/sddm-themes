@@ -68,7 +68,7 @@ Rectangle {
             TextField {
                 id: p; width: 300; height: 46; placeholderText: "ACCESS CODE"
                 placeholderTextColor: "#66b3e5fc"
-                echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 6
+                focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 18; color: "#ffffff"; font.letterSpacing: 6
                 horizontalAlignment: TextInput.AlignHCenter
                 background: Rectangle { 
                     color: "#22000000"; radius: 23; border.color: p.activeFocus ? "#4fc3f7" : "#4403a9f4"; border.width: 1 

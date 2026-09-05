@@ -5,7 +5,7 @@ Rectangle { width: 1920; height: 1080; color: "#000"; AnimatedImage { anchors.fi
  Rectangle { anchors.right: parent.right; anchors.top: parent.top; anchors.margins: 80; width: 320; height: 280; color: "#ffb6c1"; radius: 15; border.color: "#00ffff"; border.width: 4; Column { anchors.centerIn: parent; spacing: 15; Text { text: "Mya-nee~"; font.family: customFont.name; font.pixelSize: 36; color: "#00ffff"; style: Text.Outline; styleColor: "#000" }
  ComboBox { id: u; width: 250; height: 45; model: userModel; textRole: "name"; currentIndex: userModel.lastIndex; background: Rectangle { color: "#fff"; radius: 10; border.color: "#00ffff"; border.width: 2 }
  contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 22; color: "#ffb6c1"; anchors.centerIn: parent } }
- TextField { id: p; width: 250; height: 45; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 22; color: "#000"; background: Rectangle { color: "#fff"; radius: 10; border.color: "#00ffff"; border.width: 2 }
+ TextField { id: p; width: 250; height: 45; focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 22; color: "#000"; background: Rectangle { color: "#fff"; radius: 10; border.color: "#00ffff"; border.width: 2 }
  onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex) } } } 
     Row {
         anchors.top: parent.top; anchors.left: parent.left

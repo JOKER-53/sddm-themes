@@ -64,7 +64,7 @@ Rectangle {
                 id: p; width: 280; height: 40
                 placeholderText: "PASSWORD"
                 placeholderTextColor: "#55ffffff"
-                echoMode: TextInput.Password
+                focus: true; echoMode: TextInput.Password
                 font.family: customFont.name; font.pixelSize: 18; font.letterSpacing: 6
                 color: "#ffffff"
                 horizontalAlignment: TextInput.AlignHCenter

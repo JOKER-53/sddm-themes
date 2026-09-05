@@ -73,7 +73,7 @@ Rectangle {
                 id: p; width: 300; height: 50
                 placeholderText: "ENTER PASSKEY"
                 placeholderTextColor: "#aaffffff"
-                echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ffffff"; font.letterSpacing: 6
+                focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 20; color: "#ffffff"; font.letterSpacing: 6
                 horizontalAlignment: TextInput.AlignHCenter
                 background: Rectangle { color: "#33ffffff"; border.color: p.activeFocus ? "#fff" : "#88ffffff"; border.width: 1; radius: 25 }
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)

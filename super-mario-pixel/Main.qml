@@ -16,7 +16,7 @@ Rectangle {
                 contentItem: Text { text: u.currentText; font.family: customFont.name; font.pixelSize: 24; color: "#000"; anchors.centerIn: parent }
             }
             TextField {
-                id: p; width: 280; height: 50; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#000"
+                id: p; width: 280; height: 50; focus: true; echoMode: TextInput.Password; font.family: customFont.name; font.pixelSize: 24; color: "#000"
                 background: Rectangle { color: "#fff"; border.color: "#e52521"; border.width: 2 }
                 onAccepted: sddm.login(u.currentText, p.text, sessionCombo.currentIndex)
             }
