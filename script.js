@@ -502,9 +502,10 @@ function goTo(idx) {
     let playPromise = $vid.play();
     if (playPromise !== undefined) {
       playPromise.catch(error => {
-        // Auto-play was prevented or file blocked
-        $bg.style.backgroundImage = `url(${fallbackUrl})`;
-        $bg.style.opacity = "1";
+        console.warn("Playback error/Autoplay blocked:", error);
+        // Do not fallback to blurry background if it's just an autoplay block.
+        // The video is likely loaded but paused. Show the first frame!
+        $vid.style.opacity = "1";
       });
     }
   } else {
