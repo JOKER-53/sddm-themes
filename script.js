@@ -491,11 +491,22 @@ function goTo(idx) {
   
   if (targetUrl.endsWith('.mp4')) {
     $vid.src = targetUrl;
-    $vid.onloadeddata = () => { $vid.style.opacity = "1"; };
+    $vid.load();
+    // Use oncanplay instead of onloadeddata for better reliability
+    $vid.oncanplay = () => { $vid.style.opacity = "1"; };
     $vid.onerror = () => {
+      // Fallback to thumbnail if video fails (e.g. browser strict file:// policies)
       $bg.style.backgroundImage = `url(${fallbackUrl})`;
       $bg.style.opacity = "1";
     };
+    let playPromise = $vid.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Auto-play was prevented or file blocked
+        $bg.style.backgroundImage = `url(${fallbackUrl})`;
+        $bg.style.opacity = "1";
+      });
+    }
   } else {
     const img = new Image();
     img.onload = () => {
