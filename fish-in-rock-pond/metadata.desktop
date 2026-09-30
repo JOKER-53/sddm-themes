@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=KOI POND
-Description=zen rock pool
-Author=JOKER53
-Theme-Id=fish-in-rock-pond
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf

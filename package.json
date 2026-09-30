@@ -1,0 +1,10 @@
+{
+  "name": "sddm-themes",
+  "private": true,
+  "scripts": {
+    "test": "node tests/website.cjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.0"
+  }
+}

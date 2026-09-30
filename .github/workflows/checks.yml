@@ -1,0 +1,53 @@
+name: Project checks
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python3 scripts/validate.py
+      - run: python3 -m unittest discover -s tests -v
+
+  qml:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        qt: [5, 6]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Qt 5 test dependencies
+        if: matrix.qt == 5
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ pkg-config qtbase5-dev qtdeclarative5-dev qml-module-qtquick2 qml-module-qtquick-controls2 qml-module-qtquick-layouts qml-module-qtquick-window2 qml-module-qtqml-models2
+      - name: Install Qt 6 test dependencies
+        if: matrix.qt == 6
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ pkg-config qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-layouts qml6-module-qtquick-window qml6-module-qtquick-templates qml6-module-qtqml-workerscript
+      - run: python3 scripts/check_qml.py --qt ${{ matrix.qt }}
+
+  website:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm test

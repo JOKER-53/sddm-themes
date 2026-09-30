@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=NISSAN SKYLINE
-Description=r34 pure JDM
-Author=JOKER53
-Theme-Id=nissan-skyline
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf

@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=PIXEL SAKURA
+Description=retro tokyo dusk
+Author=JOKER53
+Theme-Id=pixel-sakura-city
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+QtVersion=6
+Screenshot=assets/thumbnail.jpg

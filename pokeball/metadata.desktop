@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=POKEBALL
-Description=clean catch layout
-Author=JOKER53
-Theme-Id=pokeball
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf

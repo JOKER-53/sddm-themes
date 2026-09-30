@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=BLACK PEARL
-Description=cinematic stormy sea
-Author=JOKER53
-Theme-Id=pirates-of-the-caribbean
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf

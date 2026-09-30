@@ -1,0 +1,11 @@
+[SddmGreeterTheme]
+Name=CAT POND
+Description=tranquil nature vibe
+Author=JOKER53
+Theme-Id=cat-pond
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
+QtVersion=6
+Screenshot=assets/thumbnail.jpg

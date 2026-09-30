@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=SUPER MARIO
-Description=nostalgic 8-bit
-Author=JOKER53
-Theme-Id=super-mario-pixel
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf

@@ -1,9 +1,0 @@
-[SddmGreeterTheme]
-Name=PINK BLOOM
-Description=soft floral pastel
-Author=JOKER53
-Theme-Id=pink-bloom
-Type=sddm-theme
-Version=1.0
-MainScript=Main.qml
-ConfigFile=theme.conf
