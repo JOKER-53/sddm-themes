@@ -39,7 +39,13 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y g++ pkg-config qt6-base-dev qt6-declarative-dev qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-layouts qml6-module-qtquick-window qml6-module-qtquick-templates qml6-module-qtqml-workerscript
-      - run: python3 scripts/check_qml.py --qt ${{ matrix.qt }}
+      - run: python3 scripts/check_qml.py --qt ${{ matrix.qt }} --render build/theme-layouts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: theme-layouts-qt${{ matrix.qt }}
+          path: build/theme-layouts/
+          retention-days: 7
 
   website:
     runs-on: ubuntu-latest

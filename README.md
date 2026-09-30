@@ -37,6 +37,8 @@ Use `--qt 5` for a Qt5 greeter. Manual preview logs are retained under `build/pr
 
 Uninstalled animated themes show their shipped thumbnail in QML. The installer generates the GIF used by the installed greeter. The website plays the shipped MP4 directly.
 
+All themes include a visible sign-in control, readable input text and a separate session/power footer. Desktop compositions scale to the display; smaller screens use a compact form with full-size controls. Generate a gallery of actual QML screenshots at five resolutions with `python3 scripts/check_qml.py --qt 6 --render build/theme-layouts`, then open `build/theme-layouts/index.html`. See [testing](docs/TESTING.md) for dependencies and [layout guidance](docs/LAYOUTS.md) for design conventions.
+
 ## Installer options
 
 ```bash

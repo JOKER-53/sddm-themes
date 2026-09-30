@@ -1,335 +1,336 @@
 import QtQuick 2.15
-import "components" as Common
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import "components" as Common
 
 Rectangle {
-    id: root
-    property color themeAccent: config.brand || config.accent || "#03a9f4"
+    id: viewport
+
+    property color themeAccent: root.themeAccent
+    readonly property bool compactMode: width < 1200 || height < 680
+    readonly property real layoutScale: Math.min(width / 1920, height / 1080)
 
     width: 1920
     height: 1080
-    color: "#000"
+    color: "#000000"
 
-    // Pixel Art Ocean Jars Animation
-    Common.Wallpaper {
-        anchors.fill: parent
-        source: Qt.resolvedUrl(config.background || "assets/wallpaper.mp4")
-        fallbackSource: Qt.resolvedUrl("assets/thumbnail.jpg")
-        fillMode: Image.PreserveAspectFit
-        speed: 0.6 // Reduced FPS for a calmer, slower underwater animation
-        cache: false
-    }
-    FontLoader {
-        id: customFont
-        source: "assets/font.ttf"
-    }
-
-    // Subtle deep-sea glow at the bottom
     Rectangle {
-        anchors.fill: parent
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: "transparent"
-            }
-            GradientStop {
-                position: 0.7
-                color: "transparent"
-            }
-            GradientStop {
-                position: 1.0
-                color: "#440277bd"
-            } // Subtle deep blue glow
-        }
-    }
+        // Minimalist Deep Ocean Power Controls
 
-    // Aquarium Glass Login Panel (Bottom Center)
-    Rectangle {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 100
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: 380
-        height: 260
-        color: "#1a03a9f4" // Deep translucent ocean blue
-        radius: 20
-        border.color: "#33b3e5fc"
-        border.width: 1
+        id: root
 
-        // Inner glass highlight
-        Rectangle {
+        property color themeAccent: config.brand || config.accent || "#03a9f4"
+
+        width: viewport.width / viewport.layoutScale
+        height: viewport.height / viewport.layoutScale
+        scale: viewport.layoutScale
+        transformOrigin: Item.TopLeft
+        visible: !viewport.compactMode
+        color: "#000"
+
+        // Pixel Art Ocean Jars Animation
+        Common.Wallpaper {
             anchors.fill: parent
-            anchors.margins: 1
-            radius: 19
-            color: "transparent"
-            border.color: "#11ffffff"
-            border.width: 1
+            source: Qt.resolvedUrl(config.background || "assets/wallpaper.mp4")
+            fallbackSource: Qt.resolvedUrl("assets/thumbnail.jpg")
+            fillMode: Image.PreserveAspectFit
+            speed: 0.6 // Reduced FPS for a calmer, slower underwater animation
+            cache: false
         }
 
-        Column {
-            anchors.centerIn: parent
-            spacing: 25
+        FontLoader {
+            id: customFont
 
-            Text {
-                text: "DEEP SEA SPECIMENS"
-                font.family: customFont.name
-                font.pixelSize: 18
-                color: "#b3e5fc"
-                font.letterSpacing: 6
-                font.bold: true
-                anchors.horizontalCenter: parent.horizontalCenter
-                style: Text.Outline
-                styleColor: "#55000000"
+            source: "assets/font.ttf"
+        }
+
+        // Subtle deep-sea glow at the bottom
+        Rectangle {
+            // Subtle deep blue glow
+
+            anchors.fill: parent
+
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: "transparent"
+                }
+
+                GradientStop {
+                    position: 0.7
+                    color: "transparent"
+                }
+
+                GradientStop {
+                    position: 1
+                    color: "#440277bd"
+                }
+
             }
 
-            ComboBox {
-                id: u
-                width: 300
-                height: 46
-                model: userModel
-                textRole: "name"
-                currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
-                background: Rectangle {
-                    color: "#22000000"
-                    radius: 23
-                    border.color: u.activeFocus ? "#4fc3f7" : "#4403a9f4"
-                    border.width: 1
-                }
-                contentItem: Text {
-                    text: u.currentText
+        }
+
+        // Aquarium Glass Login Panel (Bottom Center)
+        Rectangle {
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 112 / viewport.layoutScale
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: 380
+            height: 260
+            color: "#1a03a9f4" // Deep translucent ocean blue
+            radius: 20
+            border.color: "#33b3e5fc"
+            border.width: 1
+
+            // Inner glass highlight
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: 1
+                radius: 19
+                color: "transparent"
+                border.color: "#11ffffff"
+                border.width: 1
+            }
+
+            Column {
+                anchors.centerIn: parent
+                spacing: 25
+
+                Text {
+                    text: "DEEP SEA SPECIMENS"
                     font.family: customFont.name
                     font.pixelSize: 18
-                    color: "#ffffff"
-                    font.letterSpacing: 2
-                    verticalAlignment: Text.AlignVCenter
-                    horizontalAlignment: Text.AlignHCenter
-                }
-                delegate: ItemDelegate {
-                    id: optionDelegate0
-
-                    width: u.width
-                    height: 40
-                    background: Rectangle {
-                        color: optionDelegate0.hovered ? "#3303a9f4" : "#111"
-                    }
-                    contentItem: Text {
-                        text: model.name
-                        color: "#ffffff"
-                        font.family: customFont.name
-                        font.pixelSize: 16
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                    }
-                }
-            }
-
-            TextField {
-                id: p
-                enabled: !auth.busy
-                Accessible.name: qsTr("Password")
-                width: 300
-                height: 46
-                placeholderText: "ACCESS CODE"
-                placeholderTextColor: "#66b3e5fc"
-                focus: true
-                echoMode: TextInput.Password
-                font.family: customFont.name
-                font.pixelSize: 18
-                color: "#ffffff"
-                font.letterSpacing: 6
-                horizontalAlignment: TextInput.AlignHCenter
-                background: Rectangle {
-                    color: "#22000000"
-                    radius: 23
-                    border.color: p.activeFocus ? "#4fc3f7" : "#4403a9f4"
-                    border.width: 1
-                }
-                onAccepted: auth.login(u.currentText, p.text, sessionCombo.currentIndex)
-            }
-
-            Rectangle {
-                width: 160
-                height: 44
-                color: "transparent"
-                radius: 22
-                border.color: "#4fc3f7"
-                border.width: 1
-                anchors.horizontalCenter: parent.horizontalCenter
-                Text {
-                    anchors.centerIn: parent
-                    text: "DIVE"
-                    color: "#4fc3f7"
-                    font.family: customFont.name
-                    font.pixelSize: 16
+                    color: "#b3e5fc"
                     font.letterSpacing: 6
                     font.bold: true
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    style: Text.Outline
+                    styleColor: "#55000000"
                 }
-                Common.ActionArea {
-                    anchors.fill: parent
-                    cursorShape: Qt.PointingHandCursor
-                    hoverEnabled: true
-                    onEntered: {
-                        parent.color = "#4fc3f7";
-                        parent.children[0].color = "#000";
-                    }
-                    onExited: {
-                        parent.color = "transparent";
-                        parent.children[0].color = "#4fc3f7";
-                    }
-                    onClicked: auth.login(u.currentText, p.text, sessionCombo.currentIndex)
-                }
-                Behavior on color {
-                    ColorAnimation {
-                        duration: 250
-                    }
-                }
-            }
-        }
-    }
 
-    // Minimalist Deep Ocean Power Controls
-    Row {
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
-        anchors.margins: 40
-        spacing: 25
-        z: 100
+                ComboBox {
+                    id: u
 
-        ComboBox {
-            id: sessionCombo
-            width: 140
-            height: 36
-            model: sessionModel
-            textRole: "name"
-            currentIndex: sessionModel.lastIndex >= 0 ? sessionModel.lastIndex : 0
-            background: Rectangle {
-                color: "transparent"
-            }
-            contentItem: Text {
-                text: sessionCombo.currentText
-                color: "#b3e5fc"
-                font.family: customFont.name
-                font.pixelSize: 13
-                font.letterSpacing: 2
-                verticalAlignment: Text.AlignVCenter
-                anchors.right: parent.right
-            }
-            delegate: ItemDelegate {
-                id: optionDelegate1
+                    objectName: "usernameField"
+                    Accessible.name: qsTr("Username")
+                    enabled: !auth.busy
+                    width: 300
+                    height: 46
+                    model: userModel
+                    textRole: "name"
+                    currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
-                width: sessionCombo.width
-                height: 36
-                background: Rectangle {
-                    color: optionDelegate1.hovered ? "#3303a9f4" : "#111"
+                    background: Rectangle {
+                        color: "#22000000"
+                        radius: 23
+                        border.color: u.activeFocus ? "#4fc3f7" : "#4403a9f4"
+                        border.width: 1
+                    }
+
+                    contentItem: Text {
+                        text: u.currentText
+                        font.family: "sans-serif"
+                        font.pixelSize: 20
+                        color: "#ffffff"
+                        font.letterSpacing: 2
+                        verticalAlignment: Text.AlignVCenter
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+
+                    delegate: ItemDelegate {
+                        id: optionDelegate0
+
+                        width: u.width
+                        height: 40
+
+                        background: Rectangle {
+                            color: optionDelegate0.hovered ? "#3303a9f4" : "#111"
+                        }
+
+                        contentItem: Text {
+                            text: model.name
+                            color: "#ffffff"
+                            font.family: "sans-serif"
+                            font.pixelSize: 20
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                        }
+
+                    }
+
                 }
-                contentItem: Text {
-                    text: model.name
+
+                TextField {
+                    id: p
+
+                    objectName: "passwordField"
+                    enabled: !auth.busy
+                    Accessible.name: qsTr("Password")
+                    width: 300
+                    height: 46
+                    placeholderText: "ACCESS CODE"
+                    placeholderTextColor: color
+                    focus: true
+                    echoMode: TextInput.Password
+                    font.family: "sans-serif"
+                    font.pixelSize: 18
                     color: "#ffffff"
-                    font.family: customFont.name
-                    font.pixelSize: 12
-                    horizontalAlignment: Text.AlignRight
-                    verticalAlignment: Text.AlignVCenter
+                    font.letterSpacing: 0
+                    horizontalAlignment: TextInput.AlignHCenter
+                    onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+
+                    Common.FieldFocus {
+                    }
+
+                    background: Rectangle {
+                        color: "#22000000"
+                        radius: 23
+                        border.color: p.activeFocus ? "#4fc3f7" : "#4403a9f4"
+                        border.width: 1
+                    }
+
                 }
+
+                Rectangle {
+                    width: 160
+                    height: 44
+                    color: "transparent"
+                    radius: 22
+                    border.color: "#4fc3f7"
+                    border.width: 1
+                    anchors.horizontalCenter: parent.horizontalCenter
+
+                    Text {
+                        anchors.centerIn: parent
+                        text: "DIVE"
+                        color: "#4fc3f7"
+                        font.family: customFont.name
+                        font.pixelSize: 16
+                        font.letterSpacing: 6
+                        font.bold: true
+                    }
+
+                    Common.ActionArea {
+                        enabled: !auth.busy
+                        Accessible.name: qsTr("Sign in")
+                        objectName: "loginButton"
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                        hoverEnabled: true
+                        onEntered: {
+                            parent.color = "#4fc3f7";
+                            parent.children[0].color = "#000";
+                        }
+                        onExited: {
+                            parent.color = "transparent";
+                            parent.children[0].color = "#4fc3f7";
+                        }
+                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                    }
+
+                    Behavior on color {
+                        ColorAnimation {
+                            duration: 250
+                        }
+
+                    }
+
+                }
+
             }
+
         }
 
-        Text {
-            text: "RESTART"
-            color: "#b3e5fc"
-            font.family: customFont.name
-            font.pixelSize: 13
-            font.letterSpacing: 2
-            Common.ActionArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-                onEntered: {
-                    parent.color = "#ffffff";
-                }
-                onExited: {
-                    parent.color = "#b3e5fc";
-                }
-                onClicked: sddm.reboot()
+        // Injected Top-Center Clock
+        Column {
+            id: clockGroup
+
+            anchors.top: parent.top
+            anchors.topMargin: 40
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 2
+            z: 10
+
+            Text {
+                id: injectedClockTime
+
+                text: Qt.formatTime(new Date(), "hh:mm")
+                font.family: customFont.name
+                font.pixelSize: 72
+                color: "#ffffff"
+                style: Text.Outline
+                styleColor: "#66000000"
+                anchors.horizontalCenter: parent.horizontalCenter
             }
-            Behavior on color {
-                ColorAnimation {
-                    duration: 150
+
+            Text {
+                id: injectedClockDate
+
+                text: Qt.formatDate(new Date(), "dddd, MMMM d")
+                font.family: "sans-serif"
+                font.pixelSize: 20
+                color: "#ffffff"
+                style: Text.Outline
+                styleColor: "#66000000"
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            Timer {
+                interval: 1000
+                running: true
+                repeat: true
+                onTriggered: {
+                    injectedClockTime.text = Qt.formatTime(new Date(), "hh:mm");
+                    injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
+
         }
 
-        Text {
-            text: "SHUTDOWN"
-            color: "#b3e5fc"
-            font.family: customFont.name
-            font.pixelSize: 13
-            font.letterSpacing: 2
-            Common.ActionArea {
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-                onEntered: {
-                    parent.color = "#ffffff";
-                }
-                onExited: {
-                    parent.color = "#b3e5fc";
-                }
-                onClicked: sddm.powerOff()
-            }
-            Behavior on color {
-                ColorAnimation {
-                    duration: 150
-                }
-            }
+        Rectangle {
+            x: clockGroup.x - 24
+            y: clockGroup.y - 12
+            width: clockGroup.width + 48
+            height: clockGroup.height + 24
+            radius: 12
+            color: "#b3000000"
+            z: 9
         }
+
+        Common.AuthController {
+            id: auth
+
+            passwordField: viewport.compactMode ? compact.passwordField : p
+        }
+
     }
 
-    // Injected Top-Center Clock
-    Column {
-        anchors.top: parent.top
-        anchors.topMargin: 40
+    Common.CompactGreeter {
+        id: compact
+
+        anchors.fill: parent
+        visible: viewport.compactMode
+        controller: auth
+        accent: root.themeAccent
+        title: "OCEAN JAR"
+        wallpaperSource: Qt.resolvedUrl(config.background || "assets/wallpaper.mp4")
+        fallbackSource: Qt.resolvedUrl("assets/thumbnail.jpg")
+    }
+
+    Common.SystemBar {
+        id: systemBar
+
         anchors.horizontalCenter: parent.horizontalCenter
-        spacing: -10
-        z: 10
-        Text {
-            id: injectedClockTime
-            text: Qt.formatTime(new Date(), "hh:mm")
-            font.family: customFont.name
-            font.pixelSize: 84
-            color: "#b3e5fc"
-            style: Text.Outline
-            styleColor: "#66000000"
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        Text {
-            id: injectedClockDate
-            text: Qt.formatDate(new Date(), "dddd, MMMM d")
-            font.family: customFont.name
-            font.pixelSize: 24
-            color: "#b3e5fc"
-            style: Text.Outline
-            styleColor: "#66000000"
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        Timer {
-            interval: 1000
-            running: true
-            repeat: true
-            onTriggered: {
-                injectedClockTime.text = Qt.formatTime(new Date(), "hh:mm");
-                injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
-            }
-        }
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        controller: auth
     }
 
-    Common.AuthController {
-        id: auth
-        passwordField: p
-    }
     Common.LoginStatus {
         anchors.top: parent.top
-        anchors.topMargin: 160
+        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
         anchors.horizontalCenter: parent.horizontalCenter
         controller: auth
     }
+
 }

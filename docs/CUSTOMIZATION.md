@@ -23,6 +23,8 @@ The catalog controls the website and generated gallery; it does not overwrite th
 
 ## Shared behavior
 
-`common/AuthController.qml` validates login requests, prevents duplicate submissions, and clears/refocuses the password after authentication fails. `LoginStatus.qml` displays progress and errors. `SessionPicker.qml` supplies a session selector for themes without one in their layout. `ActionArea.qml` makes custom login and power controls keyboard accessible with Tab, Enter and Space. `Wallpaper.qml` displays installed GIFs or the still thumbnail of unconverted videos.
+`common/AuthController.qml` validates login requests, prevents duplicate submissions, and clears/refocuses the password after authentication fails. `LoginStatus.qml` displays progress and errors. `SystemBar.qml` reserves a footer for session selection and power controls. `LoginSubmit.qml` supplies readable sign-in buttons. `ActionArea.qml` makes custom controls keyboard accessible with Tab, Enter and Space, and `FieldFocus.qml` marks focused input fields. `Wallpaper.qml` displays installed GIFs or the still thumbnail of unconverted videos.
+
+The individual desktop compositions scale with the screen. Below 1200 pixels wide or 680 pixels high, `CompactGreeter.qml` presents the same wallpaper and accent with full-size input controls. Its username selector accepts manual input. Desktop themes with editable username fields fall back to the first listed account when SDDM has no remembered user. The password failure handler always targets the form that is currently visible.
 
 Edit these templates in `common/` and regenerate the packaged copies. Do not edit `themes/<id>/components/` directly: CI checks that those copies match their source.

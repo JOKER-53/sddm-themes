@@ -20,6 +20,18 @@ python3 scripts/check_qml.py --qt 6
 
 The harness instantiates all 44 themes with fake users, sessions and SDDM signals. It verifies configuration, missing last-user/session indices, duplicate login prevention, error feedback, and password clearing. It runs offscreen and never contacts PAM or the SDDM daemon. The GitHub Actions matrix installs both Qt runtimes independently.
 
+Render the actual QML and exercise its controls at 1920×1080, 1366×768, 1024×768, 800×600 and 3440×1440:
+
+```bash
+python3 scripts/check_qml.py --qt 6 --render build/theme-layouts
+```
+
+This checks that visible username, password, sign-in and system controls fit on screen and that login controls do not overlap the footer. It clicks each visible sign-in button, submits with Enter, checks the selected session, and verifies that authentication failure clears and refocuses the visible password. An empty last-user value exercises the first-account fallback. CI runs this on both Qt versions and uploads screenshots for seven days.
+
+Open `build/theme-layouts/index.html` to browse the screenshot gallery and switch resolutions.
+
+Screenshots use the shipped still thumbnails for videos. They establish layout and input behavior, not GIF playback, real PAM authentication, or every desktop's font and DPI settings. Inspect generated screenshots as well as the automated results.
+
 Browser checks exercise animation paths, interrupted autoplay startup, stale media callbacks, search, clipboard failure, keyboard selection, mobile layout and reduced motion:
 
 ```bash
