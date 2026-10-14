@@ -83,6 +83,11 @@ You can also open `website/index.html` directly. Browser playback/clipboard poli
 
 GitHub Pages deployment runs the validation, installer, Qt5/Qt6 and browser checks before publishing a staged site containing only the website and its media.
 
+## Author
+
+**JOKER-53** (alias **Kadhiravan E.G.**)
+- GitHub: [@JOKER-53](https://github.com/JOKER-53)
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
