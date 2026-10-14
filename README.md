@@ -2,7 +2,7 @@
 
 44 standalone Qt Quick login themes for SDDM, with distinct layouts and shared authentication helpers packaged inside each theme.
 
-[Browse the showcase](https://joker53.me/sddm-themes/) · [Theme gallery](docs/GALLERY.md) · [Customization](docs/CUSTOMIZATION.md) · [Development and testing](docs/TESTING.md)
+[Browse the showcase](https://joker-53.github.io/sddm-themes/) · [Theme gallery](docs/GALLERY.md) · [Customization](docs/CUSTOMIZATION.md) · [Development and testing](docs/TESTING.md)
 
 ## Install
 
