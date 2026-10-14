@@ -2,14 +2,14 @@
 
 44 standalone Qt Quick login themes for SDDM, with distinct layouts and shared authentication helpers packaged inside each theme.
 
-[Browse the showcase](https://kadhiravaneg.github.io/sddm-themes/) · [Theme gallery](docs/GALLERY.md) · [Customization](docs/CUSTOMIZATION.md) · [Development and testing](docs/TESTING.md)
+[Browse the showcase](https://joker53.me/sddm-themes/) · [Theme gallery](docs/GALLERY.md) · [Customization](docs/CUSTOMIZATION.md) · [Development and testing](docs/TESTING.md)
 
 ## Install
 
 Install SDDM and Python 3 first. Animated themes also require FFmpeg. The installer detects the available greeter and installs missing QML modules on Arch, Debian/Ubuntu, Fedora, and openSUSE.
 
 ```bash
-git clone https://github.com/KADHIRAVANEG/sddm-themes
+git clone https://github.com/JOKER-53/sddm-themes
 cd sddm-themes
 ./install.sh --list
 sudo ./install.sh marvel
