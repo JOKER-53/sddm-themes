@@ -59,9 +59,7 @@ Rectangle {
                     position: 1
                     color: "#cc000000"
                 }
-
             }
-
         }
 
         // top-left HUD
@@ -88,7 +86,6 @@ Rectangle {
                     font.pixelSize: 14
                     font.letterSpacing: 4
                 }
-
             }
 
             Text {
@@ -120,7 +117,6 @@ Rectangle {
                     smC.text = Qt.formatDateTime(new Date(), "ss.zzz").substring(0, 5) + "  |  " + Qt.formatDateTime(new Date(), "ddd dd MMM").toUpperCase();
                 }
             }
-
         }
 
         // bottom-right pill login
@@ -141,29 +137,23 @@ Rectangle {
                 anchors.margins: 12
                 spacing: 8
 
-                TextField {
+                Common.UsernamePicker {
                     id: u
 
-                    placeholderTextColor: color
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 150
                     height: parent.height
-                    text: userModel.lastUser || compact.defaultUsername
-                    placeholderText: "DRIVER"
-                    color: root.white
+
+                    foreground: root.white
                     font.family: "sans-serif"
                     font.italic: true
                     font.pixelSize: 16
 
-                    Common.FieldFocus {
-                    }
-
                     background: Rectangle {
                         color: "transparent"
                     }
-
                 }
 
                 Rectangle {
@@ -178,6 +168,8 @@ Rectangle {
 
                     placeholderTextColor: color
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 220
@@ -189,15 +181,15 @@ Rectangle {
                     font.family: "sans-serif"
                     font.italic: true
                     font.pixelSize: 16
-                    onAccepted: auth.login(u.text, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
                         color: "transparent"
                     }
-
                 }
 
                 Rectangle {
@@ -222,13 +214,10 @@ Rectangle {
                         enabled: !auth.busy
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
-                        onClicked: auth.login(u.text, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
-
                 }
-
             }
-
         }
 
         Common.AuthController {
@@ -236,7 +225,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -253,18 +241,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.right: viewport.compactMode ? undefined : parent.right
+        anchors.rightMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#e6080b0d"
+        foreground: "#ffffff"
+        cornerRadius: 28
+        controlRadius: 24
+        fontFamily: "sans-serif"
+        treatment: "pill"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "DRAG RACER"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 20
         controller: auth
     }
-
 }

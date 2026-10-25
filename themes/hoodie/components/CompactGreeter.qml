@@ -10,17 +10,15 @@ Item {
     property url wallpaperSource
     property url fallbackSource
     property alias passwordField: password
-    readonly property string defaultUsername: user.currentText
+    readonly property string defaultUsername: controller.username
 
     onVisibleChanged: {
         if (visible)
             password.forceActiveFocus();
-
     }
     Component.onCompleted: {
         if (visible)
             password.forceActiveFocus();
-
     }
 
     Wallpaper {
@@ -53,6 +51,7 @@ Item {
 
             Text {
                 width: parent.width
+                objectName: "greeterTitle"
                 text: compact.title
                 font.family: "sans-serif"
                 font.pixelSize: 26
@@ -75,20 +74,16 @@ Item {
                     repeat: true
                     onTriggered: parent.text = Qt.formatTime(new Date(), "hh:mm") + "   " + Qt.formatDate(new Date(), "ddd, MMM d")
                 }
-
             }
 
-            ComboBox {
+            UsernamePicker {
                 id: user
 
                 objectName: "usernameField"
                 width: parent.width
                 height: 48
-                model: userModel
-                textRole: "name"
-                currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
-                editable: true
-                enabled: !compact.controller.busy
+                controller: compact.controller
+                foreground: "#ffffff"
                 Accessible.name: qsTr("Username")
                 font.pixelSize: 18
                 palette.text: "#ffffff"
@@ -115,7 +110,6 @@ Item {
                     background: Rectangle {
                         color: parent.highlighted ? "#47525d" : "#242c35"
                     }
-
                 }
 
                 background: Rectangle {
@@ -123,13 +117,14 @@ Item {
                     border.color: user.activeFocus ? "#ffffff" : "#7e8996"
                     radius: 4
                 }
-
             }
 
             TextField {
                 id: password
 
                 objectName: "passwordField"
+                onTextEdited: compact.controller.dismissError()
+                Accessible.description: compact.controller.rejected ? compact.controller.errorMessage : ""
                 width: parent.width
                 height: 48
                 placeholderText: qsTr("Password")
@@ -143,10 +138,9 @@ Item {
 
                 background: Rectangle {
                     color: "#242c35"
-                    border.color: password.activeFocus ? "#ffffff" : "#7e8996"
+                    border.color: compact.controller.rejected ? "#ef5c66" : (password.activeFocus ? "#ffffff" : "#7e8996")
                     radius: 4
                 }
-
             }
 
             LoginSubmit {
@@ -156,11 +150,8 @@ Item {
                 width: parent.width
                 accent: compact.accent
                 enabled: !compact.controller.busy
-                onClicked: compact.controller.login(user.editText, password.text, compact.controller.sessionIndex)
+                onClicked: compact.controller.login(compact.controller.username, password.text, compact.controller.sessionIndex)
             }
-
         }
-
     }
-
 }

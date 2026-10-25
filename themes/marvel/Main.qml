@@ -69,7 +69,6 @@ Rectangle {
                 font.pixelSize: 78
                 font.letterSpacing: 8
             }
-
         }
 
         // ---- Username + password in a credits-style stack ----
@@ -80,23 +79,18 @@ Rectangle {
             spacing: 18
             width: 460
 
-            TextField {
+            Common.UsernamePicker {
                 id: userField
 
-                placeholderTextColor: color
                 objectName: "usernameField"
+                controller: auth
                 Accessible.name: qsTr("Username")
-                enabled: !auth.busy
                 Layout.fillWidth: true
-                text: userModel.lastUser || compact.defaultUsername
-                placeholderText: "USER"
-                color: root.text
+
+                foreground: root.text
                 font.family: "sans-serif"
                 font.pixelSize: 22
                 font.letterSpacing: 0
-
-                Common.FieldFocus {
-                }
 
                 background: Rectangle {
                     color: "transparent"
@@ -109,9 +103,7 @@ Rectangle {
                         height: 2
                         color: root.sub
                     }
-
                 }
-
             }
 
             TextField {
@@ -119,6 +111,8 @@ Rectangle {
 
                 placeholderTextColor: color
                 objectName: "passwordField"
+                onTextEdited: auth.dismissError()
+                Accessible.description: auth.rejected ? auth.errorMessage : ""
                 enabled: !auth.busy
                 Accessible.name: qsTr("Password")
                 Layout.fillWidth: true
@@ -129,9 +123,10 @@ Rectangle {
                 font.family: "sans-serif"
                 font.pixelSize: 22
                 font.letterSpacing: 0
-                onAccepted: auth.login(userField.text, passField.text, auth.sessionIndex)
+                onAccepted: auth.login(auth.username, passField.text, auth.sessionIndex)
 
                 Common.FieldFocus {
+                    controller: auth
                 }
 
                 background: Rectangle {
@@ -143,9 +138,7 @@ Rectangle {
                         height: 2
                         color: root.brand
                     }
-
                 }
-
             }
 
             Common.LoginSubmit {
@@ -154,9 +147,8 @@ Rectangle {
                 width: parent.width
                 accent: root.themeAccent
                 enabled: !auth.busy
-                onClicked: auth.login(userField.text, passField.text, auth.sessionIndex)
+                onClicked: auth.login(auth.username, passField.text, auth.sessionIndex)
             }
-
         }
 
         Timer {
@@ -169,6 +161,7 @@ Rectangle {
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -209,7 +202,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -227,7 +219,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : passField
         }
-
     }
 
     Common.CompactGreeter {
@@ -244,18 +235,27 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#0b0b0b"
+        foreground: "#ffffff"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "sans-serif"
+        treatment: "line"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "MARVEL"
+        fontFamily: viewport.compactMode ? "sans-serif" : passField.font.family
+        surface: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ed171717" : passField.background.color
+        foreground: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ffffff" : passField.color
+        cornerRadius: viewport.compactMode ? 10 : 0
         controller: auth
     }
-
 }

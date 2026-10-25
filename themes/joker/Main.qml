@@ -60,9 +60,7 @@ Rectangle {
                     position: 1
                     color: "#ff000000"
                 }
-
             }
-
         }
 
         Column {
@@ -111,23 +109,18 @@ Rectangle {
                 color: root.smile
             }
 
-            TextField {
+            Common.UsernamePicker {
                 id: u
 
-                placeholderTextColor: color
                 objectName: "usernameField"
+                controller: auth
                 Accessible.name: qsTr("Username")
-                enabled: !auth.busy
                 width: parent.width
-                text: userModel.lastUser || compact.defaultUsername
-                placeholderText: "who are you?"
-                color: root.text
+
+                foreground: root.text
                 font.family: "sans-serif"
                 font.italic: true
                 font.pixelSize: 18
-
-                Common.FieldFocus {
-                }
 
                 background: Rectangle {
                     color: "transparent"
@@ -138,9 +131,7 @@ Rectangle {
                         height: 1
                         color: root.dim
                     }
-
                 }
-
             }
 
             TextField {
@@ -148,6 +139,8 @@ Rectangle {
 
                 placeholderTextColor: color
                 objectName: "passwordField"
+                onTextEdited: auth.dismissError()
+                Accessible.description: auth.rejected ? auth.errorMessage : ""
                 enabled: !auth.busy
                 Accessible.name: qsTr("Password")
                 width: parent.width
@@ -158,9 +151,10 @@ Rectangle {
                 font.family: "sans-serif"
                 font.italic: true
                 font.pixelSize: 18
-                onAccepted: auth.login(u.text, p.text, auth.sessionIndex)
+                onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                 Common.FieldFocus {
+                    controller: auth
                 }
 
                 background: Rectangle {
@@ -172,9 +166,7 @@ Rectangle {
                         height: 1
                         color: root.smile
                     }
-
                 }
-
             }
 
             Text {
@@ -190,16 +182,14 @@ Rectangle {
                     enabled: !auth.busy
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: auth.login(u.text, p.text, auth.sessionIndex)
+                    onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                 }
-
             }
 
             Item {
                 width: 1
                 height: 12
             }
-
         }
 
         Common.AuthController {
@@ -207,7 +197,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -224,18 +213,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed11100f"
+        foreground: "#eaeaea"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "sans-serif"
+        treatment: "line"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "JOKER"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 0
         controller: auth
     }
-
 }

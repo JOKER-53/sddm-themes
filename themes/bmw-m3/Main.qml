@@ -63,17 +63,14 @@ Rectangle {
                 spacing: 40
 
                 // User ComboBox
-                ComboBox {
+                Common.UsernamePicker {
                     id: u
 
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 250
                     height: 50
-                    model: userModel
-                    textRole: "name"
-                    currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                     background: Rectangle {
                         color: "transparent"
@@ -82,14 +79,9 @@ Rectangle {
                         radius: 25
                     }
 
-                    contentItem: Text {
-                        text: u.currentText
-                        color: "#fff"
-                        font.family: "sans-serif"
-                        font.pixelSize: 20
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
+                    foreground: "#fff"
+                    font.family: "sans-serif"
+                    font.pixelSize: 20
 
                     delegate: ItemDelegate {
                         id: optionDelegate0
@@ -109,9 +101,7 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-
                     }
-
                 }
 
                 // Password Field
@@ -119,6 +109,8 @@ Rectangle {
                     id: p
 
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 300
@@ -132,9 +124,10 @@ Rectangle {
                     font.pixelSize: 22
                     horizontalAlignment: TextInput.AlignHCenter
                     font.letterSpacing: 0
-                    onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
@@ -143,7 +136,6 @@ Rectangle {
                         border.width: 2
                         radius: 25
                     }
-
                 }
 
                 // Login Button
@@ -171,18 +163,16 @@ Rectangle {
                         hoverEnabled: true
                         onEntered: parent.color = "#2b7de0"
                         onExited: parent.color = root.themeAccent
-                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
-
                 }
-
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -223,7 +213,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -241,7 +230,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -258,18 +246,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed0a101c"
+        foreground: "#e8f2ff"
+        cornerRadius: 4
+        controlRadius: 2
+        fontFamily: "sans-serif"
+        treatment: "stripe"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "BMW M3"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 20
         controller: auth
     }
-
 }

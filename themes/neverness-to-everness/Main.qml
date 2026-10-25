@@ -61,9 +61,7 @@ Rectangle {
                     position: 1
                     color: "#77000000"
                 }
-
             }
-
         }
 
         // Anime Slice-of-Life Clock
@@ -93,7 +91,6 @@ Rectangle {
                     timeDisplay.text = d.toLocaleTimeString(Qt.locale(), "hh:mm");
                 }
             }
-
         }
 
         Text {
@@ -125,17 +122,14 @@ Rectangle {
                 anchors.centerIn: parent
                 spacing: 25
 
-                ComboBox {
+                Common.UsernamePicker {
                     id: u
 
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 300
                     height: 46
-                    model: userModel
-                    textRole: "name"
-                    currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                     background: Rectangle {
                         color: "#44000000"
@@ -144,15 +138,10 @@ Rectangle {
                         border.width: 1
                     }
 
-                    contentItem: Text {
-                        text: u.currentText
-                        font.family: "sans-serif"
-                        font.pixelSize: 20
-                        color: "#ffffff"
-                        font.letterSpacing: 2
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
+                    font.family: "sans-serif"
+                    font.pixelSize: 20
+                    foreground: "#ffffff"
+                    font.letterSpacing: 2
 
                     delegate: ItemDelegate {
                         id: optionDelegate0
@@ -173,15 +162,15 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-
                     }
-
                 }
 
                 TextField {
                     id: p
 
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 300
@@ -195,9 +184,10 @@ Rectangle {
                     color: "#ffffff"
                     font.letterSpacing: 0
                     horizontalAlignment: TextInput.AlignHCenter
-                    onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
@@ -206,7 +196,6 @@ Rectangle {
                         border.color: p.activeFocus ? "#ff77a9" : "transparent"
                         border.width: 1
                     }
-
                 }
 
                 Rectangle {
@@ -243,20 +232,16 @@ Rectangle {
                             parent.color = "transparent";
                             parent.children[0].color = "#ffffff";
                         }
-                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
 
                     Behavior on color {
                         ColorAnimation {
                             duration: 250
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         Common.AuthController {
@@ -264,7 +249,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -281,18 +265,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.right: viewport.compactMode ? undefined : parent.right
+        anchors.rightMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed190b17"
+        foreground: "#ffe3ed"
+        cornerRadius: 2
+        controlRadius: 0
+        fontFamily: "sans-serif"
+        treatment: "stripe"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "NTE ANIME"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 20
         controller: auth
     }
-
 }

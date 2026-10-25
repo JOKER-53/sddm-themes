@@ -60,9 +60,7 @@ Rectangle {
                     position: 1
                     color: "#aa000000"
                 }
-
             }
-
         }
 
         // Alpine Explorer Dashboard (Login Panel)
@@ -117,20 +115,16 @@ Rectangle {
                         font.letterSpacing: 4
                         anchors.horizontalCenter: parent.horizontalCenter
                     }
-
                 }
 
-                ComboBox {
+                Common.UsernamePicker {
                     id: u
 
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 300
                     height: 50
-                    model: userModel
-                    textRole: "name"
-                    currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                     background: Rectangle {
                         color: "#33ffffff"
@@ -139,15 +133,10 @@ Rectangle {
                         radius: 25
                     }
 
-                    contentItem: Text {
-                        text: u.currentText
-                        font.family: "sans-serif"
-                        font.pixelSize: 20
-                        color: "#ffffff"
-                        font.letterSpacing: 2
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
+                    font.family: "sans-serif"
+                    font.pixelSize: 20
+                    foreground: "#ffffff"
+                    font.letterSpacing: 2
 
                     delegate: ItemDelegate {
                         id: optionDelegate0
@@ -168,15 +157,15 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-
                     }
-
                 }
 
                 TextField {
                     id: p
 
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 300
@@ -190,9 +179,10 @@ Rectangle {
                     color: "#ffffff"
                     font.letterSpacing: 0
                     horizontalAlignment: TextInput.AlignHCenter
-                    onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
@@ -201,7 +191,6 @@ Rectangle {
                         border.width: 1
                         radius: 25
                     }
-
                 }
 
                 // Minimalist ASCEND button
@@ -239,25 +228,22 @@ Rectangle {
                             parent.color = "transparent";
                             parent.children[0].color = "#ffffff";
                         }
-                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
 
                     Behavior on color {
                         ColorAnimation {
                             duration: 200
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -298,7 +284,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -316,7 +301,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -333,18 +317,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#f0f1f7fa"
+        foreground: "#224858"
+        cornerRadius: 4
+        controlRadius: 2
+        fontFamily: "sans-serif"
+        treatment: "panel"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "MT. EVEREST"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 20
         controller: auth
     }
-
 }

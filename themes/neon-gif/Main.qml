@@ -62,9 +62,7 @@ Rectangle {
                     position: 1
                     color: "#dd000000"
                 }
-
             }
-
         }
 
         // High-tech slanted HUD container
@@ -130,7 +128,6 @@ Rectangle {
                         font.pixelSize: 16
                         font.letterSpacing: 2
                     }
-
                 }
 
                 Rectangle {
@@ -147,17 +144,14 @@ Rectangle {
                     anchors.verticalCenter: parent.verticalCenter
 
                     // USERNAME DROPDOWN
-                    ComboBox {
+                    Common.UsernamePicker {
                         id: userCombo
 
                         objectName: "usernameField"
+                        controller: auth
                         Accessible.name: qsTr("Username")
-                        enabled: !auth.busy
                         width: parent.width
                         height: 44
-                        model: userModel
-                        textRole: "name"
-                        currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                         background: Rectangle {
                             color: "#33000000"
@@ -165,16 +159,10 @@ Rectangle {
                             border.width: 1
                         }
 
-                        contentItem: Text {
-                            text: userCombo.currentText + " ▾"
-                            color: root.neonCyan
-                            font.family: "sans-serif"
-                            font.pixelSize: 20
-                            font.bold: true
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: 12
-                        }
+                        foreground: root.neonCyan
+                        font.family: "sans-serif"
+                        font.pixelSize: 20
+                        font.bold: true
 
                         delegate: ItemDelegate {
                             id: optionDelegate0
@@ -195,7 +183,6 @@ Rectangle {
                                 border.color: root.neonCyan
                                 border.width: optionDelegate0.hovered ? 1 : 0
                             }
-
                         }
 
                         popup: Popup {
@@ -210,18 +197,14 @@ Rectangle {
                                 model: userCombo.popup.visible ? userCombo.delegateModel : null
                                 currentIndex: userCombo.highlightedIndex
 
-                                ScrollIndicator.vertical: ScrollIndicator {
-                                }
-
+                                ScrollIndicator.vertical: ScrollIndicator {}
                             }
 
                             background: Rectangle {
                                 color: "#dd000000"
                                 border.color: root.neonCyan
                             }
-
                         }
-
                     }
 
                     // PASSWORD INPUT
@@ -230,6 +213,8 @@ Rectangle {
 
                         placeholderTextColor: color
                         objectName: "passwordField"
+                        onTextEdited: auth.dismissError()
+                        Accessible.description: auth.rejected ? auth.errorMessage : ""
                         enabled: !auth.busy
                         Accessible.name: qsTr("Password")
                         width: parent.width
@@ -241,9 +226,10 @@ Rectangle {
                         font.family: "sans-serif"
                         font.pixelSize: 16
                         font.letterSpacing: 0
-                        onAccepted: auth.login(userCombo.currentText, passField.text, auth.sessionIndex)
+                        onAccepted: auth.login(auth.username, passField.text, auth.sessionIndex)
 
                         Common.FieldFocus {
+                            controller: auth
                         }
 
                         background: Rectangle {
@@ -251,7 +237,6 @@ Rectangle {
                             border.color: root.neonPink
                             border.width: 1
                         }
-
                     }
 
                     // LOGIN BUTTON
@@ -275,15 +260,11 @@ Rectangle {
                             enabled: !auth.busy
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            onClicked: auth.login(userCombo.currentText, passField.text, auth.sessionIndex)
+                            onClicked: auth.login(auth.username, passField.text, auth.sessionIndex)
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         Timer {
@@ -301,7 +282,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : passField
         }
-
     }
 
     Common.CompactGreeter {
@@ -318,18 +298,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.right: viewport.compactMode ? undefined : parent.right
+        anchors.rightMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed090618"
+        foreground: "#05d9e8"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "Monospace"
+        treatment: "line"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "NEON"
+        fontFamily: viewport.compactMode ? "sans-serif" : passField.font.family
+        surface: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ed171717" : passField.background.color
+        foreground: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ffffff" : passField.color
+        cornerRadius: viewport.compactMode ? 10 : 8
         controller: auth
     }
-
 }

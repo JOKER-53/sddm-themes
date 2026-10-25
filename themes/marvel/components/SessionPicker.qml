@@ -4,6 +4,12 @@ import QtQuick.Controls 2.15
 ComboBox {
     id: picker
 
+    property color accent: "#ffffff"
+    property color surface: "#252c34"
+    property color foreground: "#ffffff"
+    property real cornerRadius: 4
+    flat: false
+    objectName: "sessionPicker"
     property var controller
 
     width: 180
@@ -13,13 +19,13 @@ ComboBox {
     currentIndex: controller.sessionIndex
     onActivated: controller.sessionIndex = currentIndex
     Accessible.name: qsTr("Desktop session")
-    enabled: !controller.busy
+    enabled: !controller.busy && count > 0
     font.family: "sans-serif"
     font.pixelSize: 16
 
     contentItem: Text {
         text: picker.currentText
-        color: "#ffffff"
+        color: picker.foreground
         font: picker.font
         verticalAlignment: Text.AlignVCenter
         elide: Text.ElideRight
@@ -31,15 +37,15 @@ ComboBox {
         x: picker.width - 22
         anchors.verticalCenter: parent.verticalCenter
         text: "▾"
-        color: "#ffffff"
+        color: picker.foreground
         font.pixelSize: 16
     }
 
     background: Rectangle {
-        color: "#252c34"
-        radius: 4
-        border.color: picker.activeFocus ? "#ffffff" : "#56616b"
-        border.width: picker.activeFocus ? 2 : 1
+        color: "transparent"
+        radius: picker.cornerRadius
+        border.color: picker.activeFocus ? picker.foreground : picker.accent
+        border.width: picker.activeFocus ? 2 : picker.flat ? 0 : 1
     }
 
     delegate: ItemDelegate {
@@ -48,12 +54,10 @@ ComboBox {
         text: model.name
         font: picker.font
         highlighted: picker.highlightedIndex === index
-        palette.text: "#ffffff"
+        palette.text: picker.foreground
 
         background: Rectangle {
-            color: parent.highlighted ? "#47525d" : "#252c34"
+            color: parent.highlighted ? Qt.tint(picker.surface, Qt.rgba(picker.accent.r, picker.accent.g, picker.accent.b, 0.25)) : picker.surface
         }
-
     }
-
 }

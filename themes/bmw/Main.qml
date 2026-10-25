@@ -63,9 +63,7 @@ Rectangle {
                     position: 1
                     color: "transparent"
                 }
-
             }
-
         }
 
         // M-stripe column
@@ -92,7 +90,6 @@ Rectangle {
                 height: parent.height
                 color: root.mRed
             }
-
         }
 
         // Top museum placard
@@ -128,7 +125,6 @@ Rectangle {
                 font.letterSpacing: 3
                 anchors.verticalCenter: parent.verticalCenter
             }
-
         }
 
         // Key-fob login panel — left third
@@ -147,27 +143,21 @@ Rectangle {
                 font.letterSpacing: 5
             }
 
-            TextField {
+            Common.UsernamePicker {
                 id: bmwUser
 
-                placeholderTextColor: color
                 objectName: "usernameField"
+                controller: auth
                 Accessible.name: qsTr("Username")
-                enabled: !auth.busy
-                text: userModel.lastUser || compact.defaultUsername
-                placeholderText: "USERNAME"
-                color: root.ink
+
+                foreground: root.ink
                 font.family: "sans-serif"
                 font.pixelSize: 36
                 font.bold: true
 
-                Common.FieldFocus {
-                }
-
                 background: Rectangle {
                     color: "transparent"
                 }
-
             }
 
             Text {
@@ -188,6 +178,8 @@ Rectangle {
                 id: passField
 
                 objectName: "passwordField"
+                onTextEdited: auth.dismissError()
+                Accessible.description: auth.rejected ? auth.errorMessage : ""
                 enabled: !auth.busy
                 Accessible.name: qsTr("Password")
                 Layout.fillWidth: true
@@ -199,9 +191,10 @@ Rectangle {
                 font.family: "sans-serif"
                 font.pixelSize: 18
                 font.letterSpacing: 0
-                onAccepted: auth.login(bmwUser.text, passField.text, auth.sessionIndex)
+                onAccepted: auth.login(auth.username, passField.text, auth.sessionIndex)
 
                 Common.FieldFocus {
+                    controller: auth
                 }
 
                 background: Rectangle {
@@ -213,9 +206,7 @@ Rectangle {
                         height: 2
                         color: root.mRed
                     }
-
                 }
-
             }
 
             Row {
@@ -241,9 +232,8 @@ Rectangle {
                         objectName: "loginButton"
                         enabled: !auth.busy
                         anchors.fill: parent
-                        onClicked: auth.login(bmwUser.text, passField.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, passField.text, auth.sessionIndex)
                     }
-
                 }
 
                 Rectangle {
@@ -261,16 +251,14 @@ Rectangle {
                         font.pixelSize: 11
                         font.letterSpacing: 3
                     }
-
                 }
-
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -311,7 +299,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -329,7 +316,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : passField
         }
-
     }
 
     Common.CompactGreeter {
@@ -346,18 +332,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed090d13"
+        foreground: "#f4f4f4"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "sans-serif"
+        treatment: "stripe"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "BMW MUSEUM"
+        fontFamily: viewport.compactMode ? "sans-serif" : passField.font.family
+        surface: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ed171717" : passField.background.color
+        foreground: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ffffff" : passField.color
+        cornerRadius: viewport.compactMode ? 10 : 7
         controller: auth
     }
-
 }

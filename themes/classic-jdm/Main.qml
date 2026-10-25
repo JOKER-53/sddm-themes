@@ -64,9 +64,7 @@ Rectangle {
                     position: 1
                     color: "#ee000000"
                 }
-
             }
-
         }
 
         // Direction-aware car animation
@@ -93,7 +91,6 @@ Rectangle {
                     origin.x: carEmoji.width / 2
                     xScale: carContainer.goingRight ? 1 : -1
                 }
-
             }
 
             Text {
@@ -137,9 +134,7 @@ Rectangle {
                 PauseAnimation {
                     duration: 3000
                 }
-
             }
-
         }
 
         // ---- Dashboard HUD bar ----
@@ -169,9 +164,7 @@ Rectangle {
                         height: 2
                         color: index % 2 == 0 ? "#11ffffff" : "transparent"
                     }
-
                 }
-
             }
 
             // Left Cluster: Clock and RPM
@@ -203,7 +196,6 @@ Rectangle {
                         font.letterSpacing: 3
                         text: Qt.formatDateTime(new Date(), "ddd dd MMM yyyy").toUpperCase()
                     }
-
                 }
 
                 // Animated RPM Gauge
@@ -234,15 +226,10 @@ Rectangle {
                                 NumberAnimation {
                                     duration: 150
                                 }
-
                             }
-
                         }
-
                     }
-
                 }
-
             }
 
             Timer {
@@ -272,32 +259,26 @@ Rectangle {
                     font.letterSpacing: 2
                 }
 
-                TextField {
+                Common.UsernamePicker {
                     id: u
 
-                    placeholderTextColor: color
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 220
                     height: 50
-                    text: userModel.lastUser || compact.defaultUsername
-                    placeholderText: "USER"
-                    color: root.text
+
+                    foreground: root.text
                     font.family: "sans-serif"
                     font.pixelSize: 20
                     font.bold: true
                     horizontalAlignment: TextInput.AlignHCenter
-
-                    Common.FieldFocus {
-                    }
 
                     background: Rectangle {
                         color: "#33000000"
                         border.color: u.activeFocus ? root.amber : root.dim
                         border.width: 2
                     }
-
                 }
 
                 TextField {
@@ -305,6 +286,8 @@ Rectangle {
 
                     placeholderTextColor: color
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 320
@@ -318,9 +301,10 @@ Rectangle {
                     font.bold: true
                     horizontalAlignment: TextInput.AlignHCenter
                     font.letterSpacing: 0
-                    onAccepted: auth.login(u.text, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
@@ -328,7 +312,6 @@ Rectangle {
                         border.color: p.activeFocus ? root.amber : root.dim
                         border.width: 2
                     }
-
                 }
 
                 Rectangle {
@@ -355,7 +338,7 @@ Rectangle {
                         hoverEnabled: true
                         onEntered: parent.color = "#ffd54f"
                         onExited: parent.color = root.amber
-                        onClicked: auth.login(u.text, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
 
                     SequentialAnimation on opacity {
@@ -373,13 +356,9 @@ Rectangle {
                             to: 0.8
                             duration: 800
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         Common.AuthController {
@@ -387,7 +366,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -404,18 +382,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.right: viewport.compactMode ? undefined : parent.right
+        anchors.rightMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#e60a0a0a"
+        foreground: "#ffb020"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "Monospace"
+        treatment: "stripe"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "CLASSIC JDM"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 2
         controller: auth
     }
-
 }

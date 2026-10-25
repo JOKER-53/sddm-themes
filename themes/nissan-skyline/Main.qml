@@ -63,9 +63,7 @@ Rectangle {
                     position: 1
                     color: "#aa000000"
                 }
-
             }
-
         }
 
         // Sakura / Blocky UI Panel
@@ -100,17 +98,14 @@ Rectangle {
                     spacing: 15
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    ComboBox {
+                    Common.UsernamePicker {
                         id: u
 
                         objectName: "usernameField"
+                        controller: auth
                         Accessible.name: qsTr("Username")
-                        enabled: !auth.busy
                         width: 180
                         height: 46
-                        model: userModel
-                        textRole: "name"
-                        currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                         background: Rectangle {
                             color: "#33000000"
@@ -119,14 +114,9 @@ Rectangle {
                             border.width: 2
                         }
 
-                        contentItem: Text {
-                            text: u.currentText
-                            font.family: "sans-serif"
-                            font.pixelSize: 20
-                            color: "#ffffff"
-                            verticalAlignment: Text.AlignVCenter
-                            horizontalAlignment: Text.AlignHCenter
-                        }
+                        font.family: "sans-serif"
+                        font.pixelSize: 20
+                        foreground: "#ffffff"
 
                         delegate: ItemDelegate {
                             id: optionDelegate0
@@ -146,15 +136,15 @@ Rectangle {
                                 horizontalAlignment: Text.AlignHCenter
                                 verticalAlignment: Text.AlignVCenter
                             }
-
                         }
-
                     }
 
                     TextField {
                         id: p
 
                         objectName: "passwordField"
+                        onTextEdited: auth.dismissError()
+                        Accessible.description: auth.rejected ? auth.errorMessage : ""
                         enabled: !auth.busy
                         Accessible.name: qsTr("Password")
                         width: 180
@@ -168,9 +158,10 @@ Rectangle {
                         color: "#ffffff"
                         font.letterSpacing: 0
                         horizontalAlignment: TextInput.AlignHCenter
-                        onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                         Common.FieldFocus {
+                            controller: auth
                         }
 
                         background: Rectangle {
@@ -179,7 +170,6 @@ Rectangle {
                             border.color: p.activeFocus ? "#ffffff" : "#ffb7c5"
                             border.width: 2
                         }
-
                     }
 
                     Common.LoginSubmit {
@@ -187,18 +177,16 @@ Rectangle {
                         width: 110
                         accent: root.themeAccent
                         enabled: !auth.busy
-                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
-
                 }
-
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -239,7 +227,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -257,7 +244,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -274,18 +260,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed130a0a"
+        foreground: "#f4e9e9"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "Monospace"
+        treatment: "line"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "NISSAN SKYLINE"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 12
         controller: auth
     }
-
 }

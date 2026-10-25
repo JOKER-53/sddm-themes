@@ -264,7 +264,7 @@ window.THEME_CATALOG = [
     "id": "mountain-sunset",
     "name": "MOUNTAIN SUNSET",
     "tag": "retro 80s outrun",
-    "accent": "#ff007f",
+    "accent": "#ff9d76",
     "cats": [
       "nature",
       "cyber"

@@ -100,7 +100,6 @@ Rectangle {
                             duration: 750
                             easing.type: Easing.InQuad
                         }
-
                     }
 
                     // Splash rotation
@@ -112,7 +111,6 @@ Rectangle {
                             to: 60
                             duration: 1500
                         }
-
                     }
 
                     // Opacity (appear instantly when jumping, disappear when hitting water)
@@ -136,9 +134,7 @@ Rectangle {
                             to: 0
                             duration: 150
                         }
-
                     }
-
                 }
 
                 // Wait again
@@ -174,7 +170,6 @@ Rectangle {
                             duration: 800
                             easing.type: Easing.InQuad
                         }
-
                     }
 
                     SequentialAnimation {
@@ -185,7 +180,6 @@ Rectangle {
                             to: -240
                             duration: 1600
                         }
-
                     }
 
                     SequentialAnimation {
@@ -208,13 +202,9 @@ Rectangle {
                             to: 0
                             duration: 150
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         // Zen UI overlay
@@ -238,9 +228,7 @@ Rectangle {
                     position: 1
                     color: "#aa001a1a"
                 }
-
             }
-
         }
 
         // Main Login Panel (Zen Garden Style)
@@ -269,17 +257,14 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
 
-                ComboBox {
+                Common.UsernamePicker {
                     id: u
 
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     width: 300
                     height: 44
-                    model: userModel
-                    textRole: "name"
-                    currentIndex: userModel.lastIndex >= 0 ? userModel.lastIndex : 0
 
                     background: Rectangle {
                         color: "transparent"
@@ -290,17 +275,11 @@ Rectangle {
                             height: 2
                             color: u.activeFocus ? root.themeAccent : "#66ffffff"
                         }
-
                     }
 
-                    contentItem: Text {
-                        text: u.currentText
-                        font.family: "sans-serif"
-                        font.pixelSize: 20
-                        color: "#ffffff"
-                        verticalAlignment: Text.AlignVCenter
-                        horizontalAlignment: Text.AlignHCenter
-                    }
+                    font.family: "sans-serif"
+                    font.pixelSize: 20
+                    foreground: "#ffffff"
 
                     delegate: ItemDelegate {
                         id: optionDelegate0
@@ -320,15 +299,15 @@ Rectangle {
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                         }
-
                     }
-
                 }
 
                 TextField {
                     id: p
 
                     objectName: "passwordField"
+                    onTextEdited: auth.dismissError()
+                    Accessible.description: auth.rejected ? auth.errorMessage : ""
                     enabled: !auth.busy
                     Accessible.name: qsTr("Password")
                     width: 300
@@ -342,9 +321,10 @@ Rectangle {
                     color: "#ffffff"
                     font.letterSpacing: 0
                     horizontalAlignment: TextInput.AlignHCenter
-                    onAccepted: auth.login(u.currentText, p.text, auth.sessionIndex)
+                    onAccepted: auth.login(auth.username, p.text, auth.sessionIndex)
 
                     Common.FieldFocus {
+                        controller: auth
                     }
 
                     background: Rectangle {
@@ -356,9 +336,7 @@ Rectangle {
                             height: 2
                             color: p.activeFocus ? root.themeAccent : "#66ffffff"
                         }
-
                     }
-
                 }
 
                 Rectangle {
@@ -394,25 +372,22 @@ Rectangle {
                             parent.color = "transparent";
                             parent.children[0].color = root.themeAccent;
                         }
-                        onClicked: auth.login(u.currentText, p.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, p.text, auth.sessionIndex)
                     }
 
                     Behavior on color {
                         ColorAnimation {
                             duration: 250
                         }
-
                     }
-
                 }
-
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -453,7 +428,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -471,7 +445,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : p
         }
-
     }
 
     Common.CompactGreeter {
@@ -488,18 +461,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.right: viewport.compactMode ? undefined : parent.right
+        anchors.rightMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#f0eee7d8"
+        foreground: "#5f482c"
+        cornerRadius: 16
+        controlRadius: 12
+        fontFamily: "serif"
+        treatment: "panel"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "KOI POND"
+        fontFamily: viewport.compactMode ? "sans-serif" : p.font.family
+        surface: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ed171717" : p.background.color
+        foreground: viewport.compactMode || !p.background || p.background.color.a < 0.5 ? "#ffffff" : p.color
+        cornerRadius: viewport.compactMode ? 10 : 12
         controller: auth
     }
-
 }

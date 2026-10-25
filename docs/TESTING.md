@@ -18,7 +18,7 @@ python3 scripts/check_qml.py --qt 5
 python3 scripts/check_qml.py --qt 6
 ```
 
-The harness instantiates all 44 themes with fake users, sessions and SDDM signals. It verifies configuration, missing last-user/session indices, duplicate login prevention, error feedback, and password clearing. It runs offscreen and never contacts PAM or the SDDM daemon. The GitHub Actions matrix installs both Qt runtimes independently.
+The harness instantiates all 44 themes with fake users, sessions and SDDM signals. It verifies configuration, missing and stale last-user/session indices, remembered-user priority, empty models, duplicate login prevention, error feedback, invalid session rejection, and password clearing after failure and success. It runs offscreen and never contacts PAM or the SDDM daemon. The GitHub Actions matrix installs both Qt runtimes independently.
 
 Render the actual QML and exercise its controls at 1920×1080, 1366×768, 1024×768, 800×600 and 3440×1440:
 
@@ -26,9 +26,9 @@ Render the actual QML and exercise its controls at 1920×1080, 1366×768, 1024×
 python3 scripts/check_qml.py --qt 6 --render build/theme-layouts
 ```
 
-This checks that visible username, password, sign-in and system controls fit on screen and that login controls do not overlap the footer. It clicks each visible sign-in button, submits with Enter, checks the selected session, and verifies that authentication failure clears and refocuses the visible password. An empty last-user value exercises the first-account fallback. CI runs this on both Qt versions and uploads screenshots for seven days.
+This checks that visible username, password, sign-in and system controls fit on screen and that login controls do not overlap the footer. It clicks each visible sign-in button, submits with Enter, checks the selected session, and verifies that authentication failure clears and refocuses the visible password. An empty last-user value exercises the first-account fallback. Keyboard events exercise each account dropdown; switching between full and compact layouts must preserve the account and clear passwords. A second instance verifies that SDDM’s remembered user is selected even when lastIndex points to a different account. Longer feedback exercises text wrapping, and visible error banners must not overlap login controls, the clock, or the system footer. CI runs this on both Qt versions and uploads screenshots for seven days.
 
-Open `build/theme-layouts/index.html` to browse the screenshot gallery and switch resolutions.
+Open `build/theme-layouts/index.html` to browse the screenshot gallery and switch resolutions and toggle login-failure screenshots (available with Qt 6). Failure checks also verify that feedback is visible and fits on screen.
 
 Screenshots use the shipped still thumbnails for videos. They establish layout and input behavior, not GIF playback, real PAM authentication, or every desktop's font and DPI settings. Inspect generated screenshots as well as the automated results.
 

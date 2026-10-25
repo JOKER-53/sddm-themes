@@ -31,9 +31,8 @@ Rectangle {
         visible: !viewport.compactMode
         color: "#000"
         Component.onCompleted: {
-            if (userIn.pass)
-                userIn.pass.forceActiveFocus();
-
+            if (alienPassword)
+                alienPassword.forceActiveFocus();
         }
 
         // subject on the right
@@ -57,7 +56,6 @@ Rectangle {
                 color: root.glow
                 opacity: 0.04
             }
-
         }
 
         // left console
@@ -92,6 +90,7 @@ Rectangle {
 
             Text {
                 id: bigClock
+                objectName: "themeClock"
 
                 color: root.glow
                 font.family: "Monospace"
@@ -107,73 +106,43 @@ Rectangle {
                 onTriggered: bigClock.text = Qt.formatDateTime(new Date(), "HH:mm")
             }
 
-            // hex-style inputs
-            Repeater {
-                model: [{
-                    "ph": "USER ID",
-                    "id": "u"
-                }, {
-                    "ph": "PASSPHRASE",
-                    "id": "p"
-                }]
-
-                delegate: Rectangle {
-                    width: parent.width
-                    height: 52
-                    color: "transparent"
-                    border.color: root.glow
-                    border.width: 1
-
-                    TextField {
-                        id: tf
-
-                        placeholderTextColor: color
-                        objectName: modelData.id === "p" ? "passwordField" : "usernameField"
-                        enabled: !auth.busy
-                        Accessible.name: modelData.ph
-                        anchors.fill: parent
-                        anchors.margins: 2
-                        placeholderText: "> " + modelData.ph
-                        text: modelData.id === "u" && userModel.lastUser || compact.defaultUsername
-                        echoMode: modelData.id === "p" ? TextInput.Password : TextInput.Normal
-                        color: root.text
-                        font.family: "sans-serif"
-                        font.pixelSize: 16
-                        onAccepted: {
-                            if (modelData.id === "p")
-                                auth.login(userIn.userField(), tf.text, auth.sessionIndex);
-
-                        }
-                        Component.onCompleted: {
-                            if (modelData.id === "u")
-                                userIn.user = tf;
-                            else
-                                userIn.pass = tf;
-                        }
-
-                        Common.FieldFocus {
-                        }
-
-                        background: Rectangle {
-                            color: "#001100"
-                        }
-
-                    }
-
+            Common.UsernamePicker {
+                id: alienUser
+                objectName: "usernameField"
+                controller: auth
+                width: parent.width
+                height: 52
+                foreground: root.text
+                font.pixelSize: 16
+                background: Rectangle {
+                    color: "#001100"
+                    border.color: alienUser.activeFocus ? root.text : root.glow
+                    border.width: alienUser.activeFocus ? 2 : 1
                 }
-
             }
 
-            QtObject {
-                id: userIn
-
-                property var user
-                property var pass
-
-                function userField() {
-                    return user ? user.text : "";
+            TextField {
+                id: alienPassword
+                objectName: "passwordField"
+                width: parent.width
+                height: 52
+                enabled: !auth.busy
+                placeholderText: qsTr("Passphrase")
+                placeholderTextColor: root.text
+                color: root.text
+                font.pixelSize: 16
+                echoMode: TextInput.Password
+                Accessible.name: qsTr("Password")
+                Accessible.description: auth.rejected ? auth.errorMessage : ""
+                onTextEdited: auth.dismissError()
+                onAccepted: auth.login(auth.username, text, auth.sessionIndex)
+                Common.FieldFocus {
+                    controller: auth
                 }
-
+                background: Rectangle {
+                    color: "#001100"
+                    border.color: root.glow
+                }
             }
 
             Rectangle {
@@ -196,19 +165,16 @@ Rectangle {
                     enabled: !auth.busy
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    onClicked: auth.login(userIn.userField(), userIn.pass.text, auth.sessionIndex)
+                    onClicked: auth.login(auth.username, alienPassword.text, auth.sessionIndex)
                 }
-
             }
-
         }
 
         Common.AuthController {
             id: auth
 
-            passwordField: viewport.compactMode ? compact.passwordField : userIn.pass
+            passwordField: viewport.compactMode ? compact.passwordField : alienPassword
         }
-
     }
 
     Common.CompactGreeter {
@@ -225,18 +191,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed001100"
+        foreground: "#d6ffd0"
+        cornerRadius: 0
+        controlRadius: 0
+        fontFamily: "Monospace"
+        treatment: "line"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "ALIEN X"
+        fontFamily: viewport.compactMode || !alienPassword ? "sans-serif" : alienPassword.font.family
+        surface: viewport.compactMode || !alienPassword.background || alienPassword.background.color.a < 0.5 ? "#ed171717" : alienPassword.background.color
+        foreground: viewport.compactMode || !alienPassword.background || alienPassword.background.color.a < 0.5 ? "#ffffff" : alienPassword.color
+        cornerRadius: viewport.compactMode ? 10 : 0
         controller: auth
     }
-
 }

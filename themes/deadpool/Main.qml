@@ -32,14 +32,17 @@ Rectangle {
         color: "#0a0203"
         Component.onCompleted: passField.forceActiveFocus()
 
-        // Hero portrait — full screen now!
+        // Keep the complete artwork on the right, at its original aspect ratio.
         Common.Wallpaper {
             id: hero
 
             source: Qt.resolvedUrl(config.background || "assets/wallpaper.jpg")
             fallbackSource: Qt.resolvedUrl("assets/wallpaper.jpg")
-            fillMode: Image.PreserveAspectCrop
-            anchors.fill: parent
+            fillMode: Image.PreserveAspectFit
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            width: parent.width * 0.68
+            height: parent.height
             smooth: true
         }
 
@@ -48,29 +51,61 @@ Rectangle {
             // Transparent on the right to show Deadpool
 
             anchors.fill: parent
-            opacity: 0.8
+            opacity: 1
 
             gradient: Gradient {
                 orientation: Gradient.Horizontal
 
                 GradientStop {
                     position: 0
-                    color: "#e60a0203"
+                    color: "#ff0a0203"
                 }
 
-                // Darkest on the left where text is
                 GradientStop {
-                    position: 0.5
-                    color: "#800a0203"
+                    position: 0.32
+                    color: "#ff0a0203"
+                }
+                GradientStop {
+                    position: 0.52
+                    color: "#b30a0203"
                 }
 
                 GradientStop {
                     position: 1
                     color: "transparent"
                 }
-
             }
+        }
 
+        // Blend the fitted artwork into the canvas instead of exposing photo edges.
+        Rectangle {
+            anchors.fill: parent
+            gradient: Gradient {
+                GradientStop {
+                    position: 0
+                    color: "#0a0203"
+                }
+                GradientStop {
+                    position: 0.18
+                    color: "#0a0203"
+                }
+                GradientStop {
+                    position: 0.34
+                    color: "transparent"
+                }
+                GradientStop {
+                    position: 0.68
+                    color: "transparent"
+                }
+                GradientStop {
+                    position: 0.83
+                    color: "#0a0203"
+                }
+                GradientStop {
+                    position: 1
+                    color: "#0a0203"
+                }
+            }
         }
 
         // Chat column on the LEFT
@@ -115,29 +150,22 @@ Rectangle {
                 border.color: root.sub
                 border.width: 1
 
-                TextField {
+                Common.UsernamePicker {
                     id: userField
 
-                    placeholderTextColor: color
-                    placeholderText: qsTr("Username")
                     objectName: "usernameField"
+                    controller: auth
                     Accessible.name: qsTr("Username")
-                    enabled: !auth.busy
                     anchors.fill: parent
                     anchors.leftMargin: 18
-                    text: userModel.lastUser || compact.defaultUsername
-                    color: root.ink
-                    font.pixelSize: 15
 
-                    Common.FieldFocus {
-                    }
+                    foreground: root.ink
+                    font.pixelSize: 15
 
                     background: Rectangle {
                         color: "transparent"
                     }
-
                 }
-
             }
 
             // Chat bubble — password (brand red) with glow
@@ -182,6 +210,8 @@ Rectangle {
                         id: passField
 
                         objectName: "passwordField"
+                        onTextEdited: auth.dismissError()
+                        Accessible.description: auth.rejected ? auth.errorMessage : ""
                         enabled: !auth.busy
                         Accessible.name: qsTr("Password")
                         anchors.fill: parent
@@ -193,23 +223,26 @@ Rectangle {
                         echoMode: TextInput.Password
                         color: "#ffffff"
                         font.pixelSize: 16
-                        onAccepted: auth.login(userField.text, passField.text, auth.sessionIndex)
+                        onAccepted: auth.login(auth.username, passField.text, auth.sessionIndex)
 
                         Common.FieldFocus {
+                            controller: auth
                         }
 
                         background: Rectangle {
                             color: "transparent"
                         }
-
                     }
 
-                    Common.LoginSubmit {
+                    Common.ActionArea {
                         objectName: "loginButton"
-                        width: 460
-                        accent: root.themeAccent
+                        Accessible.name: qsTr("Sign in")
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.bottom: parent.bottom
+                        width: 64
                         enabled: !auth.busy
-                        onClicked: auth.login(userField.text, passField.text, auth.sessionIndex)
+                        onClicked: auth.login(auth.username, passField.text, auth.sessionIndex)
                     }
 
                     Text {
@@ -220,9 +253,7 @@ Rectangle {
                         color: "#fff"
                         font.pixelSize: 22
                     }
-
                 }
-
             }
 
             Text {
@@ -230,12 +261,12 @@ Rectangle {
                 font.pixelSize: 18
                 opacity: 0.7
             }
-
         }
 
         // Injected Top-Center Clock
         Column {
             id: clockGroup
+            objectName: "themeClock"
 
             anchors.top: parent.top
             anchors.topMargin: 40
@@ -276,7 +307,6 @@ Rectangle {
                     injectedClockDate.text = Qt.formatDate(new Date(), "dddd, MMMM d");
                 }
             }
-
         }
 
         Rectangle {
@@ -294,7 +324,6 @@ Rectangle {
 
             passwordField: viewport.compactMode ? compact.passwordField : passField
         }
-
     }
 
     Common.CompactGreeter {
@@ -311,18 +340,29 @@ Rectangle {
 
     Common.SystemBar {
         id: systemBar
-
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: viewport.compactMode ? undefined : parent.left
+        anchors.leftMargin: viewport.compactMode ? 0 : 40
+        anchors.horizontalCenter: viewport.compactMode ? parent.horizontalCenter : undefined
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 20
         controller: auth
+        accent: root.themeAccent
+        surface: "#ed1a1012"
+        foreground: "#f5e9e9"
+        cornerRadius: 26
+        controlRadius: 22
+        fontFamily: "sans-serif"
+        treatment: "pill"
     }
 
     Common.LoginStatus {
-        anchors.top: parent.top
-        anchors.topMargin: viewport.compactMode ? 12 : Math.max(192, 192 * viewport.layoutScale)
-        anchors.horizontalCenter: parent.horizontalCenter
+        compactMode: viewport.compactMode
+        accent: root.themeAccent
+        title: "DEADPOOL"
+        fontFamily: viewport.compactMode ? "sans-serif" : passField.font.family
+        surface: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ed171717" : passField.background.color
+        foreground: viewport.compactMode || !passField.background || passField.background.color.a < 0.5 ? "#ffffff" : passField.color
+        cornerRadius: viewport.compactMode ? 10 : 20
         controller: auth
     }
-
 }
